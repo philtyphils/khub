@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/sass/main.css">
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="assets/css/google-roboto-300-700.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="#" class="simple-text">
+                        <img src="assets/img/logo.png" alt="logo" style="width: 100%;">
+                    </a>
+                </div>
+    
+                <ul class="nav">
+                    <li class="active">
+                        <a href="dashboard.html">
+                            <i class="fa fa-home"></i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="data.html">
+                            <i class="fa fa-folder-open"></i>
+                            <p>Data</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="master.html">
+                            <i class="fa fa-tags"></i>
+                            <p>Master</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="">
+                            <i class="fa fa-cogs"></i>
+                            <p>Setting</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>          
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-default nabvar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- <a class="navbar-brand" href="#">Dashboard</a> -->
+                    </div>
+                    <div class="collapse navbar-collapse">
+                      
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                                    <span class="notification">4</span>
+                                      <p class="hidden-md hidden-lg">
+                                      Message
+                                      <b class="caret"></b>
+                                      </p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="masaberlaku.html">Notification 1</a></li>
+                                    <li><a href="masaberlaku.html">Notification 2</a></li>
+                                    <li><a href="masaberlaku.html">Notification 3</a></li>
+                                    <li><a href="masaberlaku.html">Notification 4</a></li>
+                                </ul>
+                            </li>          
+                            <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <p>
+                                            Administrator
+                                        <b class="caret"></b>
+                                        </p>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="#">Logout</a></li>
+                                  </ul>
+                            </li>
+                            <li class="separator hidden-lg"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="contents">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h2 class="title"></h2>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">TERSUS</h4>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TERSUS semua Provinsi</p>
+                                </div>
+                                <div id="container-pie"></div>  
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">TUKS</h4>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TUKS semua Provinsi</p>
+                                </div>
+                                <div id="container-pie2"></div>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">TERSUS & TUKS</h4>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Per Provinsi</p>
+                                </div>
+                                <div id="container-bar"></div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/light-bootstrap-dashboard.js"></script>
+<script src="assets/js/highchart/highcharts.js"></script>
+<script src="assets/js/highchart/highcharts-exporting.js"></script>
+<script src="assets/js/highchart/highcharts-export.js"></script>
+<script src="assets/js/highchart/highcharts-access.js"></script>
+
+
+
+<script>
+Highcharts.setOptions({
+	colors: ['#A3A0FB', '#43425D']
+});
+var Total = 0;
+var chart_tusk = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-pie',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        events: {
+            load: function(event) {
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;margin:5px 0;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            }
+        }  
+    },
+    title: {
+        text: ''
+    },
+    credits: {
+    enabled: false
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+   legend: {
+        useHTML: true,
+		labelFormatter: function() {
+            Total += this.y;
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x:-10,
+        itemMarginTop: 5,
+        itemMarginBottom: 5,
+        
+    },
+    series: [{
+        name: 'Status',
+        colorByPoint: true,
+        innerSize: '50%',
+        data: [{
+            name: 'AKTIF',
+            y: 2000,
+        }, {
+            name: 'NON AKTIF',
+            y: 105
+        }]
+    }],
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+            align: 'left',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    } 
+});
+
+Highcharts.setOptions({
+	colors: ['#6bd189', '#fcbf1e']
+	});
+var Total = 0;
+var chart_tersus = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-pie2',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        events: {
+            load: function(event) {
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;margin:5px 0;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            }
+        }  
+        
+    },
+    title: {
+        text: ''
+    },
+    credits: {
+    enabled: false
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    legend: {
+        useHTML: true,
+		labelFormatter: function() {
+            Total += this.y;
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x:-10,
+        itemMarginTop: 5,
+        itemMarginBottom: 5,
+    },
+    series: [{
+        name: 'Status',
+        colorByPoint: true,
+        innerSize: '50%',
+        data: [{
+            name: 'AKTIF',
+            y: 50000,
+        }, {
+            name: 'NON AKTIF',
+            y: 9000
+        }]
+    }],
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+            align: 'left',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    } 
+});
+
+
+Highcharts.setOptions({
+	colors: ['#A3A0FB','#43425D','#6bd189','#fcbf1e']
+	});
+var chart_bar = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-bar',
+        type: 'bar',
+    },
+    xAxis: {
+        categories: [
+        'Aceh', 
+        'Jakarta',
+        'Sumatera', 
+        'Sulawesi', 
+        'Kalimantan',
+        'Jawa Timur',
+        'Papua',
+        'Kalimantan Timur',
+        'Jawa Barat',
+        'Jawa Tengah',
+        'Kalimantan Barat',
+        'Kalimantan Utara',
+        'Sulawesi Selatan',
+        'Sulawesi Barat',
+        'Sumatera Barat',
+        'Sumatera Utara',
+        'NTB',
+        ],
+        labels: {
+        style: {
+            fontSize: '16px',
+            color: '#43425D'
+        }
+        }, 
+        title: {
+            text: null
+        },
+        min: 0,
+        max:6,
+        scrollbar: {
+        enabled: true
+        },
+        tickLength: 0,   
+    },
+    yAxis: {
+        title: false, 
+    },
+    title: {
+        text: 'TERSUS & TUKS PROVINSI'
+    },
+    credits: {
+    enabled: false
+    },
+    tooltip: {
+        formatter: function () {
+        return '<b>' + this.x + '</b><br/>' +
+        '<b>'+ this.series.name +'</b>'+ ' : '+'<b>' + this.y + '</b>'+'<br/>' + 
+        'Total ' + this.series.userOptions.stack + ' : '+  this.point.stackTotal ;
+        }
+    },
+    plotOptions: {
+        series: {
+            point: {}
+        },
+        bar: {
+            stacking: 'normal',
+            states: {
+                inactive: {
+                enabled: false
+                },
+                hover: {
+                color: '#4baee3',  
+                }
+            },
+            cursor: 'pointer',
+            showInLegend: true,
+        }
+    },
+//    legend: {
+//     reversed: true
+//     },
+    series: [   
+        {
+        name: 'Tersus Aktif',
+        data: [30, 40, 40, 20, 51,20,10,52,100],
+        stack: 'Tersus'
+        },   
+        {
+        name: 'Tersus Non Aktif',
+        data: [3, 4, 4, 2, 5,20,10,5,200,10,15,14,150,40,50,20],
+        stack: 'Tersus',
+        // borderRadiusTopLeft: 10,
+        // borderRadiusTopRight: 10
+        },
+        {
+        name: 'Tuks Aktif',
+        data: [10,10,50,10,20,10,30,40,10,15,12,200,120,10,50,20],
+        stack: 'Tuks'
+        }, 
+        {
+        name: 'Tuks Non Aktif',    
+        data: [5, 3, 4, 7, 2,10,10,5,10],
+        stack: 'Tuks',
+        // borderRadiusTopLeft: 10,
+        // borderRadiusTopRight: 10
+        },
+          
+    ], 
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    }  
+});
+</script>
+
+
+</html>

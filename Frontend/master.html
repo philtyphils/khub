@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/sass/main.css">
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="assets/css/google-roboto-300-700.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="#" class="simple-text">
+                        <img src="assets/img/logo.png" alt="logo" style="width: 100%;">
+                    </a>
+                </div>
+    
+                <ul class="nav">
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="fa fa-home"></i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li >
+                        <a href="data.html">
+                            <i class="fa fa-folder-open"></i>
+                            <p>Data</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="master.html">
+                            <i class="fa fa-tags"></i>
+                            <p>Master</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="">
+                            <i class="fa fa-cogs"></i>
+                            <p>Setting</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>          
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-default nabvar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right"> 
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                                    <span class="notification">4</span>
+                                      <p class="hidden-md hidden-lg">
+                                      Message
+                                      <b class="caret"></b>
+                                      </p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="masaberlaku.html">Notification 1</a></li>
+                                    <li><a href="masaberlaku.html">Notification 2</a></li>
+                                    <li><a href="masaberlaku.html">Notification 3</a></li>
+                                    <li><a href="masaberlaku.html">Notification 4</a></li>
+                                </ul>
+                            </li>          
+                            <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <p>
+                                        Administrator
+                                        <b class="caret"></b>
+                                        </p>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="#">Logout</a></li>
+                                  </ul>
+                            </li>
+                            <li class="separator hidden-lg"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="contents">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h2 class="title"></h2>
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="header-master">
+                                    <div class="header">
+                                        <h4 class="title">KATEGORI</h4>
+                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total Kategori</p>
+                                    </div>
+                                    <span class="fa fa-cog"></span>
+                                </div>
+                                <div class="content">
+                                    <div id="container-pie"></div>   
+                                </div>
+                                <div class="footer">
+                                    <a href="kategori.html" class="btn btn-fill btn-primary">VIEW</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-10">
+                            <div class="card">
+                                <div class="header-master">
+                                    <div class="header">
+                                        <h4 class="title">WILAYAH KERJA</h4>
+                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah KELAS OP KSOP & KUPP</p>
+                                    </div>
+                                    <span class="fa fa-map-marker"></span>
+                                </div>
+                                <div class="content">
+                                    <div id="container-bar-wilayahkerja"></div>   
+                                </div>
+                                <div class="footer">
+                                    <a href="kelas.html" class="btn btn-fill btn-primary">VIEW</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-10">
+                            <div class="card">
+                                <div class="header-master">
+                                    <div class="header">
+                                        <h4 class="title">BIDANG USAHA</h4>
+                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Bidang Usaha</p>
+                                    </div>
+                                    <span class="fa fa-bar-chart"></span>
+                                </div>
+                                <div class="content">
+                                    <div id="container-bar-bidangusaha"></div>   
+                                </div>
+                                <div class="footer">
+                                    <a href="bidangusaha.html" class="btn btn-fill btn-primary">VIEW</a>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/light-bootstrap-dashboard.js"></script>
+<script src="assets/js/highchart/highcharts.js"></script>
+<script src="assets/js/highchart/highcharts-exporting.js"></script>
+<script src="assets/js/highchart/highcharts-export.js"></script>
+<!-- <script src="assets/js/highchart/highcharts-access.js"></script> -->
+<script>
+var Total = 0;
+var chart_tusk = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-pie',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        events: {
+            load: function(event) {
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            }
+        }  
+    },
+    title: {
+        text: ''
+    },
+    credits: {
+    enabled: false
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+   legend: {
+        useHTML: true,
+		labelFormatter: function() {
+            Total += this.y;
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x:-10,
+        itemMarginTop: 2,
+        itemMarginBottom: 2,
+        
+    },
+    series: [{
+        name: 'Jumlah',
+        colorByPoint: true,
+        innerSize: '50%',
+        data: [{
+            name: 'PERTAMBANGAN',
+            y: 5000,
+        }, {
+            name: 'INDUSTRI',
+            y: 105
+        },{
+            name: 'ENERGI',
+            y: 1050
+        },
+        {
+            name: 'DOK DAN GALANGAN',
+            y: 999
+        },
+        {
+            name: 'PERTANIAN',
+            y: 10500
+        },
+        {
+            name: 'KEHUTANAN',
+            y: 10500
+        },
+        {
+            name: 'PARIWISATA',
+            y: 1050
+        },
+        {
+            name: 'PERIKANAN',
+            y: 555
+        },
+        ]
+    }],
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+            align: 'left',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    } 
+});
+
+
+var Total = 0;
+var chart_tusk = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-pie2',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        events: {
+            load: function(event) {
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            }
+        }  
+    },
+    title: {
+        text: ''
+    },
+    credits: {
+    enabled: false
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false,
+                padding:0
+            },
+            showInLegend: true
+        }
+    },
+   legend: {
+        useHTML: true,
+		labelFormatter: function() {
+            Total += this.y;
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x:-10,
+        itemMarginTop: 2,
+        itemMarginBottom: 2,
+        
+    },
+    series: [{
+        name: 'Jumlah',
+        colorByPoint: true,
+        innerSize: '50%',
+        data: [{"name":"KSOP KELAS IV LHOKSEUMAWE","y":3},{"name":"KSOP KELAS IV MALAHAYATI","y":3},{"name":"KSOP KELAS IV SABANG","y":1},{"name":"KSOP KELAS IV MEULABOH","y":3},{"name":"KSOP KELAS IV KUALA LANGSA","y":1},{"name":"KUPP KELAS III CALANG","y":0},{"name":"KUPP KELAS III SINABANG","y":1},{"name":"KUPP KELAS III TAPAK TUAN","y":0},{"name":"KUPP KELAS III SINGKIL","y":0},{"name":"KUPP KELAS III SUSOH","y":0},{"name":"OP UTAMA BELAWAN","y":6},{"name":"KSOP KELAS IV PANGKALAN SUSU","y":4},{"name":"KSOP KELAS IV SIBOLGA","y":3},{"name":"KSOP KELAS IV GUNUNG SITOLI","y":1},{"name":"KSOP KELAS IV TANJUNG BALAI ASAHAN","y":0},{"name":"KSOP KELAS V KUALA TANJUNG","y":3},{"name":"KUPP KELAS II TANJUNG BERINGIN","y":1},{"name":"KUPP KELAS III TANJUNG SARANG ELANG","y":1},{"name":"KUPP KELAS III BATAHAN","y":1},{"name":"KUPP KELAS III LAHEWA","y":0},{"name":"KUPP KELAS III TELUK DALAM","y":0},{"name":"KUPP KELAS III SIROMBU","y":0},{"name":"KUPP KELAS III BARUS","y":0},{"name":"KUPP KELAS III PULAU TELLO","y":0},{"name":"KUPP KELAS III LEIDONG","y":0},{"name":"KSOP KELAS I DUMAI","y":14},{"name":"KSOP KELAS II TANJUNG BUTON","y":7},{"name":"KSOP KELAS III PEKANBARU","y":14},{"name":"KSOP KELAS IV TEMBILAHAN","y":8},{"name":"KSOP KELAS IV KUALA ENOK","y":4},{"name":"KSOP KELAS IV BAGAN SIAPI - API","y":1},{"name":"KSOP KELAS IV BENGKALIS","y":1},{"name":"KSOP KELAS IV RENGAT \/ KUALA CINAKU","y":5},{"name":"KSOP KELAS V SELAT PANJANG","y":2},{"name":"KUPP KELAS III TANJUNG MEDANG","y":1},{"name":"KUPP KELAS III SUNGAI GUNTUNG","y":6},{"name":"KUPP KELAS III PANIPAHAN","y":1},{"name":"KUPP KELAS III BATU PANJANG","y":2},{"name":"KUPP KELAS III KUALA GAUNG","y":1},{"name":"KSOP KELAS III TALANG DUKU","y":42},{"name":"KSOP KELAS IV MUARA SABAK","y":2},{"name":"KSOP KELAS IV KUALA TUNGKAL","y":17},{"name":"KUPP KELAS II NIPAH PANJANG","y":0},{"name":"KUPP KELAS III KUALA MENDAHARA","y":3},{"name":"KSOP KELAS II PALEMBANG","y":69},{"name":"KUPP KELAS III SUNGAI LUMPUR","y":4},{"name":"KSOP KELAS III PULAU BAAI","y":7},{"name":"KUPP KELAS III LINAU\/BINTUHAN","y":2},{"name":"KUPP KELAS III MALAKONI-ENGGANO","y":0},{"name":"KSOP KELAS I PANJANG","y":15},{"name":"KSOP KELAS IV BAKAUHEUNI","y":6},{"name":"KUPP KELAS III LABUHAN MARINGGAI","y":3},{"name":"KUPP KELAS III LABUHAN MESUJI","y":2},{"name":"KUPP KELAS III KOTA AGUNG","y":0},{"name":"KUPP KELAS III TELUK BETUNG","y":0},{"name":"KUPP KELAS III MENGGALA","y":3},{"name":"KSOP KELAS IV MUNTOK","y":3},{"name":"KSOP KELAS IV TANJUNG PANDAN","y":8},{"name":"KSOP KELAS IV PANGKAL BALAM","y":17},{"name":"KUPP KELAS III MANGGAR","y":17},{"name":"KUPP KELAS III SADAI","y":1},{"name":"KSOP KELAS I TG. BALAI KARIMUN","y":0},{"name":"KSOP KELAS II KIJANG","y":0},{"name":"KSOP KELAS II TG. PINANG","y":0},{"name":"KSOP KELAS III PULAU SAMBU","y":0},{"name":"KUPP KELAS I TANJUNG UBAN","y":0},{"name":"KUPP KELAS II TANJUNG BATU KUNDUR","y":0},{"name":"KUPP KELAS II DABO SINGKEP","y":0},{"name":"KUPP KELAS III SENAYANG","y":0},{"name":"KUPP KELAS III TAREMPA","y":0},{"name":"OP UTAMA TANJUNG PRIOK","y":9},{"name":"KSOP KELAS III SUNDA KELAPA","y":0},{"name":"KSOP KELAS V MARUNDA","y":3},{"name":"KSOP KELAS V KEP. SERIBU","y":6},{"name":"KSOP KELAS V KALIBARU","y":0},{"name":"KSOP KELAS V MUARA ANGKE","y":0},{"name":"KSOP KELAS II CIREBON","y":5},{"name":"KSOP KELAS III PATIMBAN","y":4},{"name":"KUPP KELAS III PELABUHAN PANGANDARAN","y":0},{"name":"KUPP KELAS III PELABUHAN INDRAYAMAYU","y":3},{"name":"KUPP KELAS III PELABUHAN RATU","y":3},{"name":"KSOP KELAS I TG EMAS","y":7},{"name":"KSOP KELAS II CILACAP","y":5},{"name":"KSOP KELAS IV TEGAL","y":10},{"name":"KUPP KELAS III JEPARA","y":3},{"name":"KUPP KELAS III KARIMUNJAWA","y":0},{"name":"KUPP KELAS III BREBES","y":0},{"name":"KUPP KELAS III BATANG","y":1},{"name":"KUPP KELAS III REMBANG","y":1},{"name":"KUPP KELAS III JUWANA","y":0},{"name":"KSOP KELAS III TANJUNG WANGI","y":8},{"name":"OP UTAMA TANJUNG PERAK","y":12},{"name":"KSOP KELAS II GRESIK","y":14},{"name":"KSOP KELAS IV PROBOLINGGO","y":7},{"name":"KSOP KELAS V PASURUAN","y":0},{"name":"KSOP KELAS V KALIANGET","y":1},{"name":"KSOP KELAS V PANARUKAN","y":0},{"name":"KUPP KELAS III SAPUDI","y":0},{"name":"KUPP KELAS III BAWEAN","y":2},{"name":"KUPP KELAS III TELAGA BIRU","y":3},{"name":"KUPP KELAS III SAPEKAN","y":1},{"name":"KUPP KELAS III BRONDONG","y":12},{"name":"KUPP KELAS III KETAPANG","y":0},{"name":"KUPP KELAS III MASALEMBO","y":0},{"name":"KUPP KELAS III BRANTA","y":8},{"name":"KSOP KELAS I BANTEN","y":63},{"name":"KUPP KELAS III LABUHAN","y":3},{"name":"KUPP KELAS III KARANGANTU","y":1},{"name":"KUPP KELAS III BOJANEGARA","y":0},{"name":"KUPP KELAS III ANYAR LOR","y":0},{"name":"KSOP KELAS II BENOA","y":22},{"name":"KSOP KELAS IV PADANGBAI","y":5},{"name":"KSOP KELAS IV CELUKAN BAWANG","y":3},{"name":"KUPP KELAS III NUSA PENIDA","y":4},{"name":"KUPP KELAS III GILIMANUK","y":1},{"name":"KUPP KELAS III BULELENG","y":0},{"name":"KSOP KELAS III LEMBAR","y":7},{"name":"KSOP KELAS IV BIMA","y":1},{"name":"KSOP KELAS V BADAS","y":3},{"name":"KUPP KELAS III CALABAI","y":0},{"name":"KUPP KELAS III SAPE","y":1},{"name":"KUPP KELAS III BENETE","y":2},{"name":"KUPP KELAS III PEMENANG\/ TANJUNG","y":6},{"name":"KUPP KELAS III LABUHAN LOMBOK","y":2},{"name":"KSOP KELAS III KUPANG","y":1},{"name":"KSOP KELAS V WAINGAPU","y":1},{"name":"KSOP KELAS V LAURENTIUS SAY\/MAUMERE","y":1},{"name":"KSOP KELAS V KALABAHI","y":1},{"name":"KSOP KELAS V ENDE","y":1},{"name":"KUPP KELAS III WAIKELO","y":0},{"name":"KUPP KELAS III BARANUSA","y":0},{"name":"KUPP KELAS III MARAPOKOT","y":0},{"name":"KUPP KELAS III SABA","y":0},{"name":"KUPP KELAS III BAA","y":0},{"name":"KUPP KELAS III LABUHAN BAJO","y":1},{"name":"KUPP KELAS III ATAPUPU","y":1},{"name":"KUPP KELAS III LARANTUKA","y":2},{"name":"KUPP KELAS III REO","y":1},{"name":"KSOP KELAS II PONTIANAK","y":95},{"name":"KSOP KELAS V SUKAMARA","y":2},{"name":"KSOP KELAS V KETAPANG","y":10},{"name":"KSOP KELAS V TELUK AIR (GANTI NAMA MENJADI PADANG TIKAR)","y":7},{"name":"KSOP KELAS V SINTETE\/SAMBAS\/SINGKAWANG PEMANGKAT","y":9},{"name":"KSOP KELAS V PADANG TIKAR","y":0},{"name":"KUPP KELAS III PALOH\/SAKURA","y":0},{"name":"KUPP KELAS III KENDAWANGAN","y":14},{"name":"KUPP KELAS III TELOK MELANO","y":3},{"name":"KUPP KELAS III KINTAP","y":12},{"name":"KSOP KELAS I BANJARMASIN","y":43},{"name":"KSOP KELAS IV KOTA BARU","y":25},{"name":"KUPP KELAS III SATUI","y":29}]
+    }],
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+            align: 'left',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    } 
+});
+
+var Total = 0;
+var chart_tusk = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-pie3',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        events: {
+            load: function(event) {
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            }
+        }  
+    },
+    title: {
+        text: ''
+    },
+    credits: {
+    enabled: false
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+   legend: {
+        useHTML: true,
+		labelFormatter: function() {
+            Total += this.y;
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x:-10,
+        itemMarginTop: 2,
+        itemMarginBottom: 2,
+        
+    },
+    series: [{
+        name: 'Jumlah',
+        colorByPoint: true,
+        innerSize: '50%',
+        data: [{
+            name: 'GALANGAN KAPAL',
+            y: 20,
+        }, {
+            name: 'INDUSTRI BETON',
+            y: 10
+        },{
+            name: 'PEMANFAATAN HASIL HUTAN KAYU',
+            y: 8
+        },
+        {
+            name: 'PERTAMBANGAN BATUBARA',
+            y: 12
+        },
+        {
+            name: 'INDUSTRI PEMBUATAN KAPAL',
+            y: 11
+        },
+        {
+            name: 'PENYEDIA TENAGA LISTRIK',
+            y: 50
+        },
+        {
+            name: 'INDUSTRI SEMEN',
+            y: 52
+        },
+        {
+            name: 'NIAGA MIGAS',
+            y: 50
+        },
+        ]
+    }],
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+            align: 'left',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    } 
+});
+</script>
+
+<!-- ===================================================== NEW BAR CHART BAR WILAYAH KERJA & BIDANG USAHA ====================================================== -->
+
+<script>
+    var chart_bar = new Highcharts.chart({
+        chart: {
+            renderTo: 'container-bar-wilayahkerja',
+            type: 'bar',   
+        },
+        xAxis: {
+            categories:'',
+            labels: {
+            style: {
+            fontSize: '12px',
+            color: '#43425D'
+            }
+            }, 
+            title: {
+                text: null
+            },
+            min: 0,
+            max:8,
+            scrollbar: {
+            enabled: true
+            },
+        },
+       
+        yAxis: {
+            min:0,
+            title: false, 
+          
+        },
+        title: {
+            text: ''
+        },
+        credits: {
+        enabled: false
+        },
+        tooltip: {
+            formatter: function () {
+            return '<b>' + this.x + '</b><br/>' +
+            '<b>'+ 'Total :' +'</b>'+' '+' ' +'<b>' + this.y + '</b>'+'<br/>'
+            }
+        },
+        plotOptions: {
+            bar: {
+                stacking: 'normal',
+                states: {
+                    hover: {
+                    color: '#4baee3',  
+                    }
+                },
+                cursor: 'pointer',
+                showInLegend: false,
+                borderWidth: 0.
+            },
+            series: {
+            colorByPoint: true
+            }
+        },
+
+        series:[{
+            name:'Wilayah Kerja',
+            data:'',
+            stack:''
+        }],
+    
+        navigation: {
+            buttonOptions: {
+                enabled: false
+            }
+        },
+        exporting: {
+            buttons: {
+                contextButton: {
+                    menuItems: ['downloadXLS','viewData']
+                }
+            }
+        }  
+    });
+
+    var chart_bar = new Highcharts.chart({
+        chart: {
+            renderTo: 'container-bar-bidangusaha',
+            type: 'bar',   
+        },
+        xAxis: {
+            categories:'',
+            labels: {
+            style: {
+            fontSize: '12px',
+            color: '#43425D'
+            }
+            }, 
+            title: {
+                text: null
+            },
+            min: 0,
+            max:8,
+            scrollbar: {
+            enabled: true
+            },
+        },
+       
+        yAxis: {
+            min:0,
+            title: false, 
+          
+        },
+        title: {
+            text: ''
+        },
+        credits: {
+        enabled: false
+        },
+        tooltip: {
+            formatter: function () {
+            return '<b>' + this.x + '</b><br/>' +
+            '<b>'+ 'Total :' +'</b>'+' '+' ' +'<b>' + this.y + '</b>'+'<br/>'
+            }
+        },
+        plotOptions: {
+            bar: {
+                stacking: 'normal',
+                states: {
+                    hover: {
+                    color: '#4baee3',  
+                    }
+                },
+                cursor: 'pointer',
+                showInLegend: false,
+                borderWidth: 0.
+            },
+            series: {
+            colorByPoint: true
+            }
+        },
+
+        series:[{
+            name:'Bidang Usaha',
+            data:'',
+            stack:''
+        }],
+    
+        navigation: {
+            buttonOptions: {
+                enabled: false
+            }
+        },
+        exporting: {
+            buttons: {
+                contextButton: {
+                    menuItems: ['downloadXLS','viewData']
+                }
+            }
+        }  
+    });
+  
+</script>
+
+<!-- =========================================================================================================== -->
+
+
+</html>

@@ -1,0 +1,52 @@
+HASIL MEETING 13 NOV 2020
+==============================
+
+//================ FRONTEND =====================//
+
+* Diagram batang tampilan di home ganti dibalik
+* button name dari cari jadi filter di page Data
+* Buat cardpage untuk master data bidang usaha
+* Tambah Inputan Kelurahan DESA di form lokasi (freetext)
+* BUTTON name Tambah sepesifikasi ganti ke Tambah Dermaga (Page input data)
+* Ukuran ganti ke Spesifikasi (FREETEXT)
+* Tambahan Input Dropdown di samping SK yaitu Jenis SK
+* Status Ganti Nama ke Status Operasional AKTIF & NON AKTIF
+
+//=============================================//
+
+//================= BACKEND ==================//
+
+* sorting wilayah untuk table ? -> OP UTAMA KSOP KELAS 1-IV DAN KUPP KELAS 1-III
+* freetext untuk dropdown SUGEST UNTUK wilayah kerja ?
+* Inputan kategori kerja otomatis dari bidang usaha ? (terbalik kayak ya)
+* validasi inputan
+  LU :  Derajat = 0-11
+	Minutes = 1-60
+	Seconds	= 1-60
+  BT : `Derajat = 95-141
+* WARNA Merah di datable dan excel untuk SK legalitas yang EXPIRED
+* DERMAGA TYPE MASTER : JETTY
+			JETY DOLPHIN
+			FINGER
+			MARGINAL
+			SLIPAWAY
+			GRAVING DOCK
+			FLOATING DOCK
+			FLOATING
+			SINGLE POINT MOORING
+			POINT MOORING
+			MULTI BOUY MOORING
+* JENIS SK MASTER    :	Pembangunan
+			pengembangan
+			Pengoperasian
+			Perpajangan / Pembangunan / Pengembangan
+			Perpanjangan Pengoperasian
+			Penyesuaian
+			Pendaftaran
+
+* FLAG untuk status operasional AKTIF DAN TIDAK AKTIF
+* Kondisi Masa berlaku tidak ada (KUNING WARNING) DI DATATABLE DAN EXCEL
+* Duplicate Data Referensi DESA LOKASI
+* 
+//======================================//
+	
