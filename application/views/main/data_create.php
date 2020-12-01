@@ -42,7 +42,7 @@
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="kelurahan">Kecamataan</label>
-                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f" title="Pilih Kecamataan">
+                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f" title="Pilih Kecamataan" data-live-search="true">
                                                                 <option></option>
                                                             </select>
                                                         </div>
