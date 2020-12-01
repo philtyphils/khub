@@ -203,7 +203,7 @@
         
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
-                                                            <select name="kelas[]" class="form-control selectpicker" id="kelas" title="Pilih Wilayah Kerja">
+                                                            <select name="kelas[]" class="form-control selectpicker" id="kelas" title="Pilih Wilayah Kerja" data-live-search="true">
                                                                 <option value="">KOPP KELAS I</option>
                                                                 <option value="">KOPP KELAS II</option>
                                                                 <option value="">KOPP KELAS III</option>

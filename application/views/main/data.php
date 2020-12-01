@@ -298,9 +298,10 @@
                     <div class="col-md-2" style="margin-bottom: 1rem;">
                         <label for="satuan">Satuan</label>
                         <select class="selectpicker form-control" id="satuan" name="satuan[]" required title="Pilih Satuan">
-                            <option>FEET</option>
-                            <option>GT</option>
-                            <option>DWT</option>
+                        <option value="FEET" >FEET</option>
+                        <option value="GT" >GT</option>
+                        <option value="DWT" >DWT</option>
+                        <option value="TON" >TON</option>
                         </select>    
                     </div>
                   </div>
