@@ -11,7 +11,6 @@ class Data extends CI_Controller
 		$this->load->model('Dashboard_Model','dashboard');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encryption');
 		
 	}
 	/**
@@ -56,6 +55,7 @@ class Data extends CI_Controller
 		$status 		= $this->input->post('status');
 		$tglakhir 		= $this->input->post('tgl_akhir');
 		$expired 		= ($this->input->post('expired')) ? TRUE : FALSE;
+		$yellow_notif 	= $this->input->post('YN');
 
 		
 		/* set session data for exporting */
@@ -96,16 +96,24 @@ class Data extends CI_Controller
 		);
 
 
-		if($trigger){
-
-	
+		if($trigger){	
 
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
 	        $this->db->join('provinsi as b','a.provinsi_id=b.id','left');
 	        $this->db->join('ksop as c','a.ksop_id=c.ksop_id','left');
 	        $this->db->join('bdg_usaha as d','a.bdgusaha_id=d.bdg_usaha_id');
-	        $this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
+			$this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
+			
+			if($yellow_notif != "")
+			{
+				$this->db->where("lokasi",'');
+				$this->db->where("koordinat",'');
+				$this->db->where("sk",'');
+				$this->db->where("tgl_terbit",'');
+				$this->db->where("ms_berlaku",'');
+
+			}
 			if($namaPerusahaan != ''){
 				$this->db->like('a.nm_perusahaan', $namaPerusahaan);
 			}
@@ -194,6 +202,7 @@ class Data extends CI_Controller
 			$this->db->where('a.flag',1);
 			$this->db->order_by('a.provinsi_id','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
+			$this->db->cache_off();
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
@@ -213,7 +222,7 @@ class Data extends CI_Controller
 			$this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
 			
 			$this->db->where('a.flag',1);
-			
+			$this->db->cache_on();
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;

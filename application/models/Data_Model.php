@@ -207,7 +207,7 @@ class Data_model extends CI_Model {
 
     public function create($data)
     {
-        //echo "<pre>";print_r($data);die();
+        echo "<pre>";print_r($data);die();
         $d_provinsi = "";
         if($data['provinsi'] != "")
         {
@@ -472,12 +472,14 @@ class Data_model extends CI_Model {
 
     public function jenis_sk()
     {
+        $this->db->cache_on();
         return $this->db->get("jenis_sk")->result();
     }
 
     public function delete($data)
     {
-       $data = $this->db->where("id",$data['id'])->update("daftar_perusahaan",array(
+        $this->db->cache_off();
+        $data = $this->db->where("id",$data['id'])->update("daftar_perusahaan",array(
             "flag" => "0"
         ));
         return $data;
@@ -485,6 +487,7 @@ class Data_model extends CI_Model {
 
     public function get_dermaga()
     {
+        $this->db->cache_on();
         return $this->db->order_by("type","ASC")->get("dermaga_tipe")->result();
     }
 

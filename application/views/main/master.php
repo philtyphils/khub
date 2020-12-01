@@ -13,7 +13,7 @@
     
 </head>
 <body>
-    <input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
+<input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
 <input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
     <div class="wrapper">
             <div class="contents">
@@ -103,6 +103,7 @@
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-exporting.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-export.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 <script> 
 Highcharts.setOptions({
 	colors: ['#4baee3', '#f15c80', '#2b908f','#283bd1' , '#e4d354','#f7a35c'

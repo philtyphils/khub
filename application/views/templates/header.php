@@ -13,6 +13,8 @@
     <link href="<?php echo $baseurl;?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/google-roboto-300-700.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/img/logo-icon.png" rel="icon" >
+
+   
     
 </head>
 <body>
@@ -68,7 +70,7 @@
                        
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="yellow-notif">
                                     <i class="fa fa-bell" aria-hidden="true"></i>
                                     <span class="notification" style="background-color:yellow;color:black;">1</span>
                                       <p class="hidden-md hidden-lg">
@@ -76,13 +78,10 @@
                                       <b class="caret"></b>
                                       </p>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="<?php echo $baseurl;?>Data Kosong">Notification 1</a></li>
-                                </ul>
                             </li> 
                             
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="red-notif">
                                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
                                     <span class="notification" style="margin-left:-20px;"><?php echo $notification;?></span>
                                       <p class="hidden-md hidden-lg">

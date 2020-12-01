@@ -106,8 +106,9 @@ $(document).ready(function(){
         $.redirectPost(redirect, param);
      });
      /* klik button export CSV */
-     $(".export-csv").click(function(e){
+    $(".export-csv").click(function(e){
         var redirect = baseurl + "Export/csv";
+        var target  = "_BLANK";
         var param   = {
             nm_perusahaan   : $("#Filt01").val(),
             provinsi        : $("#Filt02").val(),
@@ -122,24 +123,15 @@ $(document).ready(function(){
             status          : $("#Filt11").val(),
             ms_berlaku      : $("#Filt12").val()
         };
-        $.redirectPost(redirect, param);
+        $.redirectPost(redirect, param, target);
      });
 
+    
+
+
 });
 
-/* Extender for posting Export Excel */
-$.extend(
-{
-    redirectPost: function(location, args)
-    {
-        var form = '';
-        $.each( args, function( key, value ) {
-            //value = value.split('"').join('\"')
-            form += '<input type="hidden" name="'+key+'" value="'+value+'">';
-        });
-        $('<form action="' + location + '" method="POST" target="_BLANK">' + form + '</form>').appendTo($(document.body)).submit();
-    }
-});
+
 
 
 
