@@ -1,15 +1,15 @@
 
                                         <div class="row group" id="lokasi-<?php echo $id;?>-warp">
                                             <div class="wrap-3">
-                                                <h4 class="headingtitle">FORM LOKASI</h4> 
+                                                <h4 class="headingtitle" style="margin: 0;">FORM LOKASI</h4> 
                                             </div> 
                                            
                                             <div class="wrap-2">
-                                                <div class="form-group col-md-5">
+                                                <div class="form-group col-md-4">
                                                     <label for="lokasi">Lokasi</label>
                                                     <textarea name="lokasi_f[]" id="lokasi_f"  rows="19" class="form-control"></textarea> 
                                                 </div>
-                                                <div class="form-group col-md-7">
+                                                <div class="form-group col-md-8">
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
                                                         <select name="provinsi_f[]" class="form-control" id="provinsi_f<?php echo $id;?>" data-live-search="true" title="Pilih Provinsi">
@@ -53,11 +53,13 @@
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group col-md-3">
+                                                        <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
-                                                            <div class="input-group">    
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
-                                                                <span class="input-group-addon" id="basic-addon1">"</span>
+                                                            <div class="input-group"> 
+                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <span class="input-group-addon" id="basic-addon1">.</span>
+                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <span class="input-group-addon" id="basic-addon1">"</span>   
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
@@ -84,10 +86,12 @@
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group col-md-3">
+                                                        <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <span class="input-group-addon" id="basic-addon1">.</span>
+                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
