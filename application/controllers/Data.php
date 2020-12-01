@@ -8,9 +8,10 @@ class Data extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Data_Model','datax');
+		$this->load->model('Dashboard_Model','dashboard');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**
@@ -56,8 +57,30 @@ class Data extends CI_Controller
 		$tglakhir 		= $this->input->post('tgl_akhir');
 		$expired 		= ($this->input->post('expired')) ? TRUE : FALSE;
 		
-		
-		
+		$r = $this->dashboard->status_aktif()->result();
+		$tersus = array(
+			array(
+				"name" => "AKTIF",
+				"y"    => (int) $r[0]->TERSUS_AKTIF
+			),
+			array(
+				"name" => "NON AKTIF",
+				"y"	   => (int) $r[0]->TERSUS_NONAKTIF
+			)
+		);
+
+		$tuks = array(
+			array(
+				"name" => "AKTIF",
+				"y"    => (int) $r[0]->TUKS_AKTIF
+			),
+			array(
+				"name" => "NON AKTIF",
+				"y"	   => (int) $r[0]->TUKS_NONAKTIF
+			)
+		);
+
+
 		if($trigger){
 			/* set session data for exporting */
 			$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
@@ -171,6 +194,9 @@ class Data extends CI_Controller
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
+
+			$data['tersus']	 = json_encode($tersus);
+			$data['tuks']	 = json_encode($tuks);
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		} else {
@@ -184,11 +210,12 @@ class Data extends CI_Controller
 			$this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
 			
 			$this->db->where('a.flag',1);
-			$this->db->order_by('a.provinsi_id','asc');
-			$this->db->order_by('a.nm_perusahaan','asc');
+			
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
+			$data['tuks']	 = json_encode($tuks);
+			$data['tersus']	 = json_encode($tersus);
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		}

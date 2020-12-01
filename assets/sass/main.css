@@ -1369,6 +1369,9 @@ fieldset[disabled] .btn-neutral.active {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 14px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .wrap {
@@ -2971,6 +2974,209 @@ body {
   padding-left: 65px;
 }
 
+.card-chart {
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.1) !important;
+          box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.1) !important;
+  background-color: #FFFFFF;
+  margin-bottom: 3rem;
+}
+
+.card-chart .image {
+  width: 100%;
+  overflow: hidden;
+  height: 260px;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.card-chart .image img {
+  width: 100%;
+}
+
+.card-chart .filter {
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.68);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.card-chart .filter .btn {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.card-chart:hover .filter {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.card-chart .btn-hover {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.card-chart:hover .btn-hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.card-chart .content {
+  padding: 15px;
+}
+
+.card-chart .header {
+  padding: 15px 15px;
+}
+
+.card-chart .header-master {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.card-chart .header-master span {
+  font-size: 50px;
+  color: #A3A0FB;
+  padding: 15px 15px;
+}
+
+.card-chart .category,
+.card-chart label {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(30, 30, 30, 0.97);
+  margin-bottom: 0px;
+  line-height: 1.5;
+}
+
+.card-chart .category i,
+.card-chart label i {
+  font-size: 16px;
+}
+
+.card-chart label {
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.card-chart .title {
+  margin: 0;
+  color: #333333;
+  font-weight: 300;
+  letter-spacing: 8px;
+  margin: 5px 0 1px 0;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.card-chart .title::after {
+  display: block;
+  height: 1px;
+  background-color: #f39c12;
+  content: " ";
+  width: 100%;
+  margin: 1px 0 10px 0;
+}
+
+.card-chart .avatar {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.card-chart .description {
+  font-size: 20px;
+  color: #333;
+}
+
+.card-chart .footer {
+  padding: 0 15px 10px;
+  background-color: transparent;
+  line-height: 30px;
+}
+
+.card-chart .footer .legend {
+  padding: 5px 0;
+}
+
+.card-chart .footer hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.card-chart .stats {
+  color: #a9a9a9;
+}
+
+.card-chart .footer div {
+  display: inline-block;
+}
+
+.card-chart .author {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card-chart .author i {
+  font-size: 14px;
+}
+
+.card-chart h6 {
+  font-size: 12px;
+  margin: 0;
+}
+
+.card-chart.card-separator:after {
+  height: 100%;
+  right: -15px;
+  top: 0;
+  width: 1px;
+  background-color: #DDDDDD;
+  content: "";
+  position: absolute;
+}
+
+.card-chart .ct-chart {
+  margin: 0 0 30px 0;
+}
+
+.card-chart .table tbody td:first-child,
+.card-chart .table thead th:first-child {
+  padding-left: 15px;
+}
+
+.card-chart .table tbody td:last-child,
+.card-chart .table thead th:last-child {
+  padding-right: 15px;
+}
+
+.card-chart .alert {
+  border-radius: 4px;
+  position: relative;
+}
+
+.card-chart .alert.alert-with-icon {
+  padding-left: 65px;
+}
+
 .card-user .image {
   height: 110px;
 }
@@ -3034,6 +3240,18 @@ body {
 }
 
 #container-pie2 {
+  width: 100%;
+  height: 200px;
+  margin: 0 0;
+}
+
+#container-pie3 {
+  width: 100%;
+  height: 200px;
+  margin: 0 0;
+}
+
+#container-pie4 {
   width: 100%;
   height: 200px;
   margin: 0 0;

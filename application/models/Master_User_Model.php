@@ -3,11 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Master_User_model extends CI_Model {
  
-    var $table = 'tbluser';
-    var $column_order = array('USERID','USERNM','USERLVL','LOCK',null); //set column field database for datatable orderable
-    var $column_search = array('USERID','USERNM','USERLVL','LOCK'); //set column field database for datatable searchable just firstname , lastname , address are searchable
-    var $order = array('USERID' => 'asc'); // default order 
- 
     public function __construct(){
         parent::__construct();
         $this->load->database();
@@ -46,34 +41,6 @@ class Master_User_model extends CI_Model {
         }
     }
  
-    function get_datatables(){
-        $this->_get_datatables_query();
-        if($_POST['length'] != -1)
-        $this->db->limit($_POST['length'], $_POST['start']);
-        $query = $this->db->get();
-        return $query->result();
-    }
- 
-    function count_filtered(){
-        $this->_get_datatables_query();
-        $query = $this->db->get();
-        return $query->num_rows();
-    }
- 
-    public function count_all(){
-        $this->db->select('a.userid,a.usernm,a.userlvl,a.email,a.lock,c.nama_pry'); 
-        $this->db->from('tbluser a');
-        return $this->db->count_all_results();
-    }
- 
-    public function get_by_id($id,$pry){
-        $this->db->select('a.userid,a.usernm,a.userlvl,a.email,a.lock as status'); 
-        $this->db->from('tbluser a');
-        $this->db->where('a.userid',$id);
-        $query = $this->db->get();
- 
-        return $query->row();
-    }
  
     public function save($data){
         $msg="";
@@ -109,6 +76,7 @@ class Master_User_model extends CI_Model {
         $this->db->update($this->table, $data, $where);
         return $this->db->affected_rows();
     }
+    
     public function getalluser(){
         $html="";
         $sqlx="select userid,usernm from tbluser order by usernm asc";
@@ -143,7 +111,7 @@ class Master_User_model extends CI_Model {
 
     public function kategori_chart()
     {
-        $data = $this->db->get('rekaptulasi_kategori')->result();
+        $data = $this->db->order_by("TOTAL","DESC")->get('rekaptulasi_kategori')->result();
         $r = array();
         foreach($data as $key => $value)
         {
@@ -159,13 +127,7 @@ class Master_User_model extends CI_Model {
 
     public function wilayah_kerja_chart()
     {
-        $data = $this->db->order_by('
-            (CASE 
-                WHEN wilayah_kerja LIKE "%OP KELAS%"    THEN 1
-                WHEN wilayah_kerja LIKE "%KSOP KELAS%"  THEN 2 
-                WHEN wilayah_kerja LIKE "%KUPP%"        THEN 3  
-            END),
-            wilayah_kerja ASC')->get('rekaptulasi_wilayah_kerja')->result(); 
+        $data = $this->db->order_by('TOTAL',"DESC")->get('rekaptulasi_wilayah_kerja')->result(); 
 
         return $data;
     }
@@ -174,13 +136,21 @@ class Master_User_model extends CI_Model {
 
     public function bdg_usaha_chart()
     {
-        $data = $this->db->order_by('bidang_usaha','ASC')->get('rekaptulasi_bidang_usaha')->result();
+        $data = $this->db->order_by('TOTAL','DESC')->get('rekaptulasi_bidang_usaha')->result();
      
         return $data;
     }
+
     public function notification()
     {
         return $this->db->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
+    }
+
+    public function rekapProvinsi()
+    {
+        $data = $this->db->order_by("JUMLAH","DESC")->get("rekaptulasi_provinsi");
+        return $data;
+
     }
 }
 ?>

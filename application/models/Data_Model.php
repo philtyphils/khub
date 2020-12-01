@@ -113,7 +113,8 @@ class Data_model extends CI_Model {
                 $query = $query." (substr(kode,1,2) =".$p. " and kode!='".$p."') OR ";
             }
             $query = substr($query,0,-4);
-            $where = $query.")";
+            $where = $query.") AND LENGTH(kode) = 5 ORDER BY nama";
+        
             $sql ="SELECT * from wilayah ".$where;
             $query= $this->db->query($sql);
                 
@@ -171,7 +172,7 @@ class Data_model extends CI_Model {
                 $query = $query." ksop.provinsi_id ='".$p."' OR ";
             }
             $query = substr($query,0,-4);
-            $where = $query.")";
+            $where = $query.") ORDER BY ksop.provinsi_id ASC, ksop.order ASC";
 
             $sql ="SELECT * from ksop left join provinsi on ksop.provinsi_id=provinsi.id ".$where;
             $query= $this->db->query($sql);
@@ -314,7 +315,7 @@ class Data_model extends CI_Model {
             {
                 $exec = $this->db->insert("daftar_perusahaan",$insert);
             }
-            catch (\Exception $e)
+            catch (\Exception $e) 
             {
                 die($e->getMessage());
                 //return FALSE;
@@ -484,7 +485,7 @@ class Data_model extends CI_Model {
 
     public function get_dermaga()
     {
-        return $this->db->get("dermaga_tipe")->result();
+        return $this->db->order_by("type","ASC")->get("dermaga_tipe")->result();
     }
 
     public function notification()

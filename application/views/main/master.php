@@ -38,7 +38,20 @@
                             </div>
                         </div>
 
-                        <div class="col-md-10">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header-master">
+                                <div class="header">
+                                    <h4 class="title">TERSUS & TUKS</h4>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Per Provinsi</p>
+                                </div>
+                                <span class="fa fa-globe"></span>
+                                </div>
+                                <div id="container-bar1"></div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
@@ -56,7 +69,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
@@ -80,6 +93,7 @@
             </div>
         </div>
     </div>
+    
 </body>
 
 <script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -90,6 +104,10 @@
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-export.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
 <script> 
+Highcharts.setOptions({
+	colors: ['#4baee3', '#f15c80', '#2b908f','#283bd1' , '#e4d354','#f7a35c'
+        , '#91e8e1', '#d966d6', '#d97766', '#f786a4']
+});
 var Total = 0;
 var chart_tusk = new Highcharts.chart({
     chart: {
@@ -156,71 +174,7 @@ var chart_tusk = new Highcharts.chart({
 });
 
 
-var Total = 0;
-var chart_tusk = new Highcharts.chart({
-    chart: {
-        renderTo: 'container-pie2',
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie',
-        events: {
-            load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
-            }
-        }  
-    },
-    title: {
-        text: ''
-    },
-    credits: {
-    enabled: false
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false,
-                padding:0
-            },
-            showInLegend: true
-        }
-    },
-   legend: {
-        useHTML: true,
-		labelFormatter: function() {
-            Total += this.y;
-			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
-		},
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x:-10,
-        itemMarginTop: 2,
-        itemMarginBottom: 2,
-        
-    },
-    series: [{
-        name: 'Jumlah',
-        colorByPoint: true,
-        innerSize: '50%',
-        data: <?php echo $wilayah_kerja;?>
-    }],
-    navigation: {
-        buttonOptions: {
-            verticalAlign: 'top',
-            align: 'left',
-        }
-    },
-    exporting: {
-        buttons: {
-            contextButton: {
-                menuItems: ['downloadXLS','viewData']
-            }
-        }
-    } 
-});
+
 
 var Total = 0;
 var chart_tusk = new Highcharts.chart({
@@ -320,7 +274,7 @@ var chart_tusk = new Highcharts.chart({
           
         },
         title: {
-            text: ''
+            text: 'Wilayah Kerja'
         },
         credits: {
         enabled: false
@@ -356,7 +310,7 @@ var chart_tusk = new Highcharts.chart({
     
         navigation: {
             buttonOptions: {
-                enabled: false
+                verticalAlign: 'top',
             }
         },
         exporting: {
@@ -397,7 +351,7 @@ var chart_tusk = new Highcharts.chart({
           
         },
         title: {
-            text: ''
+            text: 'Bidang Usaha'
         },
         credits: {
         enabled: false
@@ -433,7 +387,7 @@ var chart_tusk = new Highcharts.chart({
     
         navigation: {
             buttonOptions: {
-                enabled: false
+                verticalAlign: 'top',
             }
         },
         exporting: {
@@ -446,6 +400,109 @@ var chart_tusk = new Highcharts.chart({
     });
   
 </script>
-
 <!-- =========================================================================================================== -->
+
+<!-- ===================================================== BAR HIGHCHART TUSK & TERSUS PERPROVINSI ====================================================== -->
+
+<script>
+    Highcharts.setOptions({
+		colors: ['#A3A0FB','#43425D','#6bd189','#424038']
+    });
+	
+	var chart_bar = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-bar1',
+        type: 'bar',
+       
+    },
+    xAxis: {
+        categories: <?php echo $provinsi; ?>,
+        labels: {
+        style: {
+            fontSize: '12px',
+            color: '#43425D'
+        }
+        }, 
+        title: {
+            text: null
+        },
+        min:0,
+        max:4,
+        scrollbar: {
+        enabled: true
+        },
+        tickLength: 0,   
+    },
+    yAxis: {
+        title: false, 
+    },
+    title: {
+        text: 'TERSUS & TUKS PROVINSI'
+    },
+    credits: {
+    enabled: false
+    },
+    tooltip: {
+        formatter: function () {
+        return '<b>' + this.x + '</b><br/>' +
+        '<b>'+ this.series.name +'</b>'+ ' : '+'<b>' + this.y + '</b>'+'<br/>' ;
+        }
+    },
+    plotOptions: {
+        series: {
+            point: {}
+        },
+        bar: {       
+            groupPadding:.1,
+            pointWidth:10,
+            pointPadding:1,
+            states: {
+                inactive: {
+                enabled: false
+                },
+                hover: {
+                color: '#4baee3',  
+                }
+            },
+            cursor: 'pointer',
+            showInLegend: true,
+        }
+    },
+
+    series: [   
+        {
+        name: 'Tersus Aktif',
+        data: <?php echo $tersus_aktif;?>,
+        },   
+        {
+        name: 'Tersus Non Aktif',
+        data: <?php echo $tersus_nonaktif;?>,
+        },
+        {
+        name: 'Tuks Aktif',
+        data: <?php echo $tuks_aktif;?>,
+        }, 
+        {
+        name: 'Tuks Non Aktif',    
+        data: <?php echo $tuks_nonaktif;?>,
+        },
+          
+    ], 
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    }  
+    });
+</script>
+<!-- ================================================================================================================= -->
+
+
 </html>

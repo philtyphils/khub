@@ -10,7 +10,7 @@ class Home extends CI_Controller
 		$this->load->model('Home_model');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**

@@ -14,7 +14,8 @@ $(document).ready(function(){
 
     $('#datatables').DataTable({
         "ordering": false,
-        "scrollX": true
+        "scrollX": true,
+        "pageLength" : 5,
     });
 
     var dataTablex = $('#datatables').dataTable();
@@ -49,12 +50,10 @@ $(document).ready(function(){
         });
     });
 
-
- 
-   $('#Filt02').change(function(option, checked){
-
+    var timer;
+    $('#Filt02').on('hide.bs.select',function(option, checked) {
         var param = {'provinsi':$(this).val()};  
-       
+            
         $.ajax({
             url : siteurl+'/Data/get_Kota/',
             type: "POST",
@@ -63,19 +62,23 @@ $(document).ready(function(){
             success: function(data)
             {
                 $('#Filt03').html(data).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
-               
+
+
                 setkelas($("#Filt02").val());
+
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
                 alert('Error get data'); 
             }
         });
+
+       
     });
    
    $('#btnsearch').bind('click',function()
    {
-      //$('#frmcari')[0].reset(); // reset form on modals
+      $('.form-control').val('');
       $('.selectpicker').selectpicker('refresh');
       $('#myModal').modal('show'); // show bootstrap modal
            
