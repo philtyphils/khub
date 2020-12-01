@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-lg-5 px-lg-4">
                       <h1 class="title-h1">Selamat Datang</h1>
-                      <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                      <p class="text-muted">Database Terminal Khusus & Terminal Untuk Kepentingan Sendiri</p>
 
                       <form id="loginForm" method="post" action="<?= base_url('Login/ceklogin'); ?>" name="loginForm" style="margin-top: 3rem;">
                         <div class="form-group mb-4">

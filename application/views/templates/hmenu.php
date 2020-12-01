@@ -8,12 +8,7 @@
                 </div>
     
                 <ul class="nav">
-                    <li class="<?php echo ($menu == 'Dashboard')?'active':'';?>" id="">
-                        <a href="<?php echo $baseurl;?>Dashboard">
-                            <i class="fa fa-home"></i>
-                            <p>Home</p>
-                        </a>
-                    </li>
+                   
                     <li class="<?php echo ($menu == 'Data')?'active':'';?>" id="">
                         <a href="<?php echo $baseurl;?>Data">
                             <i class="fa fa-folder-open"></i>
@@ -22,8 +17,8 @@
                     </li>
                     <li class="<?php echo ($menu == 'Master')?'active':'';?>" id="">
                         <a href="<?php echo $baseurl;?>Master">
-                            <i class="fa fa-tags"></i>
-                            <p>Master</p>
+                            <i class="fa  fa-line-chart"></i>
+                            <p>Info Grafik</p>
                         </a>
                     </li>
                     <li class="active-pro">

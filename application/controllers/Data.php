@@ -228,7 +228,7 @@ class Data extends CI_Controller
 		$html='';
         $provinsi = $this->input->post('provinsi');
         $dataprov = $this->datax->get_Kota2($provinsi);
-        $html .='<option value="">Pilih Kabupaten / Kota</option>';
+        // $html .='<option value="">Pilih Kabupaten / Kota</option>';
         foreach ($dataprov as $list) {
              $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
         	}
@@ -293,7 +293,7 @@ class Data extends CI_Controller
         $kelurahan = $this->input->post('kecamatan');
 
         $datakelurahan = $this->datax->get_Kelurahan($kelurahan);
-        $html .='<option value="">Pilih Kelurahan</option>';
+        // $html .='<option value="">Pilih Kelurahan</option>';
         foreach ($datakelurahan as $list) {
          $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
         }

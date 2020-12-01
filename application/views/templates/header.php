@@ -28,12 +28,7 @@
                 </div>
     
                 <ul class="nav">
-                    <li class="<?php echo ($menu == 'Dashboard')?'active':'';?>" id="">
-                        <a href="<?php echo $baseurl;?>Dashboard">
-                            <i class="fa fa-home"></i>
-                            <p>Home</p>
-                        </a>
-                    </li>
+                   
                     <li class="<?php echo ($menu == 'Data')?'active':'';?>" id="">
                         <a href="<?php echo $baseurl;?>Data">
                             <i class="fa fa-folder-open"></i>
@@ -42,8 +37,8 @@
                     </li>
                     <li class="<?php echo ($menu == 'Master')?'active':'';?>" id="">
                         <a href="<?php echo $baseurl;?>Master">
-                            <i class="fa fa-tags"></i>
-                            <p>Master</p>
+                            <i class="fa  fa-line-chart"></i>
+                            <p>Info Grafik</p>
                         </a>
                     </li>
                     <li class="active-pro">
@@ -72,6 +67,20 @@
                     <div class="collapse navbar-collapse">
                        
                         <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                    <span class="notification" style="background-color:yellow;color:black;">1</span>
+                                      <p class="hidden-md hidden-lg">
+                                      Message
+                                      <b class="caret"></b>
+                                      </p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo $baseurl;?>Data Kosong">Notification 1</a></li>
+                                </ul>
+                            </li> 
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
