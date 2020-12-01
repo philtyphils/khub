@@ -13,6 +13,7 @@ $(document).ready(function(){
 
 
     $('#datatables').DataTable({
+        "processing":true,
         "ordering": false,
         "scrollX": true,
         "pageLength" : 5,
@@ -78,6 +79,7 @@ $(document).ready(function(){
    
    $('#btnsearch').bind('click',function()
    {
+      //$('#frmcari')[0].reset(); // reset form on modals
       $('.form-control').val('');
       $('.selectpicker').selectpicker('refresh');
       $('#myModal').modal('show'); // show bootstrap modal

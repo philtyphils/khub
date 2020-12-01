@@ -56,8 +56,23 @@ class Data extends CI_Controller
 		$status 		= $this->input->post('status');
 		$tglakhir 		= $this->input->post('tgl_akhir');
 		$expired 		= ($this->input->post('expired')) ? TRUE : FALSE;
+
 		
-		$r = $this->dashboard->status_aktif()->result();
+		/* set session data for exporting */
+		$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
+		$this->session->set_userdata("provinsi",$provinsi);
+		$this->session->set_userdata("kota",$kota);
+		$this->session->set_userdata("kelas",$kelas);
+		$this->session->set_userdata("kategori",$kategori);
+		$this->session->set_userdata("bidangusaha",$bidangusaha);
+		$this->session->set_userdata("meter",$meter);
+		$this->session->set_userdata("kapasitas",$kapasitas);
+		$this->session->set_userdata("tukter",$tukter);
+		$this->session->set_userdata("status",$status);
+		$this->session->set_userdata("tglakhir",$tglakhir);
+		
+		$r = $this->dashboard->status_aktif();
+		
 		$tersus = array(
 			array(
 				"name" => "AKTIF",
@@ -82,18 +97,6 @@ class Data extends CI_Controller
 
 
 		if($trigger){
-			/* set session data for exporting */
-			$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
-			$this->session->set_userdata("provinsi",$provinsi);
-			$this->session->set_userdata("kota",$kota);
-			$this->session->set_userdata("kelas",$kelas);
-			$this->session->set_userdata("kategori",$kategori);
-			$this->session->set_userdata("bidangusaha",$bidangusaha);
-			$this->session->set_userdata("meter",$meter);
-			$this->session->set_userdata("kapasitas",$kapasitas);
-			$this->session->set_userdata("tukter",$tukter);
-			$this->session->set_userdata("status",$status);
-			$this->session->set_userdata("tglakhir",$tglakhir);
 
 	
 
@@ -255,7 +258,7 @@ class Data extends CI_Controller
 		$html='';
         $provinsi = $this->input->post('provinsi');
         $dataprov = $this->datax->get_Kota2($provinsi);
-        $html .='<option value="">Pilih Kabupaten / Kota</option>';
+        // $html .='<option value="">Pilih Kabupaten / Kota</option>';
         foreach ($dataprov as $list) {
              $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
         	}
@@ -320,7 +323,7 @@ class Data extends CI_Controller
         $kelurahan = $this->input->post('kecamatan');
 
         $datakelurahan = $this->datax->get_Kelurahan($kelurahan);
-        $html .='<option value="">Pilih Kelurahan</option>';
+        // $html .='<option value="">Pilih Kelurahan</option>';
         foreach ($datakelurahan as $list) {
          $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
         }

@@ -70,7 +70,7 @@
                                    
                                     <div class="material-datatables">
 
-                                        <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="font-size: 13px;">
+                                        <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="font-size: 12px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
                                                     <th class="text-center">No</th>
@@ -302,12 +302,13 @@
 
                   <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="tukstersus">TUKS /  TERSUS</label>
+                        <label for="tukstersus">TERSUS / TUSK</label>
                         <!-- <input id="Param10" value="ter_tuk"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" id="Filt10" name="tuk_ter"> -->
                         <select class="selectpicker form-control" id="Filt10" name="tuk_ter" title="Pilih TUKS / TERSUS">
-                            <option value="TUKS">TUKS</option>
+                            
                             <option value="TERSUS">TERSUS</option>
+                            <option value="TUKS">TUKS</option>
                         </select>                       
                     </div>
                     <div class="form-group col-md-4">
@@ -364,17 +365,17 @@
                 <h5 class="title-form" style="margin-bottom: 0;">Spesifikasi</h5>
                 </div>
                
-                <h4 style="font-size: 1.8rem;margin-top: 10px;">Nama Perusahaan 
-                <span class="card-namaperusahaan" style="font-weight: bold;padding-left:10px;font-size:1.6rem;"></span> 
+                <h4 style="font-size: 1.4rem;margin-top: 10px;">Nama Perusahaan 
+                <span class="card-namaperusahaan" style="font-weight: bold;padding-left:10px;font-size:1.4rem;"></span> 
                 </h4>
 
-                <h4 style="font-size: 1.8rem;margin-top: 5px;display:inline-block;padding-right: 50px;">Wilayah Kerja</h4>
+                <h4 style="font-size: 1.4rem;margin-top: 5px;display:inline-block;padding-right: 40px;">Wilayah Kerja</h4>
                 <span class="card-wilayahkerja" style="font-weight: bold;"></span><br>
 
-                <h4 style="font-size: 1.8rem;margin-top: 5px;display:inline-block;padding-right: 29px;">Lokasi Dermaga</h4>
+                <h4 style="font-size: 1.4rem;margin-top: 5px;display:inline-block;padding-right: 24px;">Lokasi Dermaga</h4>
                 <span class="card-lokasi" style="font-size: 1.4rem;font-weight: bold;"></span>
               
-                <h4 style="font-size: 1.8rem;margin-top: 0;">Spesifikasi</h4>
+                <h4 style="font-size: 1.4rem;margin-top: 0;">Spesifikasi</h4>
                 <div class="textarea" style="border:1px solid #43425D; padding:10px;border-radius:5px;">
                 <span class="card-desc"></span>
                 </div>

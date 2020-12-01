@@ -1,4 +1,4 @@
-            <div class="contents">
+<div class="contents">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-10">
@@ -34,17 +34,21 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
-                                                            <label for="kota">Kecamatan</label>
-                                                            <select name="kecamatan_f[]" class="form-control" id="kecamatan_f"  >
-                                                                <option value="">Pilih Kecamatan</option>
+                                                        <div class="form-group col-md-4" style="margin-bottom: 1rem;">
+                                                            <label for="kota">Kabupaten / Kota</label>
+                                                            <select name="kecamatan_f[]" class="form-control selectpicker" id="kecamatan_f"  title="Pilih Kabupaten / Kota" data-live-search="true">
+                                                                <option disabled></option>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f" >
-                                                                <option value="">Pilih Kelurahan</option>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kelurahan">Kecamataan</label>
+                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f" title="Pilih Kecamataan" data-live-search="true">
+                                                                <option></option>
                                                             </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kelurahan">Kelurahan / Desa</label>
+                                                            <input type="text" class="form-control">
                                                         </div>
                                                         
                                                     </div>
@@ -74,8 +78,7 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
-                                                            <select name="direction_lat[]" id="direction_lat" class="form-control" >
-                                                                <option value="">Pilih</option>
+                                                            <select name="direction_lat[]" id="direction_lat" class="form-control selectpicker" title="Pilih">
                                                                 <option value="LU">LU</option>
                                                                 <option value="LS">LS</option>
                                                             </select>
@@ -158,8 +161,8 @@
 
                                                                 <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
-                                                                    <select name="satuan[0][]" class="form-control" id="satuan" >
-                                                                        <option value="">Pilih Satuan</option>
+                                                                    <select name="satuan[0][]" class="form-control selectpicker" id="satuan" title="Pilih Satuan" >
+                                                                    
                                                                         <option value="FEET" >FEET</option>
                                                                         <option value="GT" >GT</option>
                                                                         <option value="DWT" >DWT</option>
@@ -181,8 +184,8 @@
 
                                                         <div class="form-group col-md-6">
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
-                                                            <select name="jenissk[]" class="form-control" id="jenissk" >
-                                                                <option value="">Pilih Jenis SK / Legalitas</option>
+                                                            <select name="jenissk[]" class="form-control selectpicker" id="jenissk" title="Pilih Legalitas">
+                                                             
                                                                 <?php foreach($jenis_sk as $key => $value):?>
                                                                     <option value="<?php echo (int) $value->id;?>"><?php echo $value->jenis_sk;?></option>
                                                                 <?php endforeach;?>
@@ -191,8 +194,8 @@
         
                                                         <div class="form-group col-md-6">
                                                             <label for="bidang usaha">BIDANG USAHA</label>
-                                                            <select class="selectpicker form-control" data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="bidangusaha">
-                                                                    <option value="" disabled>Pilih Bidang Usaha</option>
+                                                            <select class="selectpicker form-control" data-live-search="true" title="Pilih Bidang Usaha" name="bidangusaha[]" id="bidangusaha">
+                                                                  
                                                                     <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                                                         <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
                                                                     <?php } ?>
@@ -201,15 +204,17 @@
         
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
-                                                            <select name="kelas[]" class="form-control" id="kelas" >
-                                                                <option value="">Pilih Wilayah Kerja</option>
+                                                            <select name="kelas[]" class="form-control selectpicker" id="kelas" title="Pilih Wilayah Kerja" data-live-search="true">
+                                                                <option value="">KOPP KELAS I</option>
+                                                                <option value="">KOPP KELAS II</option>
+                                                                <option value="">KOPP KELAS III</option>
                                                             </select>
                                                         </div>
     
                                                         <div class="form-group col-md-3" >
                                                             <label for="tersus_tuks">TERSUS / TUKS</label>
-                                                            <select name="tersus_tuks[]" class="form-control" id="tersus_tuks" >
-                                                                <option value="">Pilih</option>
+                                                            <select name="tersus_tuks[]" class="form-control selectpicker" id="tersus_tuks" title="Pilih">
+                                                             
                                                                 <option value="TERSUS">TERSUS</option>
                                                                 <option value="TUKS">TUKS</option>
                                                             </select>  
@@ -217,8 +222,8 @@
         
                                                         <div class="form-group col-md-3" >
                                                             <label for="status">STATUS OPERASIONAL</label>
-                                                            <select name="status[]" class="form-control" id="status" >
-                                                                <option value="">Pilih Status</option>
+                                                            <select name="status[]" class="form-control selectpicker" id="status" title="Pilih Status">
+                                                             
                                                                 <option value="Y">AKTIF</option>
                                                                 <option value="N">NON AKTIF</option>
                                                             </select>  
@@ -259,7 +264,9 @@
                                     
                                     </div>
                                    
-                                    <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;margin-left: -15px;">SIMPAN DATA</button>
+                                    <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;margin-left: -15px;">
+                                    <i class="fa fa-check" aria-hidden="true" style="margin-right: 4px;"></i>
+                                    SIMPAN DATA</button>
                                     <a href="<?php echo $baseurl;?>Data"  class="btn btn-fill btn-default" >KEMBALI</a> 
                                 </form>
 
