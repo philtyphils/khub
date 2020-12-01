@@ -12,25 +12,29 @@
                                                 <div class="form-group col-md-7">
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
-                                                        <select name="provinsi_f[]" class="form-control" id="provinsi_f<?php echo $id;?>" >
-                                                           <option value="">Pilih Provinsi</option>
+                                                        <select name="provinsi_f[]" class="form-control" id="provinsi_f<?php echo $id;?>" data-live-search="true" title="Pilih Provinsi">
                                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                                                 <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
-                                                            <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan_f[]" class="form-control" id="kecamatan_f<?php echo $id;?>" >
-                                                                <option value="">Pilih Kecamatan</option>
+                                                        
+                                                        <div class="form-group col-md-4" style="margin-bottom: 1rem;">
+                                                            <label for="kecamatan">Kabupaten / Kota</label>
+                                                            <select name="kecamatan_f[]" class="form-control" id="kecamatan_f<?php echo $id;?>" title="Pilih Kabupaten / Kota" data-live-search="true">
+                                                                <!-- <option value="">Pilih Kecamatan</option> -->
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f<?php echo $id;?>" >
-                                                                <option value="">Pilih Kelurahan</option>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kelurahan">Kecamataan</label>
+                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f<?php echo $id;?>" title="Pilih Kecamataan" data-live-search="true">
+                                                                <!-- <option value="">Pilih Kelurahan</option> -->
                                                             </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kelurahan">Kelurahan / Desa</label>
+                                                            <input type="text" class="form-control">
                                                         </div>
                                                         
                                                     </div>
@@ -58,8 +62,7 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
-                                                            <select name="direction_lat[]" id="direction_lat" class="form-control" >
-                                                                <option value="">Pilih</option>
+                                                            <select name="direction_lat[]" id="direction_lat" class="form-control" title="Pilih">
                                                                 <option value="LU">LU</option>
                                                                 <option value="LS">LS</option>
                                                             </select>
@@ -103,6 +106,7 @@
                                                     <div id="dermagamulti" class="wrap-2">
                                                         <div class="col-md-12">
                                                             <button type="button" id="btnTambah" class="btn btn-fill btn-primary addFields" style="margin: 10px 0 20px 0;">
+                                                            <i class="fa fa-plus" style="margin-right: 5px;"></i>
                                                             Tambah Dermaga
                                                             </button>    
                                                         </div>  
@@ -139,8 +143,7 @@
 
                                                                 <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
-                                                                    <select name="satuan[<?php echo $id;?>][]" class="form-control" id="satuan" >
-                                                                        <option value="">Pilih Satuan</option>
+                                                                    <select name="satuan[<?php echo $id;?>][]" class="form-control" id="satuan" title="Pilih">
                                                                         <option value="FEET">FEET</option>
                                                                         <option value="GT">GT</option>
                                                                         <option value="DWT">DWT</option>
@@ -162,8 +165,7 @@
 
                                                         <div class="form-group col-md-6">
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
-                                                            <select name="jenissk[]" class="form-control" id="jenissk" >
-                                                                <option value="">Pilih Jenis SK / Legalitas</option>
+                                                            <select name="jenissk[]" class="form-control" id="jenissk" title="Pilih Jenis Legalitas">
                                                                 <option value="7">Pembangunan</option>
                                                                 <option value="1">Pengembangan</option>
                                                                 <option value="2">Pengoperasian</option>
@@ -176,8 +178,7 @@
         
                                                         <div class="form-group col-md-6">
                                                             <label for="bidang usaha">BIDANG USAHA</label>
-                                                            <select class="selectpicker form-control" data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="bidangusaha">
-                                                                    <option value="" disabled>Pilih Bidang Usaha</option>
+                                                            <select class="selectpicker form-control" data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="bidangusaha" title="Pilih Bidang Usaha">
                                                                     <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                                                         <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
                                                                     <?php } ?>
@@ -186,15 +187,14 @@
         
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
-                                                            <select name="kelas[]" class="form-control" id="kelas<?php echo $id;?>" >
+                                                            <select name="kelas[]" class="form-control selectpicker" id="kelas<?php echo $id;?>" title="Pilih Wilayah Kerja" data-live-search="true">
                                                                 <option value="">Pilih Wilayah Kerja</option>
                                                             </select>
                                                         </div>
     
                                                         <div class="form-group col-md-3" >
                                                             <label for="tersus_tuks">TERSUS / TUKS</label>
-                                                            <select name="tersus_tuks[]" class="form-control" id="tersus_tuks<?php echo $id;?>" >
-                                                                <option value="">Pilih</option>
+                                                            <select name="tersus_tuks[]" class="form-control" id="tersus_tuks<?php echo $id;?>" title="Pilih">
                                                                 <option value="TERSUS">TERSUS</option>
                                                                 <option value="TUKS">TUKS</option>
                                                             </select>  
@@ -202,8 +202,7 @@
         
                                                         <div class="form-group col-md-3" >
                                                             <label for="status">STATUS OPERASIONAL</label>
-                                                            <select name="status[]" class="form-control" id="status<?php echo $id;?>" >
-                                                                <option value="">Pilih Status</option>
+                                                            <select name="status[]" class="form-control" id="status<?php echo $id;?>" title="Pilih Status">
                                                                 <option value="Y">AKTIF</option>
                                                                 <option value="N">NON AKTIF</option>
                                                             </select>  
