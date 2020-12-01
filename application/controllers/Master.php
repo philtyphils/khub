@@ -10,7 +10,7 @@ class Master extends CI_Controller
 		$this->load->model('Master_User_Model','master');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**
@@ -46,7 +46,7 @@ class Master extends CI_Controller
 		{
 			$nmksop[] 		=  $value->wilayah_kerja;
 			$wilayah_kerja[] 	= (int) $value->TOTAL;
-		}
+		} 
 
 		$nmbidang_usaha = array();
 		$bidang_usaha 	= array();
@@ -56,13 +56,33 @@ class Master extends CI_Controller
 			$bidang_usaha[]   = (int) $value->TOTAL;
 		}
 
-		$kat_chart 		= json_encode($this->master->kategori_chart());
+		$kat_chart 			= json_encode($this->master->kategori_chart());
 
+		$rekap_provinsi 	= $this->master->rekapProvinsi()->result();
+		$provinsi 			= array();
+		$tuks_aktif 		= array();
+		$tersus_aktif 		= array();
+		$tuks_nonaktif 		= array();
+		$tersus_nonaktif 	= array();
+		foreach ($rekap_provinsi as $key => $value)
+		{
+			$provinsi[] =  $value->provinsi;
+			$tuks_aktif[] = (int) $value->TUKS_AKTIF;
+			$tuks_nonaktif[] = (int) $value->TUKS_NONAKTIF;
+			$tersus_nonaktif[] = (int) $value->TERSUS_NONAKTIF;
+			$tersus_aktif[] = (int) $value->TERSUS_AKTIF;
+		}
+		
 		$data['nmksop'] 		= json_encode($nmksop);		
 		$data['wilayah_kerja'] 	= json_encode($wilayah_kerja);
 		$data['nmbidang_usaha'] = json_encode($nmbidang_usaha);		
-		$data['bidang_usaha'] 	= json_encode($bidang_usaha);
+		$data['bidang_usaha'] 	= json_encode($bidang_usaha); 
 		$data['kategori_chart'] = $kat_chart;
+		$data['provinsi'] 		= json_encode($provinsi);
+		$data['tuks_aktif'] 	= json_encode($tuks_aktif);
+		$data['tuks_nonaktif'] 	= json_encode($tuks_nonaktif);
+		$data['tersus_aktif'] 	= json_encode($tersus_aktif);
+		$data['tersus_nonaktif'] = json_encode($tersus_nonaktif);
 		$data['notification']	= $this->master->notification();
 		
 

@@ -64,6 +64,7 @@
                 $query= $query.")";
                 $this->db->where($query);
             }
+
             $this->db->where("LENGTH(wilayah.kode)","2");
             $this->db->join("wilayah","daftar_perusahaan.provinsi_id=wilayah.kode");
             $this->db->join("ksop","daftar_perusahaan.ksop_id=ksop.ksop_id");
@@ -95,31 +96,69 @@
             return $data;
         }
 
-        public function rekapProvinsi($provinsi_id)
+        public function rekapProvinsi($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id)
         {
-            $no = 0;
+            $query = ""; $prov_id = "";
             if(count($provinsi_id) > 0)
             {
-                $query ="(";
-                foreach($provinsi_id as $p)
+                $prov_id = "'" . implode(",",$provinsi_id) ."'";
+            }
+            if(count($kategori_id) > 0)
+            {
+                $query =" AND (";
+                foreach($kategori_id as $p)
                 {
-                    $query = $query."provinsi_id=".$p. " OR ";
+                    $query = $query."daftar_perusahaan.kategori_id=".$p. " OR ";
                 }
                 $query = substr($query,0,-4);
                 $query= $query.")";
-                $this->db->where($query);
                 
             }
+
             
-            $data = $this->db->get('rekaptulasi_provinsi');
+            if(count($wilayah_kerja) > 0)
+            {
+                $query =" AND (";
+                foreach($wilayah_kerja as $p)
+                {
+                    $query = $query."daftar_perusahaan.ksop_id=".$p. " OR ";
+                }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+                
+            }
+
+            if(count($bdgusaha_id) > 0)
+            {
+                $query =" AND (";
+                foreach($bdgusaha_id as $p)
+                {
+                    $query = $query."daftar_perusahaan.bdgusaha_id=".$p. " OR ";
+                }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+            }
+            if($query == "" && $prov_id == "")
+            {
+                $data = $this->db->get('rekaptulasi_provinsi');
+            }
+            else
+            {
+                $prov_id = ($prov_id == "") ? "NULL" : "'".$prov_id."'";
+                $query  = ($query == "") ? "NULL" : "'".$query."'";
+                $data = $this->db->query("call store_provinsi(".$prov_id.",".$query.")");
+                mysqli_next_result($this->db->conn_id);
+            }
+           
+            
             return $data;
         }
 
-        public function rekapWilayahkerja($provinsi_id)
+        public function rekapWilayahkerja($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id)
         {
             $no = 0;
             $prov_total = count($provinsi_id);
-            if ($prov_total > 1)
+            if ($prov_total > 0)
             {
                 $query ="(";
                 foreach($provinsi_id as $p)
@@ -131,11 +170,6 @@
                 $this->db->where($query);
             }
            
-            if ($prov_total == 1)
-            {
-                $this->db->where("provinsi_id",$provinsi_id[0]);
-            }
-            
             $data = $this->db->get('rekaptulasi_wilayah_kerja');
             return $data;
         }
@@ -154,13 +188,10 @@
             {
                 $kat_id = "'" . implode(",",$kategori_id) ."'";
             }
+
             $data = $this->db->query("call store_kategori(".$prov_id.",".$kat_id.",NULL)");
+            mysqli_next_result($this->db->conn_id);
             return $data->result_array();
-
-
-            
         }
-		
-		
-	}
+    }
 ?>

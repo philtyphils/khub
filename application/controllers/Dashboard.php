@@ -10,7 +10,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('Dashboard_Model','dashboard');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**
@@ -50,8 +50,9 @@ class Dashboard extends CI_Controller
 			$tuks_aktif[] = (int) $value->TUKS_AKTIF;
 			$tuks_nonaktif[] = (int) $value->TUKS_NONAKTIF;
 			$tersus_nonaktif[] = (int) $value->TERSUS_NONAKTIF;
-			$ersus_aktif[] = (int) $value->TERSUS_AKTIF;
+			$tersus_aktif[] = (int) $value->TERSUS_AKTIF;
 		}
+		
 		$tersus = array(
 			array(
 				"name" => "AKTIF",

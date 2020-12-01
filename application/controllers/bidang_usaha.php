@@ -10,7 +10,7 @@ class bidang_usaha extends CI_Controller
 		$this->load->model('usaha_model','usaha');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**

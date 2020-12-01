@@ -13,7 +13,7 @@
     
 </head>
 <body>
-    <input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
+<input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
 <input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
     <div class="wrapper">
             <div class="contents">
@@ -93,6 +93,7 @@
             </div>
         </div>
     </div>
+    
 </body>
 
 <script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -102,6 +103,7 @@
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-exporting.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-export.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 <script> 
 Highcharts.setOptions({
 	colors: ['#4baee3', '#f15c80', '#2b908f','#283bd1' , '#e4d354','#f7a35c'
@@ -173,71 +175,7 @@ var chart_tusk = new Highcharts.chart({
 });
 
 
-var Total = 0;
-var chart_tusk = new Highcharts.chart({
-    chart: {
-        renderTo: 'container-pie2',
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie',
-        events: {
-            load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
-            }
-        }  
-    },
-    title: {
-        text: ''
-    },
-    credits: {
-    enabled: false
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false,
-                padding:0
-            },
-            showInLegend: true
-        }
-    },
-   legend: {
-        useHTML: true,
-		labelFormatter: function() {
-            Total += this.y;
-			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
-		},
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x:-10,
-        itemMarginTop: 2,
-        itemMarginBottom: 2,
-        
-    },
-    series: [{
-        name: 'Jumlah',
-        colorByPoint: true,
-        innerSize: '50%',
-        data: <?php echo $wilayah_kerja;?>
-    }],
-    navigation: {
-        buttonOptions: {
-            verticalAlign: 'top',
-            align: 'left',
-        }
-    },
-    exporting: {
-        buttons: {
-            contextButton: {
-                menuItems: ['downloadXLS','viewData']
-            }
-        }
-    } 
-});
+
 
 var Total = 0;
 var chart_tusk = new Highcharts.chart({

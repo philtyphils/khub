@@ -10,7 +10,7 @@ class Login extends CI_Controller
 		$this->load->model('Login_Model');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		//include("../service_billing/application/libraries/cryptojs-aes.php"); 
 	
 	}

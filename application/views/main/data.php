@@ -73,23 +73,24 @@
                                         <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="font-size: 12px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
-                                                    <th>No</th>
-                                                    <th>NAMA PERUSAHAAN</th>
-                                                    <th>WILAYAH KERJA</th>
-                                                    <th>BIDANG USAHA</th>
-                                                    <th>LOKASI</th>
-                                                    <th>KOORDINAT</th>
-                                                    <th>SPESIFIKASI</th>
-                                                    <th>TERSUS / TUKS</th>
-                                                    <th>LEGALITAS</th>
-                                                    <th>TERBIT</th>
-                                                    <th>STATUS OPERASIONAL</th>
-                                                    <th>MASA BERLAKU</th>
+                                                    <th class="text-center">No</th>
+                                                    <th class="text-center">NAMA PERUSAHAAN</th>
+                                                    <th class="text-center">WILAYAH KERJA</th>
+                                                    <th class="text-center">BIDANG USAHA</th>
+                                                    <th class="text-center">LOKASI</th>
+                                                    <th class="text-center">KOORDINAT</th>
+                                                    <th class="text-center">SPESIFIKASI</th>
+                                                    <th class="text-center">TERSUS / TUKS</th>
+                                                    <th class="text-center">LEGALITAS</th>
+                                                    <th class="text-center">TERBIT</th>
+                                                    <th class="text-center">STATUS OPERASIONAL</th>
+                                                    <th class="text-center">MASA BERLAKU</th>
                                                     <th class="disabled-sorting" style="width:50px">ACTIONS</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <?php $no = 1; if (isset($company)) foreach ($company as $val) : ?> 
+                                                
                                                 <?php if($val->tgl_terbit == '0000-00-00 00:00:00'):?>
                                                     <tr class="alert alert-warning">
                                                 <?php elseif($val->ms_berlaku <= date('Y/m/d h:i:s a', time())):?>
@@ -111,7 +112,7 @@
                                                         <p class="wilayahkerja" style="display: none;"><?php echo $val->nmksop; ?></p>
                                                         <p class="lokasi" style="display: none;"><?php echo $val->lokasi; ?></p>
                                                         <p class="spesifikasi" style="display: none;">
-                                                        <?php echo $val->spesifikasi; ?>
+                                                        <?php echo preg_replace("/\s\|\s/", '<br/></hr><br/>', (string) $val->spesifikasi); ?>
                                                         </p>
                                                         <a class="showspesifikasi btn btn-success btn-fill" data-target="<?php echo $no;?>">Lihat</a>
                                                         </div>
@@ -220,10 +221,7 @@
                         <!-- <input id="Param03" value="lokasi"  type="hidden"> -->
                         <!-- <select name="kota[]" class="form-control selectpicker" id="Filt03" data-live-search="true" required > -->
                         <select name="kota" class="form-control selectpicker" id="Filt03" data-live-search="true" title="Pilih Kabupaten / Kota">
-                            <option>KOTA A</option>
-                            <option>KOTA B</option>
-                            <option>KOTA C</option>
-                            <option>KOTA D</option>
+                            
                         </select>
                     </div>
 
@@ -232,11 +230,7 @@
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
                         <select name="kelas" class="form-control selectpicker" id="Filt04" data-live-search="true" title="Pilih Wilayah Kerja">
-                           <option>KELAS KOPP 1</option>
-                           <option>KELAS KOPP II</option>
-                           <option>KELAS KOPP III</option>
-                           <option>KELAS KOPP IV</option>
-                           <option>KELAS KOPP V</option>
+                           
                         </select>
                     </div>
                   </div>
@@ -297,11 +291,11 @@
 
                     <div class="col-md-2" style="margin-bottom: 1rem;">
                         <label for="satuan">Satuan</label>
-                        <select class="selectpicker form-control" id="satuan" name="satuan[]" required title="Pilih Satuan">
-                        <option value="FEET" >FEET</option>
-                        <option value="GT" >GT</option>
-                        <option value="DWT" >DWT</option>
-                        <option value="TON" >TON</option>
+                        <select class="selectpicker form-control" id="satuan" name="satuan[]" title="Pilih Satuan">
+                            <option value="FEET" >FEET</option>
+                            <option value="GT" >GT</option>
+                            <option value="DWT" >DWT</option>
+                            <option value="TON" >TON</option>
                         </select>    
                     </div>
                   </div>
@@ -312,6 +306,7 @@
                         <!-- <input id="Param10" value="ter_tuk"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" id="Filt10" name="tuk_ter"> -->
                         <select class="selectpicker form-control" id="Filt10" name="tuk_ter" title="Pilih TUKS / TERSUS">
+                            
                             <option value="TERSUS">TERSUS</option>
                             <option value="TUKS">TUKS</option>
                         </select>                       
@@ -411,6 +406,7 @@
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
 
 <script type="text/javascript" src="<?php echo $baseurl;?>assets/js/data.js?v=<?php echo uniqid(); ?>"></script> 
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 
 <script>
     $('.showspesifikasi').on('click', function (event) {
@@ -420,6 +416,7 @@
     const modalWilayahKerja     = $(this).parents('.singleSpesifikasi').find('.wilayahkerja').text();
     const modalLokasi           = $(this).parents('.singleSpesifikasi').find('.lokasi').text();
     const modalSpefikasi        = $(this).parents('.singleSpesifikasi').find('.spesifikasi').html();
+    
 
     $('#modal-spesifikasi .modal-body>h4>.card-namaperusahaan').text(modalNamaPerusahaan);
     $('#modal-spesifikasi .modal-body>.card-wilayahkerja').text(modalWilayahKerja);
@@ -570,146 +567,6 @@ $(document).ready(function(){
 	});
 });
 </script> 
-<!-- 
-<script type="text/javascript">
-var siteurl = $("#txtsite").val();
-var baseurl = $("#txtbase").val();
-var table;
 
-$(document).ready(function(){
-
-    table = $('#datatables').DataTable({
-        "responsive": false,
-        "scrollX": true,
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "pagingType": "full_numbers",
-        "lengthMenu": [
-            [10, 25, 50, -1],
-            [10, 25, 50, "All"]
-        ],
- 
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": siteurl+'/Data/ajax_list',
-            "type": "POST"
-        },
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ -1 ], //last column
-            "orderable": false, //set not orderable
-        },
-        ],
-        "createdRow": function( row, data, dataIndex){
-                if( data[2] ==  `someVal`){
-                    $(row).addClass('redClass');
-                }
-            }
-    });
-        var dataTable = $('#datatables').dataTable();
-            $("#searchbox").keyup(function() {
-                dataTable.fnFilter(this.value);
-            }); 
-        });
-
-
-     $('#provinsi').change(function(option, checked){
-
-          var param = {'provinsi':$('[name="provinsi[]"]').val()};
-          $.ajax({
-              url : siteurl+'/Data/get_Kota/',
-              type: "POST",
-              data: param,
-              dataType: "JSON",
-              success: function(data)
-              {
-                  $('#kota').html(data);
-                  $('#kota').selectpicker('refresh');
-
-                  setkelas($('[name="provinsi[]"]').val());
-              },
-              error: function (jqXHR, textStatus, errorThrown)
-              {
-                  alert('Error get data'); 
-              }
-          });
-      });
-
-     
-
-
-  $('.datepicker').datepicker({
-    format: "mm-yyyy",
-    startView: "months",  
-    minViewMode: "months"
-    });
-
-   $('select').selectpicker();
-
-
-    $('#delete-modal').on('show.bs.modal',function() { 
-       $('.btn-del').click('.remove',function(e) {
-          $tr = $(this).closest('tr');
-          table.row($tr).remove().draw();
-          e.preventDefault();
-       });
-
-$('#btnCari').bind('click',function(){
-      alert(1)
-      $.ajaxSetup({async:false});
-        var postvar = { name:$('#name').val(),
-                        provinsi:$('#provinsi').val(),
-                        kota:$('#kota').val(),
-                        kelas:$('#kelas').val(),
-                        kategori:$('#kategori').val(),
-                        bidangusaha:$('#bidangusaha').val(),
-                        dermaga:$('#dermaga').val(),
-                        meter:$('#meter').val(),
-                        kapasitas:$('#kapasitas').val(),
-                        tuk_ter:$('#tuk_ter').val(),
-                        status:$('#status').val(),
-                        tgl_akhir:$('#tgl_akhir').val()};
-        $.post(siteurl+"/Data/getData",postvar,function(data){
-          var arrData = new Array();
-            arrData = eval(data);
-
-            alert(arrData[0]["html"]);
-            $("#isiData").html(arrData[0]["html"]);
-            $('#myModal').hide();
-        });
-      $.ajaxSetup({async:true});
-    });
-
-    
-
-    
-});
-
-
-
-function setkelas(id){
-
-          var param = {'kota':id};
-          $.ajax({
-              url : siteurl+'/Data/get_Kelas/',
-              type: "POST",
-              data: param,
-              dataType: "JSON",
-              success: function(data)
-              {
-                  $('#kelas').html(data);
-                  $('#kelas').selectpicker('refresh');
-              },
-              error: function (jqXHR, textStatus, errorThrown)
-              {
-                  alert('Error get data'); 
-              }
-          });
-
-}
-
-</script> -->
 
 </html>

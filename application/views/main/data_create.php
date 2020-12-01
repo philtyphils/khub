@@ -133,6 +133,7 @@
                                                             <button type="button" id="btnTambah" onclick="addFields()" class="btn btn-fill btn-primary" style="margin: 10px 0 20px 0;">
                                                             <i class="fa fa-plus" style="margin-right: 5px;"></i>
                                                             Tambah Dermaga
+
                                                             </button>    
                                                         </div>  
                                                         <div id="groupdermaga">

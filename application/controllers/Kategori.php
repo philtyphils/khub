@@ -10,7 +10,7 @@ class Kategori extends CI_Controller
 		$this->load->model('Kategori_model','kategori');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**

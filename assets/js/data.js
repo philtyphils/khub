@@ -15,7 +15,8 @@ $(document).ready(function(){
     $('#datatables').DataTable({
         "processing":true,
         "ordering": false,
-        "scrollX": true
+        "scrollX": true,
+        "pageLength" : 5,
     });
 
     var dataTablex = $('#datatables').dataTable();
@@ -50,12 +51,10 @@ $(document).ready(function(){
         });
     });
 
-
- 
-   $('#Filt02').change(function(option, checked){
-
+    var timer;
+    $('#Filt02').on('hide.bs.select',function(option, checked) {
         var param = {'provinsi':$(this).val()};  
-       
+            
         $.ajax({
             url : siteurl+'/Data/get_Kota/',
             type: "POST",
@@ -64,14 +63,18 @@ $(document).ready(function(){
             success: function(data)
             {
                 $('#Filt03').html(data).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
-               
+
+
                 setkelas($("#Filt02").val());
+
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
                 alert('Error get data'); 
             }
         });
+
+       
     });
    
    $('#btnsearch').bind('click',function()
@@ -103,8 +106,9 @@ $(document).ready(function(){
         $.redirectPost(redirect, param);
      });
      /* klik button export CSV */
-     $(".export-csv").click(function(e){
+    $(".export-csv").click(function(e){
         var redirect = baseurl + "Export/csv";
+        var target  = "_BLANK";
         var param   = {
             nm_perusahaan   : $("#Filt01").val(),
             provinsi        : $("#Filt02").val(),
@@ -119,24 +123,15 @@ $(document).ready(function(){
             status          : $("#Filt11").val(),
             ms_berlaku      : $("#Filt12").val()
         };
-        $.redirectPost(redirect, param);
+        $.redirectPost(redirect, param, target);
      });
 
+    
+
+
 });
 
-/* Extender for posting Export Excel */
-$.extend(
-{
-    redirectPost: function(location, args)
-    {
-        var form = '';
-        $.each( args, function( key, value ) {
-            //value = value.split('"').join('\"')
-            form += '<input type="hidden" name="'+key+'" value="'+value+'">';
-        });
-        $('<form action="' + location + '" method="POST" target="_BLANK">' + form + '</form>').appendTo($(document.body)).submit();
-    }
-});
+
 
 
 

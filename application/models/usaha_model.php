@@ -21,7 +21,9 @@
 			//	$this->db->like("ksop.nama",trim(htmlentities($post['searchbox'])));
 			//}
 			//$this->db->where('flag',1);
-			$data = $this->db->get('rekaptulasi_bidang_usaha');
+			$query = "SELECT * FROM rekaptulasi_bidang_usaha ORDER BY if(kategori_id = '' or kategori_id is null,2,1), kategori_id ASC";
+			$data = $this->db->query($query);
+			//echo "<pre>";print_r($this->db->last_query());die();
 			return $data;
         }
         

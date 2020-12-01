@@ -20,7 +20,6 @@ class Export extends CI_Controller
 		$this->load->model('Export_model');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
 		
 	}
 	
@@ -50,6 +49,7 @@ class Export extends CI_Controller
             "kategori"      => $this->session->userdata('kategori'),
             "bidangusaha"   => $this->session->userdata('bidangusaha')
         );
+        
         $post = $session_data;
         /* Filter Nama Perusahaan */
         $nm_perusahaan = "";
@@ -57,7 +57,6 @@ class Export extends CI_Controller
         {
             $nm_perusahaan = $nm_perusahaan;
         }
-
         /* Filter Provinsi */        
         $provinsi_id = array();
         if(isset($post['provinsi']) && $post['provinsi'] != "")
@@ -92,10 +91,10 @@ class Export extends CI_Controller
         $kategori_id = array();
         if(isset($post['kategori']) && $post['kategori'] !== "")
         {
-            $r = explode(",",$post['kategori']);
-            if(count($r) > 0 && is_array($r))
+            //$r = explode(",",$post['kategori']);
+            if(count($post['kategori']) > 0 && is_array($post['kategori']))
             {
-                $kategori_id = $r;
+                $kategori_id = $post['kategori'];
             }
         }
 
@@ -111,8 +110,8 @@ class Export extends CI_Controller
         }
 
         $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id); 
-        $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id);
-        //$rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
+        $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id);
+        //$rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id);
         $rekap_kategori         = $this->Export_model->rekapKategori($provinsi_id,$kategori_id);
         $spreadsheet = new Spreadsheet();
         $index = 0;
@@ -474,7 +473,7 @@ class Export extends CI_Controller
             $sheet->getStyle($columns.$rows)->getAlignment()->setHorizontal('center');
             $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
             $sheet->setCellValue($columns.$rows, $value['TOTAL']);
-            $nomor++;$columns = "B"; $rows++; $tersus+=$value['TERSUS'];$tuks+=$value['TUKS'];$lainlain=$value['LAINNYA'];$jumlah+=$value['TOTAL'];
+            $nomor++;$columns = "B"; $rows++; $tersus+=$value['TERSUS'];$tuks+=$value['TUKS'];$lainlain+=$value['LAINNYA'];$jumlah+=$value['TOTAL'];
         }
         
         $sheet->mergeCells("B".$rows.":C".$rows);
