@@ -18,7 +18,7 @@ $("#red-notif").click(function(e){
    var target  = "_SELF";
    var param   = {
        trigger: true,
-       YN  : "delapan.id - IT Konsultan"
+       expired  : "delapan.id - IT Konsultan"
    };
    $.redirectPost(redirect, param, target);
 });

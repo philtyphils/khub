@@ -152,5 +152,10 @@ class Master_User_model extends CI_Model {
         return $data;
 
     }
+
+    public function notif_yellow()
+    {
+        return $this->db->where("flag",1)->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
+    }
 }
 ?>

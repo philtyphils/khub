@@ -40,6 +40,8 @@ class Data extends CI_Controller
 		$data['dataBdgUsaha'] 	= $this->datax->get_bidangusaha();
 		$data['dermaga']		= $this->datax->get_dermaga();
 		$data['notification']	= $this->datax->notification();
+		
+		$data['notif_yellow']	= $this->datax->notif_yellow();
 		$trigger ='';
 		$trigger 		= $this->input->post('trigger');
 		$namaPerusahaan = $this->input->post('name');
@@ -112,6 +114,7 @@ class Data extends CI_Controller
 				$this->db->where("sk",'');
 				$this->db->where("tgl_terbit",'');
 				$this->db->where("ms_berlaku",'');
+				$this->db->where("ter_tuk",'');
 
 			}
 			if($namaPerusahaan != ''){
@@ -201,6 +204,7 @@ class Data extends CI_Controller
 
 			$this->db->where('a.flag',1);
 			$this->db->order_by('a.provinsi_id','asc');
+			$this->db->order_by('c.order','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
 			$this->db->cache_off();
 			$return 		= $this->db->get()->result();
@@ -213,6 +217,7 @@ class Data extends CI_Controller
 			$this->load->view('main/data',$data);
 		} else {
 			$this->db->order_by('a.provinsi_id','asc');
+			$this->db->order_by('c.order','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
@@ -349,6 +354,8 @@ class Data extends CI_Controller
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
 		$data['jenis_sk']     = $this->datax->jenis_sk();
 		$data['notification']	= $this->datax->notification();
+		
+		$data['notif_yellow']			= $this->datax->notif_yellow();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/data_create',$data);
@@ -429,6 +436,7 @@ class Data extends CI_Controller
 		$data['dataProvinsi'] 			= $this->datax->get_provinsi();
 		$data['dataBdgUsaha'] 			= $this->datax->get_bidangusaha();
 		$data['notification']			= $this->datax->notification();
+		$data['notif_yellow']			= $this->datax->notif_yellow();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/data_edit',$data);
@@ -443,9 +451,6 @@ class Data extends CI_Controller
             $this->form_validation->set_rules('name', 'Nama Perusahaan', 'required',
                     array('required' => 'Pastikan %s telah terisi.')
             );
-            $this->form_validation->set_rules('email', 'Email', 'required',
-					array('required' => 'Pastikan %s telah terisi.')
-			);
 
 			$this->form_validation->set_rules('nosk', 'Nomor SK', 'check_nosk_callback',
 					array('required' => 'Pastikan %s telah terisi dan belum terdaftar.')
@@ -454,10 +459,7 @@ class Data extends CI_Controller
 			$this->form_validation->set_rules('d_lat', 'Degree Latitude', 'check_dlat_callback');
 			$this->form_validation->set_rules('m_lat', 'Minutes Latitude', 'check_mlat_callback');
 			$this->form_validation->set_rules('s_lat', 'Second Latitude', 'check_mlat_callback');
-			$this->form_validation->set_rules('d_long', 'Degree Latitude', 'check_dlat_callback');
-			$this->form_validation->set_rules('m_long', 'Degree Latitude', 'check_mlat_callback');
-			$this->form_validation->set_rules('s_long', 'Degree Latitude', 'check_slat_callback');
-			$this->form_validation->set_rules('kelas', 'Wilayah Kerja', 'check_provf_callback');
+			$this->form_validation->set_rules('kelas', 'Wilayah Kerja', 'check_provf_callback'); 
 			$this->form_validation->set_rules('provinsi_f', 'Provinsi Lokasi', 'check_provf_callback');
 			
             if ($this->form_validation->run() == FALSE)

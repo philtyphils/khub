@@ -138,7 +138,6 @@ class Data_model extends CI_Model {
 
     public function get_Kecamatan($id)
     {
-        
         $sql ="SELECT * from wilayah where length(kode) = 8 && substr(kode,1,2) = '".$id."' and kode!='".$id."' ORDER BY nama ASC";
         $query= $this->db->query($sql);
             
@@ -209,38 +208,6 @@ class Data_model extends CI_Model {
     {
         echo "<pre>";print_r($data);die();
         $d_provinsi = "";
-        if($data['provinsi'] != "")
-        {
-            $dData = explode("|",$data['provinsi']);
-            $d_provinsi = (int) $dData[0];
-        }
-
-        $d_kecamatan = "";
-        if( $data['kecamatan'] != "")
-        {
-            $dData = explode("|",$data['kecamatan']);
-            $d_kecamatan = (int) $dData[0];
-        }
-
-        $d_kelurahan = "";
-        if($data['kelurahan'] != "")
-        {
-            $dData = explode("|",$data['kelurahan']);
-            $d_kelurahan = (int) $dData[0];
-        }
-
-        $contactperson = "";
-        if($data['contactperson'] != "")
-        {
-            $contactperson = $data['contactperson'];
-        }
-
-        $email = "";
-        if($data['email'] != "")
-        {
-            $email = $data['email'];
-        }
-
         for($i=0;$i<count($data['lokasi_f']);$i++)
         {
             $provinsi_f = "";
@@ -251,16 +218,16 @@ class Data_model extends CI_Model {
             }
 
             $kecamatan_f = "";
-            if($data['kecamatan_f'][$i] != "")
+            if($data['kota'][$i] != "")
             {
-                $dData = explode("|",$data['kecamatan_f'][$i]);
+                $dData = explode("|",$data['kota'][$i]);
                 $kecamatan_f = (int) $dData[0];
             }
 
             $kelurahan_f = "";
-            if($data['kelurahan_f'][$i] != "")
+            if($data['kecamatan'][$i] != "")
             {
-                $dData = explode("|",$data['kelurahan_f'][$i]);
+                $dData = explode("|",$data['kota'][$i]);
                 $kelurahan_f = (int) $dData[0];
             }
 
@@ -290,13 +257,6 @@ class Data_model extends CI_Model {
                 "lokasi"                => $data['lokasi_f'][$i],
                 "lokasi_kecamatan"      => $kecamatan_f,
                 "lokasi_kelurahan"      => $kelurahan_f,
-                "alamat"                => $data['alamat'],
-                "alamat_provinsi_id"    => $d_provinsi,
-                "alamat_kelurahan"      => $d_kelurahan,
-                "alamat_kecamatan"      => $d_kecamatan,
-                "alamat_kodepos"        => $data['kodepos'],
-                "alamat_email"          => $email,
-                "no_tlp"                => $contactperson,
                 "koordinat"             => $data["d_lat"][$i]."°-".$data['m_lat'][$i]."'-".$data['s_lat'][$i]."\"".$data['direction_lat'][$i]."/". $data["d_long"][$i]."°-".$data['m_long'][$i]."'-".$data['s_long'][$i]."\"BT",
                 "koordinat_dd"          => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i]) ." ". $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i]),
                 "k_lat"                 => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i]),
@@ -311,6 +271,7 @@ class Data_model extends CI_Model {
                 "status"                => $data['status'][$i]
     
             );
+
             try
             {
                 $exec = $this->db->insert("daftar_perusahaan",$insert);
@@ -494,6 +455,11 @@ class Data_model extends CI_Model {
     public function notification()
     {
         return $this->db->where("flag",1)->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
+    }
+
+    public function notif_yellow()
+    {
+        return $this->db->where("flag",1)->where('ter_tuk','')->where('koordinat','')->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
     }
 
 }

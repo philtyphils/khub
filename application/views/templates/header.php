@@ -72,7 +72,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="yellow-notif">
                                     <i class="fa fa-bell" aria-hidden="true"></i>
-                                    <span class="notification" style="background-color:yellow;color:black;">1</span>
+                                    <span class="notification" style="background-color:yellow;color:black;"><?php echo $notif_yellow;?></span>
                                       <p class="hidden-md hidden-lg">
                                       Message
                                       <b class="caret"></b>

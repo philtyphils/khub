@@ -80,7 +80,7 @@
                 daftar_perusahaan.alamat as alamat,
                 daftar_perusahaan.png_jwb as png_jwb,
                 daftar_perusahaan.npwp as npwp,
-                daftar_perusahaan.koordinat_dd as koordinat,
+                daftar_perusahaan.koordinat as koordinat,
                 daftar_perusahaan.ter_tuk as ter_tuk,
                 daftar_perusahaan.spesifikasi as spesifikasi,
                 daftar_perusahaan.sk as legalitas,
@@ -144,7 +144,7 @@
             }
             else
             {
-                $prov_id = ($prov_id == "") ? "NULL" : "'".$prov_id."'";
+                $prov_id = ($prov_id == "") ? "NULL" : $prov_id;
                 $query  = ($query == "") ? "NULL" : "'".$query."'";
                 $data = $this->db->query("call store_provinsi(".$prov_id.",".$query.")");
                 mysqli_next_result($this->db->conn_id);

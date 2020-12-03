@@ -24,7 +24,7 @@
                                             <div class="wrap-3">
                                                 <h4 class="headingtitle" style="margin: 0;">FORM LOKASI</h4> 
                                             </div> 
-                                           
+                                            
                                             <div class="wrap-2">
                                                 <div class="form-group col-md-4">
                                                     <label for="lokasi">Lokasi</label>
@@ -43,19 +43,19 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
-                                                            <select name="kecamatan_f[]" class="form-control selectpicker" id="kecamatan_f"  title="Pilih Kabupaten / Kota" data-live-search="true">
+                                                            <select name="kota[]" class="form-control selectpicker" id="kecamatan_f"  title="Pilih Kabupaten / Kota" data-live-search="true">
                                                                 <option disabled></option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-4">
-                                                            <label for="kelurahan">Kecamataan</label>
-                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f" title="Pilih Kecamataan" data-live-search="true">
+                                                            <label for="kecamatan">Kecamataan</label>
+                                                            <select name="kecamatan[]" class="form-control" id="kelurahan_f" title="Pilih Kecamataan" data-live-search="true">
                                                                 <option></option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" name="kelurahan[]" class="form-control">
                                                         </div>
                                                         
                                                     </div>
@@ -79,7 +79,7 @@
                                                             <div class="input-group"> 
                                                                 <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>   
                                                             </div>
                                                         </div>
@@ -96,7 +96,7 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" min="0" max="11" name="d_long[]" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" min="95" max="141" name="d_long[]" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
@@ -112,7 +112,7 @@
                                                             <div class="input-group">
                                                                 <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>

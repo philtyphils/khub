@@ -84,6 +84,7 @@ class Master extends CI_Controller
 		$data['tersus_aktif'] 	= json_encode($tersus_aktif);
 		$data['tersus_nonaktif'] = json_encode($tersus_nonaktif);
 		$data['notification']	= $this->master->notification();
+		$data['notif_yellow']	= $this->master->notif_yellow();
 		
 
 		$this->load->view('templates/header',$data);
