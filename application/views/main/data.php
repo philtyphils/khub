@@ -93,7 +93,7 @@
                                                 
                                                 <?php if($val->tgl_terbit == '0000-00-00 00:00:00'):?>
                                                     <tr class="alert alert-warning">
-                                                <?php elseif($val->ms_berlaku <= date('Y/m/d h:i:s a', time())):?>
+                                                <?php elseif($val->ms_berlaku <= date('Y-m-d h:i:s a', time())):?>
                                                     <tr class="alert alert-danger">
                                                 <?php else:?>                   
                                                     <tr>

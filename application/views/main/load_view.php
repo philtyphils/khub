@@ -22,19 +22,19 @@
                                                         
                                                         <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                                                             <label for="kecamatan">Kabupaten / Kota</label>
-                                                            <select name="kecamatan_f[]" class="form-control" id="kecamatan_f<?php echo $id;?>" title="Pilih Kabupaten / Kota" data-live-search="true">
+                                                            <select name="kota[]" class="form-control" id="kecamatan_f<?php echo $id;?>" title="Pilih Kabupaten / Kota" data-live-search="true">
                                                                 <!-- <option value="">Pilih Kecamatan</option> -->
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="kelurahan">Kecamataan</label>
-                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f<?php echo $id;?>" title="Pilih Kecamataan" data-live-search="true">
+                                                            <select name="kecamatan[]" class="form-control" id="kelurahan_f<?php echo $id;?>" title="Pilih Kecamataan" data-live-search="true">
                                                                 <!-- <option value="">Pilih Kelurahan</option> -->
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" name="kelurahan" class="form-control">
                                                         </div>
                                                         
                                                     </div>
@@ -58,7 +58,7 @@
                                                             <div class="input-group"> 
                                                                 <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat2[]" id="s_lat2" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>   
                                                             </div>
                                                         </div>
@@ -91,7 +91,7 @@
                                                             <div class="input-group">
                                                                 <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>

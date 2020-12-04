@@ -16,72 +16,6 @@
                                                 <label for="name" class="label-font" style="margin-bottom: 1rem;">Nama Perusahaan</label>
                                                 <input type="text" name="name" value="<?php echo $data['data']->nm_perusahaan;?>" id="name" class="form-control" placeholder="Nama Perusahaan" >
                                             </div>
-
-                                            <div class="wrap">
-                                               
-                                                <div class="form-group col-md-6 border-right">
-                                                    <label for="alamat">Alamat Kantor</label>
-                                                    <textarea name="alamat" id="alamat" rows="11" class="form-control"><?php echo $data['data']->alamat;?></textarea> 
-                                                </div>
-                                                <div class="form-group col-md-6" >
-                                                    <div class="form-group">
-                                                        <label for="provinsi">Provinsi</label>
-                                                        <select name="provinsi" class="form-control" id="provinsi" >
-                                                           <option value="" readonly>Pilih Provinsi</option>
-                                                            <?php for($i=0;$i<count($dataProvinsi);$i++){?>
-                                                                <?php if($dataProvinsi[$i]->kode == $data['data']->alamat_provinsi_id):?>
-                                                                    <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>" selected><?php echo $dataProvinsi[$i]->nama; ?></option>
-                                                                <?php else: ?>
-                                                                    <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
-                                                                <?php endif;?>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-4">
-                                                            <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan" class="form-control" id="kecamatan" >
-                                                                <option value="" readonly>Pilih Kecamatan</option>
-                                                                <?php foreach ($data['alamat_kecamatan'] as $key => $value):?>
-                                                                    <?php if($value->kode == $data['data']->alamat_kecamatan):?>
-                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
-                                                                    <?php else:?>
-                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
-                                                                    <?php endif;?>
-                                                                <?php endforeach;?>
-            
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="kelurahan">Kelurahan</label>
-                                                            <select name="kelurahan" class="form-control" id="kelurahan" >
-                                                                <option value="">Pilih Kelurahan</option>
-                                                                <?php foreach ($data['kelurahan'] as $key => $value):?>
-                                                                    <?php if($value->kode == $data['data']->alamat_kelurahan):?>
-                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
-                                                                    <?php else:?>
-                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
-                                                                    <?php endif;?>
-                                                                <?php endforeach;?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="kodepos">KodePos</label>
-                                                            <input type="number" name="kodepos" value="<?php echo $data['data']->alamat_kodepos;?>" id="kodepos" class="form-control" placeholder="KodePos">  
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="contactperson">Contact Person</label>
-                                                            <input type="number" name="contactperson" value="<?php echo $data['data']->no_tlp;?>" id="contactperson" class="form-control" placeholder="Contact Person"> 
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="email">Email</label>
-                                                            <input type="email" name="email" id="email"  value="<?php echo $data['data']->alamat_email;?>" class="form-control" placeholder="Email">
-                                                        </div>
-                                                    </div>  
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="row group">
@@ -92,7 +26,7 @@
                                             <div class="wrap-2">
                                                 <div class="form-group col-md-5">
                                                     <label for="lokasi">Lokasi</label>
-                                                    <textarea name="lokasi_f" id="lokasi_f"  rows="19" class="form-control"><?php echo $data['data']->lokasi;?></textarea> 
+                                                    <textarea name="lokasi_f" id="lokasi_f"  rows="15" class="form-control"><?php echo $data['data']->lokasi;?></textarea> 
                                                 </div>
                                                 <div class="form-group col-md-7">
                                                     <div class="form-group">
@@ -109,10 +43,21 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
-                                                            <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan_f" class="form-control selectpicker" id="kecamatan_f" data-live-search="true">
-                                                                <option value="">Pilih Kecamatan</option>
+                                                        <div class="form-group col-md-4" style="margin-bottom: 1rem;">
+                                                            <label for="kota">Kabupaten / Kota</label>
+                                                            <select name="kota" class="form-control selectpicker" id="kecamatan_f"  title="Pilih Kabupaten / Kota" data-live-search="true">
+                                                                <?php foreach ($data['kota'] as $key => $value):?>
+                                                                    <?php if($value->kode == $data['data']->lokasi_kota):?>
+                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
+                                                                    <?php else:?>
+                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kecamatan">Kecamataan</label>
+                                                            <select name="kecamatan" class="form-control" id="kelurahan_f" title="Pilih Kecamataan" data-live-search="true">
                                                                 <?php foreach ($data['kecamatan'] as $key => $value):?>
                                                                     <?php if($value->kode == $data['data']->lokasi_kecamatan):?>
                                                                         <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
@@ -122,18 +67,9 @@
                                                                 <?php endforeach;?>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-6">
+                                                        <div class="form-group col-md-4">
                                                             <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <select name="kelurahan_f" class="form-control" id="kelurahan" >
-                                                                <option value="">Pilih Kelurahan</option>
-                                                                <?php foreach ($data['kelurahan'] as $key => $value):?>
-                                                                    <?php if($value->kode == $data['data']->lokasi_kelurahan):?>
-                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
-                                                                    <?php else:?>
-                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
-                                                                    <?php endif;?>
-                                                                <?php endforeach;?>
-                                                            </select>
+                                                            <input type="text" name="kelurahan" value="<?php echo $data['data']->lokasi_kelurahan;?>" class="form-control">
                                                         </div>
                                                         
                                                     </div>
@@ -154,8 +90,22 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
-                                                            <div class="input-group">    
-                                                                <input type="number" value="<?php echo (array_key_exists(2,$data['data']->koordinat)) ? trim($data['data']->koordinat[2]) : "";?>" name="s_lat" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
+                                                            <div class="input-group">
+                                                                <?php if (array_key_exists(2,$data['data']->koordinat)) {
+                                                                    $seconds = trim($data['data']->koordinat[2]);
+                                                                   
+                                                                    $split   = explode(".",$seconds);
+                                                                   
+                                                                    $first   = (array_key_exists(0,$split)) ? $split[0] : "00";
+                                                                    $second  = (array_key_exists(1,$split)) ? $split[1] : "00";
+                                                                }else{
+                                                                    $first   = "00";
+                                                                    $second  = "00";
+                                                                }
+                                                                ?>
+                                                                <input type="number" value="<?php echo $first;?>" name="s_lat" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
+                                                                <span class="input-group-addon" id="basic-addon1">.</span>
+                                                                <input type="number" value="<?php echo $second;?>" name="s_lat2" id="s_lat2" class="form-control" value="00" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -187,7 +137,20 @@
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" value="<?php echo (array_key_exists(6,$data['data']->koordinat)) ? trim($data['data']->koordinat[6]) : "";?>" name="s_long" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <?php if (array_key_exists(6,$data['data']->koordinat)) {
+                                                                    $seconds = trim($data['data']->koordinat[6]);
+                                                                   
+                                                                    $split   = explode(".",$seconds);
+                                                                    $first   = (array_key_exists(0,$split)) ? $split[0] : "00";
+                                                                    $second  = (array_key_exists(1,$split)) ? $split[1] : "00";
+                                                                }else{
+                                                                    $first   = "00";
+                                                                    $second  = "00";
+                                                                }
+                                                                ?>
+                                                                <input type="number" value="<?php echo $first;?>" name="s_long" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
+                                                                <span class="input-group-addon" id="basic-addon1">.</span>
+                                                                <input type="number" value="<?php echo $second;?>" name="s_long2" id="s_long" class="form-control" value="00" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -270,14 +233,14 @@
                                                         <div class="form-group col-md-6">
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
                                                             <select name="jenissk" class="form-control" id="jenissk" >
-                                                                <option value="">Pilih Jenis SK / Legalitas</option>
-                                                                <option value="7">Pembangunan</option>
-                                                                <option value="1">Pengembangan</option>
-                                                                <option value="2">Pengoperasian</option>
-                                                                <option value="3">Perpajangan / Pembangunan / Pengembangan</option>
-                                                                <option value="4">Perpanjangan Pengoperasian</option>
-                                                                <option value="5">Penyesuaian</option>
-                                                                <option value="6">Pendaftaran</option>
+                                                                <option value="" readonly>Pilih Jenis SK / Legalitas</option>
+                                                                <?php foreach($jenis_sk as $key => $value):?>
+                                                                    <?php if($value->id == $data['data']->jns_legalitas):?>
+                                                                    <option value="<?php echo (int) $value->id;?>" selected><?php echo $value->jenis_sk;?></option>
+                                                                    <?php else: ?>
+                                                                    <option value="<?php echo (int) $value->id;?>"><?php echo $value->jenis_sk;?></option>
+                                                                    <?php endif ;?>
+                                                                <?php endforeach; ?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6">

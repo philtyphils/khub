@@ -90,7 +90,14 @@
 
 		public function notification()
     	{
+			$this->db->cache_on();
     	    return $this->db->where("flag",1)->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
+		}
+		
+		public function notif_yellow()
+    	{
+			$this->db->cache_on();
+    	    return $this->db->where("flag",1)->where('ter_tuk','')->where('koordinat','')->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
     	}
 		
 		

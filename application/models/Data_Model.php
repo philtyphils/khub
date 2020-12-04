@@ -138,7 +138,8 @@ class Data_model extends CI_Model {
 
     public function get_Kecamatan($id)
     {
-        $sql ="SELECT * from wilayah where length(kode) = 8 && substr(kode,1,2) = '".$id."' and kode!='".$id."' ORDER BY nama ASC";
+        $sql ="SELECT * from wilayah where length(kode) = 8 && substr(kode,1,5) = '".$id."' ORDER BY nama ASC";
+       
         $query= $this->db->query($sql);
             
         return $query->result(); 
@@ -206,7 +207,7 @@ class Data_model extends CI_Model {
 
     public function create($data)
     {
-        echo "<pre>";print_r($data);die();
+        //echo "<pre>";print_r($data);die();
         $d_provinsi = "";
         for($i=0;$i<count($data['lokasi_f']);$i++)
         {
@@ -217,18 +218,24 @@ class Data_model extends CI_Model {
                 $provinsi_f = (int) $dData[0];
             }
 
-            $kecamatan_f = "";
+            $kota_f = "";
             if($data['kota'][$i] != "")
             {
                 $dData = explode("|",$data['kota'][$i]);
-                $kecamatan_f = (int) $dData[0];
+                $kota_f = $dData[0];
+            }
+
+            $kecamatan_f = "";
+            if($data['kecamatan'][$i] != "")
+            {
+                $dData = explode("|",$data['kecamatan'][$i]);
+                $kecamatan_f = $dData[0];
             }
 
             $kelurahan_f = "";
-            if($data['kecamatan'][$i] != "")
+            if($data['kelurahan'][$i] != "")
             {
-                $dData = explode("|",$data['kota'][$i]);
-                $kelurahan_f = (int) $dData[0];
+                $kelurahan_f = $data['kelurahan'][$i];
             }
 
             $spesifikasi = "";
@@ -255,18 +262,19 @@ class Data_model extends CI_Model {
                 "kategori_id"           => $kategori_id,
                 "nm_perusahaan"         => $data['name'],
                 "lokasi"                => $data['lokasi_f'][$i],
+                "lokasi_kota"           => $kota_f,
                 "lokasi_kecamatan"      => $kecamatan_f,
                 "lokasi_kelurahan"      => $kelurahan_f,
-                "koordinat"             => $data["d_lat"][$i]."°-".$data['m_lat'][$i]."'-".$data['s_lat'][$i]."\"".$data['direction_lat'][$i]."/". $data["d_long"][$i]."°-".$data['m_long'][$i]."'-".$data['s_long'][$i]."\"BT",
-                "koordinat_dd"          => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i]) ." ". $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i]),
-                "k_lat"                 => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i]),
-                "k_long"                => $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i]),
-                "ter_tuk"               => $$data['tersus_tuks'][$i],
+                "koordinat"             => $data["d_lat"][$i]."°-".$data['m_lat'][$i]."'-".$data['s_lat'][$i].".".$data['s_lat2'][$i]."\"".$data['direction_lat'][$i]."/". $data["d_long"][$i]."°-".$data['m_long'][$i]."'-".$data['s_long'][$i].".".$data['s_long'][$i]."\"BT",
+                "koordinat_dd"          => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i].".".$data['s_lat2'][$i]) ." ". $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i].".".$data['s_long2'][$i]),
+                "k_lat"                 => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i].".".$data['s_lat2'][$i]),
+                "k_long"                => $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i].".".$data['s_lat2'][$i]),
+                "ter_tuk"               => $data['tersus_tuks'][$i],
                 "spesifikasi"           => $spesifikasi,
                 "sk"                    => $data['nosk'][$i],
                 "jns_legalitas"         => $data['jenissk'][$i],
-                "tgl_terbit"            => $data['tgl_terbit'][$i],
-                "ms_berlaku"            => $data['tgl_akhir'][$i],
+                "tgl_terbit"            => date("Y-m-d H:i:s",strtotime($data['tgl_terbit'][$i])),
+                "ms_berlaku"            => date("Y-m-d H:i:s",strtotime($data['tgl_akhir'][$i])),
                 "update_date"           => date("Y-m-d"),
                 "status"                => $data['status'][$i]
     
@@ -288,25 +296,23 @@ class Data_model extends CI_Model {
 
     public function edit($data)
     {
-        $d_provinsi = "";
-        if($data['provinsi'] != "")
+        //echo "<pre>";print_r($data);die();
+        $d_kota = "";
+        if( $data['kota'] != "")
         {
-            $dData = explode("|",$data['provinsi']);
-            $d_provinsi = (int) $dData[0];
+            $d_kota = $data["kota"];
         }
 
         $d_kecamatan = "";
         if( $data['kecamatan'] != "")
         {
-            $dData = explode("|",$data['kecamatan']);
-            $d_kecamatan = (int) $dData[0];
+            $d_kecamatan = $data['kecamatan'];
         }
 
         $d_kelurahan = "";
         if($data['kelurahan'] != "")
         {
-            $dData = explode("|",$data['kelurahan']);
-            $d_kelurahan = (int) $dData[0];
+            $d_kelurahan = $data['kelurahan'];
         }
 
         $provinsi_f = "";$prov_nama = "";
@@ -329,31 +335,34 @@ class Data_model extends CI_Model {
             $spesifikasi .= "TIPE: ".$val .", SPESIFIKASI:" . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
            
         }
+        //echo "<pre>";print_r($d_kecamatan);die("<<<");
         $spesifikasi        = substr($spesifikasi,0,-3);
+
         $_get_kategori_id   = $this->db->where('bdg_usaha_id',(int) $data['bidangusaha'])->get("bdg_usaha")->row();
 
-        $lok_kec            = $this->db->where("kode",$data['kecamatan_f'])->get('wilayah')->row();
-        $lok_kel            = $this->db->where("kode",$data['kelurahan_f'])->get('wilayah')->row();
+        $lok_kec            = $this->db->where("kode",$d_kecamatan)->get('wilayah')->row();
+        $lok_kot            = $this->db->where("kode",$d_kota)->get('wilayah')->row();
         /* ------------ table update ---------------*/
         $provinsi_id        = $provinsi_f;
         $ksop_id            = (int) $data['wilayah_kerja'];
         $bdg_usaha_id       = (int) $data['bidangusaha'];
         $kategori_id        = $_get_kategori_id->kategori_id;        
         $nm_perusahaan      = trim($data['name']);
-        $lokasi             = $data['lokasi_f'] . " " .$lok_kec->nama . " " .$lok_kel->nama . " ".$prov_nama;
-        $lokasi_kecamatan   = $data['kecamatan_f'];
-        $lokasi_kelurahan   = $data['kelurahan_f'];
-        $alamat             = $data['alamat'];
-        $alamat_provinsi_id = $d_provinsi;        
-        $alamat_kelurahan   = $data['kelurahan'];
-        $alamat_kecamatan   = $data['kecamatan'];
-        $alamat_kodepos     = $data['kodepos'];
-        $alamat_email       = $data['email'];
-        $no_tlp             = $data['contactperson'];
-        $koordinat          = $data["d_lat"]."°-".$data['m_lat']."'-".$data['s_lat']."\"".$data['direction_lat']."/". $data["d_long"]."°-".$data['m_long']."'-".$data['s_long']."\"BT";
-        $koordinat_dd       = $this->DMStoDD($data["d_lat"],$data['m_lat'],$data['s_lat']) ." ". $this->DMStoDD($data["d_long"],$data['m_long'],$data['s_long']);
-        $k_lat              = $this->DMStoDD($data["d_lat"],$data['m_lat'],$data['s_lat']);
-        $k_long             = $this->DMStoDD($data["d_long"],$data['m_long'],$data['s_long']);
+        $lokasi             = $data['lokasi_f'];
+        $lokasi_kota        = $d_kota;
+        $lokasi_kecamatan   = $d_kecamatan;
+        $lokasi_kelurahan   = $d_kelurahan;
+        //$alamat             = $data['alamat'];
+        //$alamat_provinsi_id = $d_provinsi;        
+        //$alamat_kelurahan   = $data['kelurahan'];
+        //$alamat_kecamatan   = $data['kecamatan'];
+        //$alamat_kodepos     = $data['kodepos'];
+        //$alamat_email       = $data['email'];
+        //$no_tlp             = $data['contactperson'];
+        $koordinat          = $data["d_lat"]."°-".$data['m_lat']."'-".$data['s_lat'].".".$data['s_lat2']."\"".$data['direction_lat']."/". $data["d_long"]."°-".$data['m_long']."'-".$data['s_long'].".".$data['s_long2']."\"BT";
+        $koordinat_dd       = $this->DMStoDD($data["d_lat"],$data['m_lat'],$data['s_lat'].".".$data['s_lat2']) ." ". $this->DMStoDD($data["d_long"],$data['m_long'],$data['s_long'].".".$data['s_long2']);
+        $k_lat              = $this->DMStoDD($data["d_lat"],$data['m_lat'],$data['s_lat'].".".$data['s_lat2']);
+        $k_long             = $this->DMStoDD($data["d_long"],$data['m_long'],$data['s_long'].".".$data['s_long2']);
         $ter_tuk            = $data['ter_tuk'];
         $spesifikasi        = $spesifikasi;
         $sk                 = $data['nosk'];
@@ -370,13 +379,13 @@ class Data_model extends CI_Model {
             "lokasi"                => $lokasi,
             "lokasi_kecamatan"      => $lokasi_kecamatan,
             "lokasi_kelurahan"      => $lokasi_kelurahan,
-            "alamat"                => $alamat,
-            "alamat_provinsi_id"    => $alamat_provinsi_id,
-            "alamat_kelurahan"      => $alamat_kelurahan,
-            "alamat_kecamatan"      => $alamat_kecamatan,
-            "alamat_kodepos"        => $alamat_kodepos,
-            "alamat_email"          => $alamat_email,
-            "no_tlp"                => $no_tlp,
+            //"alamat"                => $alamat,
+            //"alamat_provinsi_id"    => $alamat_provinsi_id,
+            //"alamat_kelurahan"      => $alamat_kelurahan,
+            //"alamat_kecamatan"      => $alamat_kecamatan,
+            //"alamat_kodepos"        => $alamat_kodepos,
+            //"alamat_email"          => $alamat_email,
+            //"no_tlp"                => $no_tlp,
             "koordinat"             => $koordinat,
             "koordinat_dd"          => $koordinat_dd,
             "k_lat"                 => $k_lat,
@@ -385,8 +394,8 @@ class Data_model extends CI_Model {
             "spesifikasi"           => $spesifikasi,
             "sk"                    => $sk,
             "jns_legalitas"         => $jns_legalitas,
-            "tgl_terbit"            => $tgl_terbit,
-            "ms_berlaku"            => $ms_berlaku,
+            "tgl_terbit"            => date("Y-m-d",strtotime($tgl_terbit)),
+            "ms_berlaku"            => date("Y-m-d",strtotime($ms_berlaku)),
             "update_date"           => date("Y-m-d"),
             "status"                => $data['status']
 
@@ -400,14 +409,15 @@ class Data_model extends CI_Model {
     public function _getSingleData($id)
     {
         $data           = $this->db->where("id",$id)->get("daftar_perusahaan")->row();
-     
-        $kecamatan      = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)",5)->get("wilayah")->result();
-        $kelurahan      = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)>5")->get("wilayah")->result();
+        $kota           = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)",5)->get("wilayah")->result();
+        $kecamatan      = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)",8)->get("wilayah")->result();
+        $kelurahan      = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)>8")->get("wilayah")->result();
         $wilayah_kerja  = $this->db->where("provinsi_id",$data->provinsi_id)->get("ksop")->result();
        
         $alamat_kecamtan=  $this->db->where("substr(kode,1,2)",$data->alamat_provinsi_id)->where("LENGTH(kode)",5)->get("wilayah")->result();
         return array(
             "data" => $data,
+            "kota"      => $kota,
             "kecamatan" => $kecamatan,
             "kelurahan" => $kelurahan,
             "wilayah_kerja" => $wilayah_kerja,
@@ -426,7 +436,7 @@ class Data_model extends CI_Model {
     public function check_sk($val)
     {
         $this->db->where("sk",trim($val));
-        $data = $this->db->count_all_results();
+        $data = $this->db->count_all_results("daftar_perusahaan");
         return $data;
 
     }
@@ -461,5 +471,7 @@ class Data_model extends CI_Model {
     {
         return $this->db->where("flag",1)->where('ter_tuk','')->where('koordinat','')->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
     }
+
+   
 
 }

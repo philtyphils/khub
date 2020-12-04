@@ -36,6 +36,7 @@ class Kelas extends CI_Controller
 		$data['siteurl'] = site_url();
 		$data['wilayah_kerja'] = $this->kelas->wilayah_kerja();
 		$data['notification']	= $this->kelas->notification();	
+		$data['notif_yellow']	= $this->kelas->notif_yellow();
 	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/Kelas',$data);	
@@ -73,12 +74,13 @@ class Kelas extends CI_Controller
 
 	public function create()
 	{
-		$data['title'] = 'Create Wilayah Kerja';
-		$data['menu'] = 'Wilayah Kerja';
-		$data['baseurl'] = base_url();
-		$data['siteurl'] = site_url();
-		$data['provinsi'] = $this->kelas->wilayah_kerja();
+		$data['title'] 			= 'Create Wilayah Kerja';
+		$data['menu'] 			= 'Wilayah Kerja';
+		$data['baseurl'] 		= base_url();
+		$data['siteurl'] 		= site_url();
+		$data['provinsi'] 		= $this->kelas->wilayah_kerja();
 		$data['notification']	= $this->kelas->notification();	
+		$data['notif_yellow']	= $this->kelas->notif_yellow();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/kelas_create',$data);
@@ -93,6 +95,7 @@ class Kelas extends CI_Controller
 		$data['provinsi'] 		= $this->kelas->wilayah_kerja();
 		$data['kategori'] 		= $this->kelas->_get($id);
 		$data['notification']	= $this->kelas->notification();	
+		$data['notif_yellow']	= $this->kelas->notif_yellow();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/kelas_edit',$data);

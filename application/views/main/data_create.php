@@ -43,13 +43,13 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
-                                                            <select name="kota[]" class="form-control selectpicker" id="kecamatan_f"  title="Pilih Kabupaten / Kota" data-live-search="true">
+                                                            <select name="kota[]" class="form-control selectpicker" id="kota_f"  title="Pilih Kabupaten / Kota" data-live-search="true">
                                                                 <option disabled></option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="kecamatan">Kecamataan</label>
-                                                            <select name="kecamatan[]" class="form-control" id="kelurahan_f" title="Pilih Kecamataan" data-live-search="true">
+                                                            <select name="kecamatan[]" class="form-control" id="kecamatan_f" title="Pilih Kecamataan" data-live-search="true">
                                                                 <option></option>
                                                             </select>
                                                         </div>
@@ -63,23 +63,23 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number"  min="0" max="11" name="d_lat[]" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number"  min="0" max="11" name="d_lat[]" id="d_lat" class="form-control" placeholder="1-11" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">  
-                                                                <input type="number" min="1" max="60" name="m_lat[]" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="m_lat[]" id="m_lat" class="form-control" placeholder="1-60" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group"> 
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>   
                                                             </div>
                                                         </div>
@@ -96,23 +96,23 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" min="95" max="141" name="d_long[]" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" min="95" max="141" name="d_long[]" id="d_long" class="form-control"  placeholder="95-141" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">
-                                                                <input type="number" min="1" max="60" name="m_long[]" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="m_long[]" id="m_long" class="form-control"  placeholder="1-60" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" required placeholder="Seconds">
+                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" value="00" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -354,7 +354,7 @@ $(document).ready(function(){
             dataType: "JSON",
             success: function(data)
             {
-                $('#kecamatan_f').html(data).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
+                $('#kota_f').html(data).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
 
                 setkelas2(provinsi[0]);
 
@@ -367,7 +367,7 @@ $(document).ready(function(){
     });
 
     $('#kota_f').change(function(option, checked){
-        var str = $('[name="kota_f[]"]').val();
+        var str = $(this).val();
         var kota_f = str.split("|");
         var param = {'kota':kota_f[0]};
         $.ajax({

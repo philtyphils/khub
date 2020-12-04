@@ -12,15 +12,37 @@
        		    "lokasi"        => $this->session->userdata('kota'),
        		    "wilayah_kerja" => $this->session->userdata('kelas'),
        		    "kategori"      => $this->session->userdata('kategori'),
-       		    "bidangusaha"   => $this->session->userdata('bidangusaha')
+				"bidangusaha"   => $this->session->userdata('bidangusaha'),
+				"rn"			=> $this->session->userdata('expired'),
+				"yn"			=> $this->session->userdata('YN')
 			);
 			   
 			$provinsi_id	= ($session_data['provinsi']) ? $session_data['provinsi'] : array();
 			$kategori_id	= ($session_data['kategori']) ? $session_data['kategori'] : array();
 			$wilayah_kerja	= ($session_data['wilayah_kerja']) ? $session_data['wilayah_kerja'] : array();
 			$bdgusaha_id	= ($session_data['bidangusaha']) ? $session_data['bidangusaha'] : array();
-
+			$RN				= ($session_data['rn']) ? $session_data['rn'] :"";
+			$YN				= ($session_data['yn']) ? $session_data['yn'] :"";
 			$query = ""; $prov_id = "";
+
+			if($YN != "")
+			{
+				$query =" AND (";
+               
+                $query = $query."daftar_perusahaan.ms_berlaku = '' AND daftar_perusahaan.koordinat = '' AND daftar_perusahaan.sk = '' AND daftar_perusahaan.tgl_terbit = ''";
+                
+                $query =  $query.")";
+			}
+
+			if($RN != "")
+			{
+				$query =" AND (";
+               
+                $query = $query.'daftar_perusahaan.ms_berlaku <= "'.date("Y-m-d H:i:s").'"';
+                
+                $query = $query.")";
+			}
+
             if(count($provinsi_id) > 0)
             {
                 $prov_id = "'" . implode(",",$provinsi_id) ."'";
@@ -40,11 +62,11 @@
             
             if(count($wilayah_kerja) > 0)
             {
+
                 $query =" AND (";
-                foreach($wilayah_kerja as $p)
-                {
-                    $query = $query."daftar_perusahaan.ksop_id=".$p. " OR ";
-                }
+                
+              	$query = $query."daftar_perusahaan.ksop_id=".$wilayah_kerja. " OR ";
+               
                 $query = substr($query,0,-4);
                 $query= $query.")";
                 

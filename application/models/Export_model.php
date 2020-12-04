@@ -64,7 +64,7 @@
                 $query= $query.")";
                 $this->db->where($query);
             }
-
+            
             $this->db->where("LENGTH(wilayah.kode)","2");
             $this->db->join("wilayah","daftar_perusahaan.provinsi_id=wilayah.kode");
             $this->db->join("ksop","daftar_perusahaan.ksop_id=ksop.ksop_id");
@@ -138,6 +138,7 @@
                 $query = substr($query,0,-4);
                 $query= $query.")";
             }
+
             if($query == "" && $prov_id == "")
             {
                 $data = $this->db->get('rekaptulasi_provinsi');

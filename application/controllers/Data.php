@@ -39,8 +39,7 @@ class Data extends CI_Controller
 		$data['dataKateg'] 		= $this->datax->get_kategori();
 		$data['dataBdgUsaha'] 	= $this->datax->get_bidangusaha();
 		$data['dermaga']		= $this->datax->get_dermaga();
-		$data['notification']	= $this->datax->notification();
-		
+		$data['notification']	= $this->datax->notification();		
 		$data['notif_yellow']	= $this->datax->notif_yellow();
 		$trigger ='';
 		$trigger 		= $this->input->post('trigger');
@@ -72,6 +71,9 @@ class Data extends CI_Controller
 		$this->session->set_userdata("tukter",$tukter);
 		$this->session->set_userdata("status",$status);
 		$this->session->set_userdata("tglakhir",$tglakhir);
+		$this->session->set_userdata("expired",$expired);
+		$this->session->set_userdata("YN",$yellow_notif);
+		
 		
 		$r = $this->dashboard->status_aktif();
 		
@@ -109,12 +111,12 @@ class Data extends CI_Controller
 			
 			if($yellow_notif != "")
 			{
-				$this->db->where("lokasi",'');
-				$this->db->where("koordinat",'');
-				$this->db->where("sk",'');
-				$this->db->where("tgl_terbit",'');
-				$this->db->where("ms_berlaku",'');
-				$this->db->where("ter_tuk",'');
+				$this->db->where("a.lokasi",'');
+				$this->db->where("a.koordinat",'');
+				$this->db->where("a.sk",'');
+				$this->db->where("a.tgl_terbit",'');
+				$this->db->where("a.ms_berlaku",'');
+				$this->db->where("a.ter_tuk",'');
 
 			}
 			if($namaPerusahaan != ''){
@@ -151,10 +153,8 @@ class Data extends CI_Controller
                 $query = substr($query,0,-4);
                 $query= $query.")";
                 $this->db->where($query);
-            }
-			// for($i = 0; $i < count($kategori); $i++){
-			// 	$this->db->or_like('a.kategori_id', $kategori[$i]);
-			// }
+			}
+			
 			if(count($bidangusaha) > 0)
             {
                 $query ="(";
@@ -165,10 +165,8 @@ class Data extends CI_Controller
                 $query = substr($query,0,-4);
                 $query= $query.")";
                 $this->db->where($query);
-            }
-			// for($j = 0; $j < count($bidangusaha); $j++){
-			// 	$this->db->or_like('a.bdgusaha_id', $bidangusaha[$j]);
-			// }
+			}
+			
 			if($dermaga != ''){
 				$query ="(";
                 foreach($dermaga as $k)
@@ -216,6 +214,7 @@ class Data extends CI_Controller
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		} else {
+			
 			$this->db->order_by('a.provinsi_id','asc');
 			$this->db->order_by('c.order','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
@@ -311,7 +310,7 @@ class Data extends CI_Controller
         $kecamatan = $this->input->post('kota');
 
         $datakelas = $this->datax->get_Kecamatan($kecamatan);
-        $html .='<option value="">Pilih Kecamatan</option>';
+        $html .='<option value="" readonly>Pilih Kecamatan</option>';
         foreach ($datakelas as $list) {
              $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
         	}
@@ -346,10 +345,10 @@ class Data extends CI_Controller
 
 	public function create()
 	{
-		$data['title'] = 'Create Data';
-		$data['menu'] = 'Create Data';
-		$data['baseurl'] = base_url();
-		$data['siteurl'] = site_url();
+		$data['title'] 		= 'Create Data';
+		$data['menu'] 		= 'Create Data';
+		$data['baseurl'] 	= base_url();
+		$data['siteurl'] 	= site_url();
 		$data['dataProvinsi'] = $this->datax->get_provinsi();
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
 		$data['jenis_sk']     = $this->datax->jenis_sk();
@@ -384,7 +383,7 @@ class Data extends CI_Controller
 					$b 			= preg_match("/TIPE:[a-zA-Z\s]+,(.*), KEDALAMAN:/",$value,$spesifikasi);
 					$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$value,$peruntukan);
 					$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$value,$kedalaman);
-					$e 			= preg_match("/MAKSIMUM\s+([0-9*]+.+[0-9*])+/",$value,$kapasitas);
+					$e 			= preg_match("/MAKSIMUM\s([0-9]*)\s/",$value,$kapasitas);
 					$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$value,$satuan);
 					
 					$result = array(
@@ -427,12 +426,14 @@ class Data extends CI_Controller
 		$selected['data']->koordinat	= str_replace("-","",$selected['data']->koordinat);
 		$split 							= preg_split("/[°º⁰˚'\"”\/]+/",str_replace(",",".",$selected['data']->koordinat));
 		$selected['data']->koordinat	= $split;
+		
 		$data['title'] 					= 'Edit Data';
 		$data['menu'] 					= 'Edit Data';
 		$data['baseurl'] 				= base_url();
 		$data['siteurl'] 	  			= site_url();
 		$data['data']		  			= $selected;
-		$data['dermaga']				= $results;	
+		$data['dermaga']				= $results;
+		$data['jenis_sk']				= $this->datax->jenis_sk();
 		$data['dataProvinsi'] 			= $this->datax->get_provinsi();
 		$data['dataBdgUsaha'] 			= $this->datax->get_bidangusaha();
 		$data['notification']			= $this->datax->notification();
@@ -447,20 +448,29 @@ class Data extends CI_Controller
 		$post = $this->input->post();
 		if($action == "create")
 		{
+			//echo "<pre>";print_r($post);die();
 			$this->load->library('form_validation');
             $this->form_validation->set_rules('name', 'Nama Perusahaan', 'required',
                     array('required' => 'Pastikan %s telah terisi.')
-            );
-
-			$this->form_validation->set_rules('nosk', 'Nomor SK', 'check_nosk_callback',
-					array('required' => 'Pastikan %s telah terisi dan belum terdaftar.')
 			);
 
-			$this->form_validation->set_rules('d_lat', 'Degree Latitude', 'check_dlat_callback');
-			$this->form_validation->set_rules('m_lat', 'Minutes Latitude', 'check_mlat_callback');
-			$this->form_validation->set_rules('s_lat', 'Second Latitude', 'check_mlat_callback');
-			$this->form_validation->set_rules('kelas', 'Wilayah Kerja', 'check_provf_callback'); 
-			$this->form_validation->set_rules('provinsi_f', 'Provinsi Lokasi', 'check_provf_callback');
+			for($i=0;$i<count($post['nosk']);$i++)
+			{
+				$this->form_validation->set_rules('nosk['.$i.']', 'Nomor SK', 'required|callback_check_nosk');
+			}
+
+			for($i=0;$i<count($post['tersus_tuks']);$i++)
+			{
+				$this->form_validation->set_rules('tersus_tuks['.$i.']', 'TERSUS/TERUS', 'required',
+                    array('required' => 'Pastikan %s telah terisi.')
+				);
+			}
+			for($i=0;$i<count($post['kelas']);$i++)
+			{
+				$this->form_validation->set_rules('kelas['.$i.']', 'Wilayah Kerja', 'required',
+                    array('required' => 'Pastikan %s telah terisi.')
+				);
+			}
 			
             if ($this->form_validation->run() == FALSE)
             {
@@ -513,25 +523,20 @@ class Data extends CI_Controller
 
 	public function check_nosk($arr)
 	{
-		foreach($arr as $key => $value)
+		
+			
+		$data = $this->datax->check_sk($arr);
+		if($data > 0)
 		{
-			
-			if($value == "" || empty($value))
-			{
-				$this->form_validation->set_message('check_nosk', 'Kolom {field} harus terisi.');
-				return FALSE;
-			}
-			
-			$data = $this->datax->check_sk($value);
-			if($data > 0)
-			{
-				$this->form_validation->set_message('check_nosk', '{field} telah terdaftar.');
-				return FALSE;
-			}
-				
+			$this->form_validation->set_message('check_nosk', '{field} telah terdaftar.');
+			return FALSE;
 		}
-
-		return TRUE;
+		else
+		{
+			return TRUE;
+		}
+	
+		
 	}
 
 	public function check_dlat($arr)
