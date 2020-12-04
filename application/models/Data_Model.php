@@ -472,6 +472,42 @@ class Data_model extends CI_Model {
         return $this->db->where("flag",1)->where('ter_tuk','')->where('koordinat','')->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
     }
 
+    public function _get_bidangusaha($data)
+    {
+        for($i=0;$i<count($data);$i++)
+        {
+            if($i = 0)
+            {
+                $this->db->where("kategori_id",$data['kategori'][$i]);
+            }
+            else
+            {
+                $this->db->or_where("kategori_id",$data['kategori'][$i]);
+            }
+        }
+        $this->db->where('flag',1);
+        $data = $this->db->get("bdg_usaha");
+        return $data->result();
+    }
+
+    public function _get_kategori($data)
+    {
+        for($i=0;$i<count($data);$i++)
+        {
+            if($i = 0)
+            {
+                $this->db->where("bdg_usaha_id",$data['bidangusaha'][$i]);
+            }
+            else
+            {
+                $this->db->or_where("bdg_usaha_id",$data['bidangusaha'][$i]);
+            }
+        }
+        $this->db->where('flag',1);
+        $data = $this->db->get("bdg_usaha");
+        return $data->result();
+    }
+
    
 
 }

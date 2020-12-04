@@ -51,6 +51,42 @@ $(document).ready(function(){
         });
     });
 
+    $("#kategori").on('hide.bs.select',function(option, checked){
+        var param = {'kategori':$(this).val()};         
+        $.ajax({
+            url : siteurl+'/Data/selected_kategori/',
+            type: "POST",
+            data: param,
+            dataType: "JSON",
+            success: function(data)
+            {
+                $('#bidangusaha').html(data.html).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log("ERROR: Contact IT Consultanct - Delapan");
+            }
+        });
+    });
+
+    $("#bidangusaha").on('hide.bs.select',function(option, checked){
+        var param = {'bidangusaha':$(this).val()};         
+        $.ajax({
+            url : siteurl+'/Data/selected_bidangusaha/',
+            type: "POST",
+            data: param,
+            dataType: "JSON",
+            success: function(data)
+            {
+                $('#kategori').html(data.html).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log("ERROR: Contact IT Consultanct - Delapan");
+            }
+        });
+    });
+
     var timer;
     $('#Filt02').on('hide.bs.select',function(option, checked) {
         var param = {'provinsi':$(this).val()};  
@@ -85,6 +121,8 @@ $(document).ready(function(){
       $('#myModal').modal('show'); // show bootstrap modal
            
    });
+
+
 
     /* klik button export */
     $(".export-excel").click(function(e){

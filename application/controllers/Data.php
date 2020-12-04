@@ -74,7 +74,7 @@ class Data extends CI_Controller
 		$this->session->set_userdata("expired",$expired);
 		$this->session->set_userdata("YN",$yellow_notif);
 		
-		
+		 
 		$r = $this->dashboard->status_aktif();
 		
 		$tersus = array(
@@ -133,12 +133,13 @@ class Data extends CI_Controller
                 $query = substr($query,0,-4);
                 $query= $query.")";
                 $this->db->where($query);
-			}
+			} 
 			
 			if($kota != '')
 			{
-				$this->db->like('a.lokasi', $kota);		
+				$this->db->where('a.lokasi_kota', $kota);		
 			}
+
 			if($kelas != '')
 			{
 				$this->db->where('a.ksop_id', $kelas);	
@@ -260,7 +261,7 @@ class Data extends CI_Controller
 		{
         	foreach ($dataprov as $list) {
 
-        	 $html .= '<option value="'.trim($list->nama).'">'.trim($list->nama).'</option>';
+        	 $html .= '<option value="'.trim($list->kode).'">'.trim($list->nama).'</option>';
 			}
 		}
 	    echo json_encode($html); 
@@ -578,6 +579,74 @@ class Data extends CI_Controller
 
 		return TRUE;
 	}
+
+	public function selected_kategori()
+	{
+		$post = $this->input->post();
+		
+		if(array_key_exists("kategori",$post) && count($post['kategori']) > 0)
+		{
+			$data = $this->datax->_get_bidangusaha($post);
+		}
+		else
+		{
+			$data = $this->datax->get_bidangusaha();
+		}
+
+		$html = "<option value='' readonly >Pilih Bidang Usaha</option>";
+		foreach($data as $key => $value)
+		{
+			
+			$html .= "<option value='".$value->bdg_usaha_id."'>".strtoupper(trim($value->nama))."</option>";
+			
+		}
+
+		echo json_encode(array(
+			"status" => 200,
+			"html" => $html 
+		));
+			
+		
+
+	}
+
+	public function selected_bidangusaha()
+	{
+		$post = $this->input->post();
+		
+		$selected = $this->datax->_get_kategori($post);
+		$data = $this->datax->get_kategori();
+
+		$html = "<option value='' readonly >Pilih Kategori</option>";
+		foreach($data as $key => $value)
+		{
+			if($this->in_array_recursive($value->kategori_id,$selected))
+			{
+				$html .= "<option value='".$value->kategori_id."' selected>".strtoupper(trim($value->nama))."</option>";
+			}
+			else
+			{
+				$html .= "<option value='".$value->kategori_id."'>".strtoupper(trim($value->nama))."</option>";
+			}
+		}
+
+		echo json_encode(array(
+			"status" => 200,
+			"html" => $html 
+		));
+	}
+
+	public function in_array_recursive($needle, $haystack) {
+		
+		foreach($haystack as $key => $value) {
+			if($value->kategori_id == $needle) {
+				return true;
+
+			}
+		}
+	
+		return false;
+	} 
 	
 }
 ?>
