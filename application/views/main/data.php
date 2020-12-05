@@ -291,7 +291,7 @@
 
                     <div class="col-md-2" style="margin-bottom: 1rem;">
                         <label for="satuan">Satuan</label>
-                        <select class="selectpicker form-control" id="satuan" name="satuan[]" title="Pilih Satuan">
+                        <select class="selectpicker form-control" id="satuan" name="satuan" title="Pilih Satuan">
                             <option value="FEET" >FEET</option>
                             <option value="GT" >GT</option>
                             <option value="DWT" >DWT</option>

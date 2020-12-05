@@ -13,7 +13,88 @@
 
         public function getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id)
         {
-          
+            
+            $filter_session = array(
+                'nm_perusahaan' => $this->session->userdata('nm_perusahaan'),
+                'dermaga'       => $this->session->userdata('dermaga'),
+                'kapasitas'     => $this->session->userdata('kapasistas'),
+                'satuan'        => $this->session->userdata('satuan'),
+                'ms_berlaku'    => $this->session->userdata('tglakhir'),
+                'meter'         => $this->session->userdata('meter'),
+                'status'        => $this->session->userdata('status'),
+                'tukter'        => $this->session->userdata('tukter'),
+                'expired'       => $this->session->userdata('expired'),
+            );
+           
+            if($filter_session['nm_perusahaan'] != '')
+            {
+                $query = "(";
+                $query .= "daftar_perusahaan.nm_perusahaan LIKE '%".$filter_session['nm_perusahaan']. "'%";
+                $query .= ")";
+                $this->db->where($query);
+            }
+
+            if($filter_session['dermaga'] != '')
+            {
+                $query = "(";
+                $query .= "daftar_perusahaan.spesifikasi LIKE '%".$filter_session['dermaga']. "'%";
+                $query .= ")";
+                $this->db->where($query);
+            }
+
+            if($filter_session['kapasitas'] != '')
+            {
+                
+                $query = "(";
+                $query .= "daftar_perusahaan.spesifikasi LIKE '%".$filter_session['dermaga']. " " . $filter_session['satuan']."%'";
+                $query .= ")";
+                $this->db->where($query);
+            }
+
+            if($filter_session['ms_berlaku'] != '')
+            {
+                $query = "(";
+                $query .= "daftar_perusahaan.ms_berlaku < '".date("Y-m-d H:i:s",strtotime("31-".$filter_session['ms_berlaku'])). "'";
+                $query .= ")";
+                $this->db->where($query);
+            }
+
+            if($filter_session['expired'])
+            {
+                $query = "(";
+                $query .= "daftar_perusahaan.ms_berlaku < '".date("Y-m-d H:i:s"). "'";
+                $query .= ")";
+                $this->db->where($query);
+            }
+
+            if($filter_session['meter'] != '')
+            {
+                
+                $query = "(";
+                $query .= "daftar_perusahaan.spesifikasi LIKE '%".$filter_session['meter']. " M LWS%'";
+                $query .= ")";
+                $this->db->where($query);
+            }
+
+            if($filter_session['status'] != '')
+            {
+                
+                $query = "(";
+                $query .= "daftar_perusahaan.status = '".$filter_session['status']."'";
+                $query .= ")";
+                $this->db->where($query);
+            }
+
+            if($filter_session['tukter'] != '')
+            {
+                
+                $query = "(";
+                $query .= "daftar_perusahaan.ter_tuk = '".$filter_session['tukter']."'";
+                $query .= ")";
+                $this->db->where($query);
+                unset($query);
+            }
+        
             if(count($provinsi_id) > 0)
             { 
                 $query ="(";
@@ -99,6 +180,78 @@
         public function rekapProvinsi($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id)
         {
             $query = ""; $prov_id = "";
+            $filter_session = array(
+                'nm_perusahaan' => $this->session->userdata('nm_perusahaan'),
+                'dermaga'       => $this->session->userdata('dermaga'),
+                'kapasitas'     => $this->session->userdata('kapasistas'),
+                'satuan'        => $this->session->userdata('satuan'),
+                'ms_berlaku'    => $this->session->userdata('tglakhir'),
+                'meter'         => $this->session->userdata('meter'),
+                'status'        => $this->session->userdata('status'),
+                'tukter'        => $this->session->userdata('tukter'),
+                'expired'       => $this->session->userdata('expired'),
+            );
+           
+            if($filter_session['nm_perusahaan'] != '')
+            {
+                $query .= " AND (";
+                $query .= "daftar_perusahaan.nm_perusahaan LIKE \'%".$filter_session['nm_perusahaan']. "\'%";
+                $query .= ")";
+            }
+
+            if($filter_session['dermaga'] != '')
+            {
+                $query .= " AND (";
+                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['dermaga']. "\'%";
+                $query .= ")";
+            }
+
+            if($filter_session['kapasitas'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['dermaga']. " " . $filter_session['satuan']."%\'";
+                $query .= ")";
+            }
+
+            if($filter_session['ms_berlaku'] != '')
+            {
+                $query = " AND (";
+                $query .= "daftar_perusahaan.ms_berlaku < \'".date("Y-m-d H:i:s",strtotime("31-".$filter_session['ms_berlaku'])). "\'";
+                $query .= ")";
+            }
+
+            if($filter_session['expired'])
+            {
+                $query = " AND (";
+                $query .= "daftar_perusahaan.ms_berlaku < \'".date("Y-m-d H:i:s"). "\'";
+                $query .= ")";
+            }
+
+            if($filter_session['meter'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['meter']. " M LWS%\'";
+                $query .= ")";
+            }
+
+            if($filter_session['status'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.status = \'".$filter_session['status']."\'";
+                $query .= ")";
+            }
+
+            if($filter_session['tukter'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.ter_tuk = \'".$filter_session['tukter']."\'";
+                $query .= ")";
+            }
+
             if(count($provinsi_id) > 0)
             {
                 $prov_id = "'" . implode(",",$provinsi_id) ."'";

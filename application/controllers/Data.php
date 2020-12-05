@@ -55,10 +55,10 @@ class Data extends CI_Controller
 		$tukter 		= $this->input->post('tuk_ter');
 		$status 		= $this->input->post('status');
 		$tglakhir 		= $this->input->post('tgl_akhir');
+		$satuan 		= $this->input->post('satuan');
 		$expired 		= ($this->input->post('expired')) ? TRUE : FALSE;
 		$yellow_notif 	= $this->input->post('YN');
 
-		
 		/* set session data for exporting */
 		$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
 		$this->session->set_userdata("provinsi",$provinsi);
@@ -66,11 +66,13 @@ class Data extends CI_Controller
 		$this->session->set_userdata("kelas",$kelas);
 		$this->session->set_userdata("kategori",$kategori);
 		$this->session->set_userdata("bidangusaha",$bidangusaha);
+		$this->session->set_userdata("dermaga",$dermaga);
 		$this->session->set_userdata("meter",$meter);
 		$this->session->set_userdata("kapasitas",$kapasitas);
 		$this->session->set_userdata("tukter",$tukter);
 		$this->session->set_userdata("status",$status);
 		$this->session->set_userdata("tglakhir",$tglakhir);
+		$this->session->set_userdata("satuan",$satuan);
 		$this->session->set_userdata("expired",$expired);
 		$this->session->set_userdata("YN",$yellow_notif);
 		
@@ -178,11 +180,12 @@ class Data extends CI_Controller
                 $query= $query.")";
                 $this->db->where($query);
 			}
+			
 			if($meter != ''){
-				$this->db->like('a.spesifikasi', $meter);
+				$this->db->like('a.spesifikasi', $meter ." M LWS");
 			}
 			if($kapasitas != ''){
-				$this->db->like('a.spesifikasi', $kapasitas);
+				$this->db->like('a.spesifikasi', $kapasitas . " " . $satuan);
 			}
 			if($tukter != ''){
 				$this->db->where('a.ter_tuk', $tukter);
@@ -191,9 +194,7 @@ class Data extends CI_Controller
 				$this->db->where('a.status', $status);
 			}
 			if($tglakhir != ''){
-				$tgl =explode("-", $tglakhir);
-				$t = $tgl[1].'-'.$tgl[0];
-				$this->db->where('ms_berlaku BETWEEN "'.$tgl[1].'-'.$tgl[0].'-01 00:00:00" AND "'.$tgl[1].'-'.$tgl[0].'-30 00:00:00"');
+				$this->db->where('ms_berlaku < "'.date("Y-m-d H:i:s",strtotime("31-".$tglakhir)).'"');
 			}
 
 			if($expired)
