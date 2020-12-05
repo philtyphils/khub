@@ -98,7 +98,7 @@
                                         </p>
                                   </a>
                                   <ul class="dropdown-menu">
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="<?php echo base_url('login/logout');?>">Logout</a></li>
                                   </ul>
                             </li>    
                             <li class="separator hidden-lg"></li>

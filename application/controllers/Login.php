@@ -45,12 +45,12 @@ class Login extends CI_Controller
 		$user = trim($this->input->post('username'));
 		$pass = trim($this->input->post('password'));
 
-		$i = 0;
+		$i = 0; 
 		$cek = $this->Login_Model->cekUser($user,$pass);
 		if($cek==true)
 		{
 			$this->session->set_userdata(array("validUser" => $user,"isLoggedIn" => true));
-			$arrHasil[0]["msg"] = "";
+			redirect(base_url('Data'));
 		}
 		else
 		{
@@ -59,22 +59,9 @@ class Login extends CI_Controller
 		echo json_encode($arrHasil);
 	}
 		
-	// public function ubah(){
-	// 	$arrayx=array();
-	// 	$username = $this->input->post('username');
-	// 	$passlama =  $this->input->post('passlama');
-	// 	$passbaru1 = $this->input->post('passbaru1');
-	// 	$passbaru2 = $this->input->post('passbaru2');
-	// 	$cek = $this->login_model->cekUser($username,$passlama);
-	// 	if($cek===false){
-	// 		$arrayx[0]['status']="Not Found";
-	// 		echo json_encode($arrayx);
-	// 	}else{	
-	// 		$cek2 = $this->login_model->ubahUser($username,$passbaru2);
-	// 		echo json_encode($cek2);
-			
-	// 	}			
-		
-	// }
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect(base_url());
+	}
 }
 ?>

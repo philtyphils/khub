@@ -23,7 +23,7 @@ $(document).ready(function(){
                   $('#msg').html(arrHasil[0]['msg']);
                 }
               }else{
-                window.location.replace(siteurl+'/Dashboard');
+                window.location.href(siteurl+'/Data');
               }
       });
       $.ajaxSetup({async:true});

@@ -30,7 +30,6 @@ class Home extends CI_Controller
 	 */
 	public function index()
 	{
-		die("AAA");
 		$data['title'] = 'HOME';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-class Export extends CI_Controller 
+class Export extends MY_Controller 
 {
     /* installing phpspresheet
 
@@ -497,6 +497,7 @@ class Export extends CI_Controller
         $sheet->setCellValue("G".$rows,$jumlah );
 
         $this->session->sess_destroy();
+        $this->session->set_userdata("isLoggedIn",true);
         
 		$writer = new Xlsx($spreadsheet);
 		$filename = 'Data-TUKS-TERSUS-INDONESIA_'.date("Ymd").".xlsx";
@@ -575,9 +576,8 @@ class Export extends CI_Controller
             }
         }
         $data = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id); 
-        //echo "<pre>";print_r($data->result());die("<<<");
         header("Content-type: application/csv");
-        header("Content-Disposition: attachment; filename=\"test".".csv\"");
+        header("Content-Disposition: attachment; filename=\"Data-Map-".date("Ymd").".csv\"");
         header("Pragma: no-cache");
         header("Expires: 0");
         $handle = fopen('php://output', 'w');

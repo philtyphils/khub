@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Master extends CI_Controller 
+class Master extends MY_Controller 
 {
 
 	public function __construct()
@@ -10,7 +10,6 @@ class Master extends CI_Controller
 		$this->load->model('Master_User_Model','master');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encryption');
 		
 	}
 	/**
