@@ -29,7 +29,7 @@
             if($filter_session['nm_perusahaan'] != '')
             {
                 $query = "(";
-                $query .= "daftar_perusahaan.nm_perusahaan LIKE '%".$filter_session['nm_perusahaan']. "'%";
+                $query .= "daftar_perusahaan.nm_perusahaan LIKE '%".$filter_session['nm_perusahaan']. "%'";
                 $query .= ")";
                 $this->db->where($query);
             }
@@ -195,14 +195,14 @@
             if($filter_session['nm_perusahaan'] != '')
             {
                 $query .= " AND (";
-                $query .= "daftar_perusahaan.nm_perusahaan LIKE \'%".$filter_session['nm_perusahaan']. "\'%";
+                $query .= "daftar_perusahaan.nm_perusahaan LIKE \'%".$filter_session['nm_perusahaan']. "%\'";
                 $query .= ")";
             }
 
             if($filter_session['dermaga'] != '')
             {
                 $query .= " AND (";
-                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['dermaga']. "\'%";
+                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['dermaga']. "\%'";
                 $query .= ")";
             }
 

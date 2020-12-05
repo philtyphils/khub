@@ -14,8 +14,12 @@
        		    "kategori"      => $this->session->userdata('kategori'),
 				"bidangusaha"   => $this->session->userdata('bidangusaha'),
 				"rn"			=> $this->session->userdata('expired'),
+				"tukter"		=> $this->session->userdata('tukter'),
+				"status"		=> $this->session->userdata('status'),
 				"yn"			=> $this->session->userdata('YN')
 			);
+
+			//echo "<pre>";print_r($session_data);die();
 			   
 			$provinsi_id	= ($session_data['provinsi']) ? $session_data['provinsi'] : array();
 			$kategori_id	= ($session_data['kategori']) ? $session_data['kategori'] : array();
@@ -24,6 +28,27 @@
 			$RN				= ($session_data['rn']) ? $session_data['rn'] :"";
 			$YN				= ($session_data['yn']) ? $session_data['yn'] :"";
 			$query = ""; $prov_id = "";
+
+			if($session_data['nm_perusahaan'] != "")
+			{
+				$query = " AND (";
+				$query = $query . "daftar_perusahaan.nm_perusahaan LIKE \'%".$session_data['nm_perusahaan']."%\'";
+				$query = $query . ")";
+			}
+
+			if($session_data['status'] != "")
+			{
+				$query = " AND (";
+				$query = $query . "daftar_perusahaan.status = \'".$session_data['status']."\'";
+				$query = $query . ")";
+			}
+
+			if($session_data['tukter'] != "")
+			{
+				$query = " AND (";
+				$query = $query . "daftar_perusahaan.ter_tuk = \'".$session_data['tukter']."\'";
+				$query = $query . ")";
+			}
 
 			if($YN != "")
 			{

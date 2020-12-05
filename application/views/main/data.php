@@ -8,7 +8,7 @@
                                         <div class="card-chart">
                                             <div class="header" style="padding: 0 15px;">
                                             <h4 class="title">TERSUS</h4>
-                                            <p class="category" style="color: #AAAAAA; font-weight: 300;font-size:1.2rem;">Jumlah Total TERSUS semua Provinsi</p>
+                                            <p class="category" style="color: #AAAAAA; font-weight: 300;font-size:1.2rem;"></p>
                                             </div>
                                             <div id="container-pie3"></div>  
                                         </div>
@@ -17,7 +17,7 @@
                                         <div class="card-chart">
                                             <div class="header" style="padding: 0 15px;">
                                             <h4 class="title">TUKS</h4>
-                                            <p class="category" style="color: #AAAAAA; font-weight: 300;font-size:1.2rem;">Jumlah Total TUKS semua Provinsi</p>
+                                            <p class="category" style="color: #AAAAAA; font-weight: 300;font-size:1.2rem;"></p>
                                             </div>
                                             <div id="container-pie4"></div>  
                                         </div>
@@ -169,7 +169,7 @@
                         <button type="button" class="close" data-dismiss="modal" style="color: #ffff;outline: none;opacity: 1;">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <h5>Apakah anda nyakin akan Delete ?</h5>
+                        <h5>Apakah anda yakin ingin menghapus data ini ?</h5>
                     </div>
                     <div class="modal-footer" style="border-top: none;">
                         <button type="button" class="btn btn-default btn-fill" data-dismiss="modal">Cancel</button>

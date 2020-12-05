@@ -61,11 +61,9 @@ class Export extends CI_Controller
         $provinsi_id = array();
         if(isset($post['provinsi']) && $post['provinsi'] != "")
         {
-            //$prov = explode(",",$post['provinsi']);
-            //if(count($prov) > 0 && is_array($prov))
-            //{
-                $provinsi_id = $post['provinsi'];
-            //}
+            
+            $provinsi_id = $post['provinsi'];
+           
         }
         
         /* filter by lokasi */
@@ -501,7 +499,7 @@ class Export extends CI_Controller
         $this->session->sess_destroy();
         
 		$writer = new Xlsx($spreadsheet);
-		$filename = 'Data-TUKS-TERSUS-INDONESIA_'.date("Ymd");
+		$filename = 'Data-TUKS-TERSUS-INDONESIA_'.date("Ymd").".xlsx";
 		
         header('Content-Disposition: attachment;filename="'. $filename);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -577,6 +575,7 @@ class Export extends CI_Controller
             }
         }
         $data = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id); 
+        //echo "<pre>";print_r($data->result());die("<<<");
         header("Content-type: application/csv");
         header("Content-Disposition: attachment; filename=\"test".".csv\"");
         header("Pragma: no-cache");
@@ -591,16 +590,16 @@ class Export extends CI_Controller
                     "Wilayah kerja",
                     "Perusahaan",
                     "Bidang Usaha",
-                    //"Kategori",
+                    "Kategori",
                     "Lokasi",
-                    //"Alamat",
-                    //"Penanggung Jawab",
-                    //"NPWP",
-                    //"Koordinat",
+                    "Alamat",
+                    "Penanggung Jawab",
+                    "NPWP",
+                    "Koordinat",
                     "TERSUS/TUKS",
                     "Spesifikasi",
                     "Legalitas",
-                    //"Tanggal Terbit",
+                    "Tanggal Terbit",
                     "status",
                     "Masa Berlaku",
                     "latitude",
