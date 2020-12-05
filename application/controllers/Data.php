@@ -618,7 +618,7 @@ class Data extends CI_Controller
 		$selected = $this->datax->_get_kategori($post);
 		$data = $this->datax->get_kategori();
 
-		$html = "<option value='' readonly >Pilih Kategori</option>";
+		$html = "<option value='' readonly disabled>Pilih Kategori</option>";
 		foreach($data as $key => $value)
 		{
 			if($this->in_array_recursive($value->kategori_id,$selected))

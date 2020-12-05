@@ -330,7 +330,79 @@
 
         public function rekapKategori($provinsi_id,$kategori_id)
         {
-            $no = 0;
+            $filter_session = array(
+                'nm_perusahaan' => $this->session->userdata('nm_perusahaan'),
+                'dermaga'       => $this->session->userdata('dermaga'),
+                'kapasitas'     => $this->session->userdata('kapasistas'),
+                'satuan'        => $this->session->userdata('satuan'),
+                'ms_berlaku'    => $this->session->userdata('tglakhir'),
+                'meter'         => $this->session->userdata('meter'),
+                'status'        => $this->session->userdata('status'),
+                'tukter'        => $this->session->userdata('tukter'),
+                'expired'       => $this->session->userdata('expired'),
+            );
+
+            $query = "";
+            if($filter_session['nm_perusahaan'] != '')
+            {
+                $query .= " AND (";
+                $query .= "daftar_perusahaan.nm_perusahaan LIKE \'%".$filter_session['nm_perusahaan']. "%\'";
+                $query .= ")";
+            }
+
+            if($filter_session['dermaga'] != '')
+            {
+                $query .= " AND (";
+                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['dermaga']. "\%'";
+                $query .= ")";
+            }
+
+            if($filter_session['kapasitas'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['dermaga']. " " . $filter_session['satuan']."%\'";
+                $query .= ")";
+            }
+
+            if($filter_session['ms_berlaku'] != '')
+            {
+                $query = " AND (";
+                $query .= "daftar_perusahaan.ms_berlaku < \'".date("Y-m-d H:i:s",strtotime("31-".$filter_session['ms_berlaku'])). "\'";
+                $query .= ")";
+            }
+
+            if($filter_session['expired'])
+            {
+                $query = " AND (";
+                $query .= "daftar_perusahaan.ms_berlaku < \'".date("Y-m-d H:i:s"). "\'";
+                $query .= ")";
+            }
+
+            if($filter_session['meter'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.spesifikasi LIKE \'%".$filter_session['meter']. " M LWS%\'";
+                $query .= ")";
+            }
+
+            if($filter_session['status'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.status = \'".$filter_session['status']."\'";
+                $query .= ")";
+            }
+
+            if($filter_session['tukter'] != '')
+            {
+                
+                $query = " AND (";
+                $query .= "daftar_perusahaan.ter_tuk = \'".$filter_session['tukter']."\'";
+                $query .= ")";
+            }
+
             $prov_id = "NULL";
             if(count($provinsi_id) > 0)
             {
@@ -343,7 +415,8 @@
                 $kat_id = "'" . implode(",",$kategori_id) ."'";
             }
 
-            $data = $this->db->query("call store_kategori(".$prov_id.",".$kat_id.",NULL)");
+            $query = ($query == '') ? "NULL" : "'".$query."'";
+            $data = $this->db->query("call store_kategori(".$prov_id.",".$kat_id.",".$query.")");
             mysqli_next_result($this->db->conn_id);
             return $data->result_array();
         }
