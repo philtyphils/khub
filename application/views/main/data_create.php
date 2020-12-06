@@ -79,7 +79,7 @@
                                                             <div class="input-group"> 
                                                                 <input type="number" name="s_lat[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds">
+                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>   
                                                             </div>
                                                         </div>
@@ -112,7 +112,7 @@
                                                             <div class="input-group">
                                                                 <input type="number" name="s_long[]" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" value="00" required placeholder="Seconds">
+                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -138,9 +138,9 @@
                                                         </div>  
                                                         <div id="groupdermaga">
                                                             <div class="form-group col-md-12" id="dermaga type">  
-                                                                <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
+                                                                <div class="col-md-3 autocomplete" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="dermaga">Dermaga Tipe</label>
-                                                                    <input type="text" name="dermaga[0][]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
+                                                                    <input type="text" name="dermaga[0][]" id="dermaga" class="form-control dermaga"  placeholder="Dermaga Type">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
@@ -288,11 +288,17 @@
 </body>
 <script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo $baseurl;?>assets/js/jquery-ui.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.multifield.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
+
+
 <!--  -->
+
+
+
 <script type="text/javascript">
 
 var siteurl = $("#txtsite").val();
@@ -320,6 +326,7 @@ $(document).ready(function(){
     });
 
 
+
     $('#provinsi').change(function(option, checked){
         var str = $('[name="provinsi"]').val();
         var provinsi = str.split("|");
@@ -341,6 +348,9 @@ $(document).ready(function(){
             }
         });
     });
+
+    
+   
 
 
     $('#provinsi_f').change(function(option, checked){
@@ -502,9 +512,11 @@ function setKelasExtra(id,counter){
 function addFields(){
    var idField = Math.random();
 
-   $('#groupdermaga').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" name="dermaga[0][]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi[0][]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan[0][]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter[0][]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas[0][]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan[0][]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option value="FEET">FEET</option><option value="GT">GT</option><option value="DWT">DWT</option><option value="TON">TON</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
+   $('#groupdermaga').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" name="dermaga[0][]" id="dermaga" class="dermaga form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi[0][]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan[0][]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter[0][]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas[0][]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan[0][]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option value="FEET">FEET</option><option value="GT">GT</option><option value="DWT">DWT</option><option value="TON">TON</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
 
 }
+
+
 
 
 function rmvFields(id){
@@ -526,9 +538,17 @@ function removeLokasi(id)
      
     }
 }
-
-
 </script>
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            $( ".dermaga" ).autocomplete({
+              source: "<?php echo site_url('Data/get_autocomplete/?');?>"
+            });
+        });
+</script>
+
+
 
 
 </html>

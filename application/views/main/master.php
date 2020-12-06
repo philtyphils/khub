@@ -407,7 +407,7 @@ var chart_tusk = new Highcharts.chart({
 
 <script>
     Highcharts.setOptions({
-		colors: ['#A3A0FB','#43425D','#6bd189','#424038']
+		colors: ['#A3A0FB','#43425D','#6bd189','#158467']
     });
 	
 	var chart_bar = new Highcharts.chart({

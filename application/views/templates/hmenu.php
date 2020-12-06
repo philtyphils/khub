@@ -21,12 +21,7 @@
                             <p>Info Grafik</p>
                         </a>
                     </li>
-                    <li class="active-pro">
-                        <a href="">
-                            <i class="fa fa-cogs"></i>
-                            <p>Setting</p>
-                        </a>
-                    </li>
+                   
                 </ul>
             </div>          
         </div>

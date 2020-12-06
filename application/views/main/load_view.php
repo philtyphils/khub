@@ -1,7 +1,7 @@
 
-                                        <div class="row group" id="lokasi-<?php echo $id;?>-warp">
+                                        <div class="row group" id="lokasi-<?php echo $id;?>-warp" style="background-color:#cfd5f1 ;">
                                             <div class="wrap-3">
-                                                <h4 class="headingtitle" style="margin: 0;">FORM LOKASI</h4> 
+                                                <h4 class="headingtitle" style="margin: 0;">FORM LOKASI TAMBAHAN</h4> 
                                             </div> 
                                            
                                             <div class="wrap-2">
@@ -42,23 +42,23 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="d_lat[]" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number"  min="0" max="11" name="d_lat[]" id="d_lat" class="form-control" placeholder="1-11" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">  
-                                                                <input type="number" name="m_lat[]" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="m_lat[]" id="m_lat" class="form-control" placeholder="1-60" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group"> 
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_lat2[]" id="s_lat2" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>   
                                                             </div>
                                                         </div>
@@ -75,23 +75,23 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="d_long[]" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" min="95" max="141" name="d_long[]" id="d_long" class="form-control"  placeholder="95-141" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="m_long[]" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="m_long[]" id="m_long" class="form-control"  placeholder="1-60" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -119,7 +119,7 @@
                                                             <div class="form-group col-md-12" id="dermaga type">  
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="dermaga">Dermaga Tipe</label>
-                                                                    <input type="text" name="dermaga[<?php echo $id;?>][]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
+                                                                    <input type="text" name="dermaga[<?php echo $id;?>][]" id="dermaga" class="form-control dermaga"  placeholder="Dermaga Type">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
@@ -246,7 +246,15 @@
                                             </div>
                                         </div>
 
-                                        
+
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            $( ".dermaga" ).autocomplete({
+              source: "<?php echo site_url('Data/get_autocomplete/?');?>"
+            });
+        });
+</script>                           
 
 <script type="text/javascript">
 
@@ -275,7 +283,7 @@ $(".addFields").click(function(){
     $('#groupdermaga<?php echo $id;?>').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" namame="dermaga["'+idField+'"][]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi["'+idField+'"][]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan["'+idField+'"][]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter["'+idField+'"][]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas["'+idField+'"][]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan["'+idField+'"][]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option>FEET</option><option>GT</option><option>DWT</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
 });
 
-   
+
 
 $('#provinsi_f<?php echo $id;?>').change(function(option, checked){
         var str = $('#provinsi_f<?php echo $id;?>').val();
@@ -363,3 +371,4 @@ $('#kecamatan_f<?php echo $id;?>').change(function(option, checked){
 
 
 </script>
+
