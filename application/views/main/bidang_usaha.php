@@ -134,7 +134,7 @@
                     <button type="button" class="close" data-dismiss="modal" style="color: #ffff;">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <h5>Apakah anda Yakin akan Delete ?</h5>
+                    <h5>Apakah anda menghapus data ini ?</h5>
                 </div>
                 <div class="modal-footer" style="border-top: none;">
                     <button type="button" class="btn btn-default btn-fill" data-dismiss="modal">Cancel</button>

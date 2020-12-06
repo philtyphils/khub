@@ -250,7 +250,7 @@ class Data_model extends CI_Model {
                 $val4 = $data['meter'][$i][$key];
                 $val5 = $data['kapasitas'][$i][$key];
                 $val6 = $data['satuan'][$i][$key];                 
-                $spesifikasi .= "DERMAGA TIPE: ".$val .", SPESIFIKASI: " . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
+                $spesifikasi .= "DERMAGA TIPE: ".$val .", " . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
             
             }
             $spesifikasi        = substr($spesifikasi,0,-3);
@@ -354,7 +354,7 @@ class Data_model extends CI_Model {
             $val4 = $data['meter'][$key];
             $val5 = $data['kapasitas'][$key];
             $val6 = $data['satuan'][$key];                 
-            $spesifikasi .= "TIPE: ".$val .", SPESIFIKASI:" . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
+            $spesifikasi .= "DERMAGA TIPE: ".$val .", " . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
            
         }
         //echo "<pre>";print_r($d_kecamatan);die("<<<");

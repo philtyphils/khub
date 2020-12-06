@@ -41,6 +41,7 @@ class Data extends MY_Controller
 		$data['dermaga']		= $this->datax->get_dermaga();
 		$data['notification']	= $this->datax->notification();		
 		$data['notif_yellow']	= $this->datax->notif_yellow();
+
 		$trigger ='';
 		$trigger 		= $this->input->post('trigger');
 		$namaPerusahaan = $this->input->post('name');
@@ -195,12 +196,12 @@ class Data extends MY_Controller
 				$this->db->where('a.status', $status);
 			}
 			if($tglakhir != ''){
-				$this->db->where('ms_berlaku < "'.date("Y-m-d H:i:s",strtotime("31-".$tglakhir)).'"');
+				$this->db->where('ms_berlaku BETWEEN "'.date("Y-m-d H:i:s",strtotime("01-".$tglakhir)).'" AND "'.date("Y-m-d H:i:s",strtotime("31-".$tglakhir)).'"');
 			}
 
 			if($expired)
 			{
-				$this->db->where("ms_berlaku < '".date("Y-m-d H:i:s")."'");
+				$this->db->where("ms_berlaku b '".date("Y-m-d H:i:s")."'");
 			}
 
 			$this->db->where('a.flag',1);
@@ -383,7 +384,7 @@ class Data extends MY_Controller
 				{
 				
 					$a 			= preg_match("/TIPE:([a-zA-Z\s]+)/",$value,$tipe);
-					$b 			= preg_match("/TIPE:[a-zA-Z\s]+,(.*), KEDALAMAN:/",$value,$spesifikasi);
+					$b 			= preg_match("/TIPE:[a-zA-Z\s()]+,(.*), KEDALAMAN:/",$value,$spesifikasi);
 					$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$value,$peruntukan);
 					$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$value,$kedalaman);
 					$e 			= preg_match("/MAKSIMUM\s([0-9]*)\s/",$value,$kapasitas);

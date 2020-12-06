@@ -8,6 +8,7 @@
 		{
 			return $this->db->where('flag',1)->count_all_results("bdg_usaha");
 		}
+		
 		public function gets($post = array())
 		{
 		
@@ -21,7 +22,7 @@
 			//	$this->db->like("ksop.nama",trim(htmlentities($post['searchbox'])));
 			//}
 			//$this->db->where('flag',1);
-			$query = "SELECT * FROM rekaptulasi_bidang_usaha ORDER BY if(kategori_id = '' or kategori_id is null,2,1), kategori_id ASC";
+			$query = "SELECT * FROM rekaptulasi_bidang_usaha ORDER BY if(kategori_id = '' or kategori_id is null,1,0), kategori_id ASC, TOTAL DESC";
 			$data = $this->db->query($query);
 			//echo "<pre>";print_r($this->db->last_query());die();
 			return $data;
