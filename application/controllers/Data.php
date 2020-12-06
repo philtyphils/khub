@@ -114,13 +114,14 @@ class Data extends MY_Controller
 			if($yellow_notif != "")
 			{
 				$this->db->where("a.lokasi",'');
-				$this->db->where("a.koordinat",'');
-				$this->db->where("a.sk",'');
-				$this->db->where("a.tgl_terbit",'');
-				$this->db->where("a.ms_berlaku",'');
-				$this->db->where("a.ter_tuk",'');
+				$this->db->or_where("a.koordinat",'');
+				$this->db->or_where("a.sk",'');
+				$this->db->or_where("a.tgl_terbit",'');
+				$this->db->or_where("a.ms_berlaku",'');
+				$this->db->or_where("a.ter_tuk",'');
 
 			}
+
 			if($namaPerusahaan != ''){
 				$this->db->like('a.nm_perusahaan', $namaPerusahaan);
 			}
@@ -182,10 +183,10 @@ class Data extends MY_Controller
 			}
 			
 			if($meter != ''){
-				$this->db->like('a.spesifikasi', $meter ." M LWS");
+				$this->db->like('a.spesifikasi',$meter ." M LWS");
 			}
 			if($kapasitas != ''){
-				$this->db->like('a.spesifikasi', $kapasitas . " " . $satuan);
+				$this->db->like('a.spesifikasi',$kapasitas . " " . $satuan);
 			}
 			if($tukter != ''){
 				$this->db->where('a.ter_tuk', $tukter);

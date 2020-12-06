@@ -97,7 +97,7 @@
 		public function notif_yellow()
     	{
 			$this->db->cache_on();
-    	    return $this->db->where("flag",1)->where('ter_tuk','')->where('koordinat','')->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
+    	    return $this->db->where('ter_tuk','')->or_where('koordinat','')->or_where("lokasi",'')->or_where('sk','')->or_where('tgl_terbit','0000-00-00 00:00:00')->or_where('ms_berlaku','0000-00-00 00:00:00')->count_all_results("daftar_perusahaan");
     	}
 		
 		

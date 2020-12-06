@@ -79,6 +79,7 @@ class Data_model extends CI_Model {
 
     public function get_provinsi()
     {
+        $this->db->cache_on();
         $this->db->from('wilayah');
         $this->db->where('length(kode) = 2');
         $this->db->order_by('kode','asc');
@@ -216,6 +217,7 @@ class Data_model extends CI_Model {
             {
                 $dData = explode("|",$data['provinsi_f'][$i]);
                 $provinsi_f = (int) $dData[0];
+                $provinsi_text = $dData[1];
             }
 
             $kota_f = "";
@@ -223,13 +225,15 @@ class Data_model extends CI_Model {
             {
                 $dData = explode("|",$data['kota'][$i]);
                 $kota_f = $dData[0];
+                $kota_text = $dData[1];
             }
 
             $kecamatan_f = "";
             if($data['kecamatan'][$i] != "")
             {
                 $dData = explode("|",$data['kecamatan'][$i]);
-                $kecamatan_f = $dData[0];
+                $kecamatan_f    = $dData[0];
+                $kecamatan_text = $dData[1];
             }
 
             $kelurahan_f = "";
@@ -246,7 +250,7 @@ class Data_model extends CI_Model {
                 $val4 = $data['meter'][$i][$key];
                 $val5 = $data['kapasitas'][$i][$key];
                 $val6 = $data['satuan'][$i][$key];                 
-                $spesifikasi .= "TIPE: ".$val .", SPESIFIKASI: " . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
+                $spesifikasi .= "DERMAGA TIPE: ".$val .", SPESIFIKASI: " . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
             
             }
             $spesifikasi        = substr($spesifikasi,0,-3);
@@ -255,13 +259,31 @@ class Data_model extends CI_Model {
             $_get_kategori_id   = $this->db->where('bdg_usaha_id',(int) $data['bidangusaha'])->get("bdg_usaha")->row();
             $kategori_id        = $_get_kategori_id->kategori_id;
 
+            $insert_lokasi             = "";
+            if($data['lokasi_f'][$i] != "")
+            {
+                $insert_lokasi .= strtoupper($data['lokasi_f'][$i]) . ", ";
+            }
+            if($kelurahan_f != "")
+            {
+                $insert_lokasi .= "KELURAHAN ". strtoupper($kelurahan_f).", ";
+            }
+            if($kecamatan_text && $kecamatan_text != "")
+            {
+                $insert_lokasi .= "KECAMATAN ". strtoupper($kecamatan_text).", ";
+            }
+            if($provinsi_text && $provinsi_text != "")
+            {
+                $insert_lokasi .= "PROVINSI ". strtoupper($provinsi_text).".";
+            }
+
             $insert = array(
                 "provinsi_id"           => $provinsi_f,
                 "ksop_id"               => $data['kelas'][$i],
                 "bdgusaha_id"           => $bdgusaha_id,
                 "kategori_id"           => $kategori_id,
                 "nm_perusahaan"         => $data['name'],
-                "lokasi"                => $data['lokasi_f'][$i],
+                "lokasi"                => $insert_lokasi,
                 "lokasi_kota"           => $kota_f,
                 "lokasi_kecamatan"      => $kecamatan_f,
                 "lokasi_kelurahan"      => $kelurahan_f,
@@ -270,8 +292,8 @@ class Data_model extends CI_Model {
                 "k_lat"                 => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i].".".$data['s_lat2'][$i]),
                 "k_long"                => $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i].".".$data['s_lat2'][$i]),
                 "ter_tuk"               => $data['tersus_tuks'][$i],
-                "spesifikasi"           => $spesifikasi,
-                "sk"                    => $data['nosk'][$i],
+                "spesifikasi"           => html_escape($spesifikasi),
+                "sk"                    => $this->security->xss_clean($data['nosk'][$i]),
                 "jns_legalitas"         => $data['jenissk'][$i],
                 "tgl_terbit"            => date("Y-m-d H:i:s",strtotime($data['tgl_terbit'][$i])),
                 "ms_berlaku"            => date("Y-m-d H:i:s",strtotime($data['tgl_akhir'][$i])),
@@ -469,7 +491,7 @@ class Data_model extends CI_Model {
 
     public function notif_yellow()
     {
-        return $this->db->where("flag",1)->where('ter_tuk','')->where('koordinat','')->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
+        return $this->db->or_where('ter_tuk','')->or_where('koordinat','')->or_where("lokasi",'')->or_where('sk','')->or_where('tgl_terbit','0000-00-000 00:00:00')->or_where('ms_berlaku','0000-00-000 00:00:00')->count_all_results("daftar_perusahaan");
     }
 
     public function _get_bidangusaha($data)

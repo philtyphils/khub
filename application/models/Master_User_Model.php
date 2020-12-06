@@ -155,7 +155,7 @@ class Master_User_model extends CI_Model {
 
     public function notif_yellow()
     {
-        return $this->db->where("flag",1)->where("lokasi",'')->where('sk','')->where('tgl_terbit','')->where('ms_berlaku','')->count_all_results("daftar_perusahaan");
+        return $this->db->where("ter_tuk",'')->or_where("koordinat",'')->or_where("lokasi",'')->or_where('sk','')->or_where('tgl_terbit','')->or_where('ms_berlaku','')->count_all_results("daftar_perusahaan");
     }
 }
 ?>
