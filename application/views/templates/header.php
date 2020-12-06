@@ -9,6 +9,7 @@
     <title><?php echo $title;?></title>
     <link rel="stylesheet" href="<?php echo $baseurl;?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $baseurl;?>assets/sass/main.css">
+    <link rel="stylesheet" href="<?php echo $baseurl;?>assets/css/jquery-ui.css">
     <link href="<?php echo $baseurl;?>assets/css/font-awesome.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/google-roboto-300-700.css" rel="stylesheet" />
@@ -43,12 +44,7 @@
                             <p>Info Grafik</p>
                         </a>
                     </li>
-                    <li class="active-pro">
-                        <a href="">
-                            <i class="fa fa-cogs"></i>
-                            <p>Setting</p>
-                        </a>
-                    </li>
+                   
                 </ul>
             </div>          
         </div>

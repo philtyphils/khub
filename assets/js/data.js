@@ -24,11 +24,7 @@ $(document).ready(function(){
         dataTablex.fnFilter(this.value);
     }); 
 
-    $('.datepicker').datepicker({
-      format: "mm-yyyy",
-      startView: "months",  
-      minViewMode: "months"
-    });
+    $('.datepicker').datepicker();
 
 
     $('#delete-modal').on('show.bs.modal',function() { 
@@ -120,6 +116,11 @@ $(document).ready(function(){
       $('.selectpicker').selectpicker('refresh');
       $('#myModal').modal('show'); // show bootstrap modal
            
+   });
+
+   $('#btnClear').click(function() {
+    $('.form-control').val('');
+    $('.selectpicker').selectpicker('refresh');
    });
 
 

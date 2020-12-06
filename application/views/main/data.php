@@ -196,7 +196,7 @@
                 <form role="form" id="frmcari" action="<?= base_url('Data'); ?>" method="post">
                     <div class="row">
                         <input type="hidden" value="1" name="trigger">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-12">
                             <label for="name">Nama Perusahaan</label>
                             <!-- <input id="Param01" value="nm_perusahaan"  type="hidden"> -->
                             <input type="text" name="name" id="Filt01" placeholder="Nama Perusahaan" class="form-control">
@@ -291,7 +291,7 @@
 
                     <div class="col-md-2" style="margin-bottom: 1rem;">
                         <label for="satuan">Satuan</label>
-                        <select class="selectpicker form-control" id="satuan" name="satuan" title="Pilih Satuan">
+                        <select class="selectpicker form-control" id="satuan" name="satuan" title="Satuan">
                             <option value="FEET" >FEET</option>
                             <option value="GT" >GT</option>
                             <option value="DWT" >DWT</option>
@@ -301,17 +301,17 @@
                   </div>
 
                   <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="tukstersus">TERSUS / TUSK</label>
                         <!-- <input id="Param10" value="ter_tuk"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" id="Filt10" name="tuk_ter"> -->
-                        <select class="selectpicker form-control" id="Filt10" name="tuk_ter" title="Pilih TUKS / TERSUS">
+                        <select class="selectpicker form-control" id="Filt10" name="tuk_ter" title="TUKS / TERSUS">
                             
                             <option value="TERSUS">TERSUS</option>
                             <option value="TUKS">TUKS</option>
                         </select>                       
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="status">STATUS OPERASIONAL</label>
                         <!-- <input id="Param11" value="status"  type="hidden">
                         <select class="selectpicker form-control" id="Filt11" name="status"> -->
@@ -320,7 +320,19 @@
                             <option value="N">NON AKTIF</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
+                        <label for="akhir">Tgl Terbit</label>
+                        <!-- <input id="Param12" value="tglakhir"  type="hidden"> -->
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                            <!-- <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off"> -->
+                            <input placeholder="Tgl Terbit" type="text" class="form-control datepicker" id="Filt12" name="tgl_awal" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
                         <label for="akhir">Masa Berlaku</label>
                         <!-- <input id="Param12" value="tglakhir"  type="hidden"> -->
                         <div class="input-group date">
@@ -328,22 +340,20 @@
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
                             <!-- <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off"> -->
-                            <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off">
+                            <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt13" name="tgl_akhir" autocomplete="off">
                         </div>
                     </div>
+                
+                    <div class="form-check" style="float:right;padding:0 15px;">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="expired" style="margin-right: 5px;">
+                        <label class="form-check-label" for="exampleCheck1" style="font-size: 14px;">Expired</label>
+                    </div> 
 
-                    <div class="form-group col-md-4">
-                        <input type="checkbox" name="expired"/> Expired
-                    </div>
-                    
                   </div>
-                  
-                  <button id="btnCari" type="submit" class="btn btn-success btn-fill">FILTER NOW</button>
 
+                <button id="btnCari" type="submit" class="btn btn-success btn-fill col-md-2" style="margin-right: 5px;font-size:12px">FILTER NOW</button>
               </form>
-
-                   
-            
+                <button id="btnClear" class="btn btn-default btn-fill col-md-2" style="font-size:12px;">CLEAR / RESET</button>
             </div>
         </div>
     </div>
@@ -498,7 +508,7 @@ $(document).ready(function(){
 	    } 
 	});
     Highcharts.setOptions({
-		colors: ['#6bd189', '#595861']
+		colors: ['#6bd189', '#158467']
 	});
 
 	var Total = 0;

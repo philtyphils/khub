@@ -40,6 +40,7 @@ button.close {
   -webkit-font-smoothing: antialiased;
   font-family: "Roboto","Helvetica Neue",Arial,sans-serif;
   font-weight: 400;
+  font-size: 12px;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
