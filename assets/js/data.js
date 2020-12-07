@@ -24,7 +24,13 @@ $(document).ready(function(){
         dataTablex.fnFilter(this.value);
     }); 
 
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker({
+      format: "mm-yyyy",
+      startView: "months",  
+      minViewMode: "months"
+    });
+
+    // $('.datepicker').datepicker();
 
 
     $('#delete-modal').on('show.bs.modal',function() { 
