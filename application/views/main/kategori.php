@@ -51,14 +51,14 @@
 </div>
     <!-- MODAL DELETE-->
     <div class="modal fade" id="delete-modal" role="dialog">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog">
                 <!--modal delete content start-->
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #43425D;color: #ffff;">
                         <button type="button" class="close" data-dismiss="modal" style="color: #ffff;">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <h5>Apakah anda akan menghapus data ini ?</h5>
+                    <h5>Apakah anda yakin ingin menghapus data ini ?</h5>
                     </div>
                     <div class="modal-footer" style="border-top: none;">
                         <button type="button" class="btn btn-default btn-fill" data-dismiss="modal">Cancel</button>
@@ -75,6 +75,46 @@
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
+
+<?php if ($this->session->flashdata('success')): ?>
+<script>
+swal.fire({
+  title: "Berhasil",
+  text: "Data Berhasil Dibuat",
+  button: false,
+  icon: 'success',
+  showCloseButton: true,
+});
+</script>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('info')): ?>
+<script>
+swal.fire({
+  title: "Edit",
+  text: "Data Berhasil Di Edit",
+  button: false,
+  icon: 'success',
+  showCloseButton: true,
+ 
+});
+</script>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('delete')): ?>
+<script>
+swal.fire({
+  title: "Delete",
+  text: "Data Berhasil Di Delete",
+  button: false,
+  icon: 'success',
+  showCloseButton: true,
+});
+</script>
+<?php endif; ?>
+
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('#datatables').DataTable({

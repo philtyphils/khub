@@ -478,20 +478,22 @@ class Data extends MY_Controller
 			
             if ($this->form_validation->run() == FALSE)
             {
-				$alert = array('teks'=> '<div class="alert-danger text-center" role="alert"><b>'. validation_errors().'</b></div>');
-				$this->session->set_flashdata($alert);
+				// $alert = array('teks'=> '<div class="alert-danger text-center" role="alert"><b>'. validation_errors().'</b></div>');
+				$this->session->set_flashdata('error','Action NoCompleted');
 				redirect(base_url()."Data/create");
             }
             else
             {
                 $data = $this->datax->create($this->input->post());
 			
-				$alert = array('teks'=>'<div class="alert-danger text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
+				// $alert = array('teks'=>'<div class="alert-danger text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
+				
 				if($data)
 				{
-					$alert = array('teks'=>'<div style="padding:10%" class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
+					// $alert = array('teks'=>'<div style="padding:10%" class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
+					$this->session->set_flashdata('success','Action Completed');
 				}
-				$this->session->set_flashdata($alert);
+				// $this->session->set_flashdata($alert);
 				redirect(base_url()."Data/create");
 				
 			}
@@ -502,25 +504,31 @@ class Data extends MY_Controller
 		if($action == "edit")
 		{
 			$data 	= $this->datax->edit($post);
-			$alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> EDIT DATA GAGAL!</b></div>');
+			// $alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> EDIT DATA GAGAL!</b></div>');
 			if($data)
 			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> EDIT DATA BERHASIL !</b></div>');
+				// $alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> EDIT DATA BERHASIL !</b></div>');
+				$this->session->set_flashdata('info','Action Completed');
+			}else {
+
+				$this->session->set_flashdata('error','Action NoCompleted');
 			}
-			$this->session->set_flashdata($alert);
+			// $this->session->set_flashdata($alert);
 			redirect(base_url()."Data/edit/".$post['_id']);
 		}
 
 		if($action == "delete")
 		{
 			$data = $this->datax->delete($post);
-			$alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
+			// $alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
 			if($data)
 			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> DELETE DATA BERHASIL !</b></div>');
+				// $alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> DELETE DATA BERHASIL !</b></div>');
+				$return = $this->session->set_flashdata('delete','Action Completed');
 			}
-			$this->session->set_flashdata($alert);
-			echo json_encode(array("status" => 200,"data" => "Successfully"));
+			// $this->session->set_flashdata($alert);
+			// echo json_encode(array("status" => 200,"data" => "Successfully"));
+			echo json_encode($return);
 		}
 
 	}

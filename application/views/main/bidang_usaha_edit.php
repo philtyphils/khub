@@ -28,7 +28,9 @@
                                             <?php endforeach;?>
                                     </select>                 
                                 </div>
-                                <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;">SIMPAN</button>
+                                <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;">
+                                <i class="fa fa-check" aria-hidden="true" style="margin-right: 4px;"></i>
+                                SIMPAN</button>
                                 <a href="<?php echo $baseurl;?>bidang_usaha"  class="btn btn-fill btn-default" >KEMBALI</a>
                             </div>  
                         </form>
@@ -43,6 +45,7 @@
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {

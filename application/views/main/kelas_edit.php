@@ -24,7 +24,9 @@
                                         <?php endforeach;?>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;">SIMPAN</button>
+                                <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;">
+                                <i class="fa fa-check" aria-hidden="true" style="margin-right: 4px;"></i>
+                                SIMPAN</button>
                                 <a href="<?php echo $baseurl."kelas";?>"  class="btn btn-fill btn-default" >KEMBALI</a>
                             </div>  
                         </form>
@@ -39,5 +41,43 @@
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
+
+<?php if ($this->session->flashdata('success')): ?>
+<script>
+swal.fire({
+  title: "Berhasil",
+  text: "Data Berhasil Dibuat",
+  button: false,
+  icon: 'success',
+  showCloseButton: true,
+});
+</script>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('info')): ?>
+<script>
+swal.fire({
+  title: "Edit",
+  text: "Data Berhasil Di Edit",
+  button: false,
+  icon: 'success',
+  showCloseButton: true,
+ 
+});
+</script>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('delete')): ?>
+<script>
+swal.fire({
+  title: "Delete",
+  text: "Data Berhasil Di Delete",
+  button: false,
+  icon: 'success',
+  showCloseButton: true,
+});
+</script>
+<?php endif; ?>
 
 </html>
