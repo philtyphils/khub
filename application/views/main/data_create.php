@@ -324,7 +324,7 @@ $(document).ready(function(){
     <?php if ($this->session->flashdata('error')): ?>
 
     swal.fire({
-    title: "Berhasil",
+    title: "Gagal",
     text: "Data Gagal Dibuat",
     button: false,
     icon: 'error',

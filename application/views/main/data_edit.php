@@ -370,10 +370,10 @@ $(document).ready(function(){
 
     <?php if ($this->session->flashdata('info')): ?>
         swal.fire({
-        title: "Berhasil",
+        title: "Edit",
         text: "Data Berhasil Di Edit",
         button: false,
-        icon: 'info',
+        icon: 'success',
         showCloseButton: true,
     });
     <?php endif; ?>
@@ -381,7 +381,7 @@ $(document).ready(function(){
     <?php if ($this->session->flashdata('error')): ?>
 
         swal.fire({
-        title: "Berhasil",
+        title: "Gagal",
         text: "Data Gagal Di Edit",
         button: false,
         icon: 'error',

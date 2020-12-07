@@ -58,10 +58,10 @@ swal.fire({
 <?php if ($this->session->flashdata('info')): ?>
 <script>
 swal.fire({
-  title: "Berhasil",
+  title: "Edit",
   text: "Data Berhasil Di Edit",
   button: false,
-  icon: 'info',
+  icon: 'success',
   showCloseButton: true,
  
 });
@@ -71,7 +71,7 @@ swal.fire({
 <?php if ($this->session->flashdata('delete')): ?>
 <script>
 swal.fire({
-  title: "Berhasil",
+  title: "Delete",
   text: "Data Berhasil Di Delete",
   button: false,
   icon: 'success',

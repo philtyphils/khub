@@ -422,7 +422,7 @@
 <?php if ($this->session->flashdata('delete')): ?>
 <script>
 swal.fire({
-  title: "Berhasil",
+  title: "Delete",
   text: "Data Berhasil Di Delete",
   button: false,
   icon: 'success',
