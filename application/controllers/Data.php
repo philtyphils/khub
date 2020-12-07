@@ -201,14 +201,14 @@ class Data extends MY_Controller
 
 			if($expired)
 			{
-				$this->db->where("ms_berlaku b '".date("Y-m-d H:i:s")."'");
+				$this->db->where("ms_berlaku < '".date("Y-m-d H:i:s")."'");
 			}
 
 			$this->db->where('a.flag',1);
 			$this->db->order_by('a.provinsi_id','asc');
 			$this->db->order_by('c.order','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
-			$this->db->cache_off();
+			$this->db->cache_on();
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
@@ -369,7 +369,7 @@ class Data extends MY_Controller
 		$f = $this->datax->_getspesifikasi($id);
 		foreach($f as $key => $value)
 		{
-			$split = preg_split("/(. DERMAGA|.DERMAGA|\s\|\s)/",$value->spesifikasi);
+			$split = preg_split("/(\s\|\s)/",$value->spesifikasi);
 			$tipe = array();
 			$spesifikasi = array();
 			$peruntukan = array();
@@ -384,11 +384,11 @@ class Data extends MY_Controller
 				{
 				
 					$a 			= preg_match("/TIPE:([a-zA-Z\s]+)/",$value,$tipe);
-					$b 			= preg_match("/TIPE:[a-zA-Z\s()]+,(.*), KEDALAMAN:/",$value,$spesifikasi);
+					$b 			= preg_match("/TIPE:[\sa-zA-Z()]*,(.*), KEDALAMAN:/",$value,$spesifikasi);
 					$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$value,$peruntukan);
 					$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$value,$kedalaman);
 					$e 			= preg_match("/MAKSIMUM\s([0-9]*)\s/",$value,$kapasitas);
-					$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$value,$satuan);
+					$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{2,4})/",$value,$satuan);
 					
 					$result = array(
 						"tipe" 			=> (count($tipe) > 1) ? trim($tipe[1]) : "",
@@ -406,11 +406,11 @@ class Data extends MY_Controller
 			else
 			{
 				$a 			= preg_match("/TIPE:([a-zA-Z\s()*]+),/",$split[0],$tipe);
-				$b 			= preg_match("/TIPE:[a-zA-Z\s0-9()]+,(.*), KEDALAMAN:/",$split[0],$spesifikasi);
+				$b 			= preg_match("/TIPE:[\sa-zA-Z()]*,(.*), KEDALAMAN:/",$split[0],$spesifikasi);
 				$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$split[0],$peruntukan);
 				$d 			= preg_match("/KEDALAMAN:(.*)\sM LWS/",$split[0],$kedalaman);
 				$e 			= preg_match("/MAKSIMUM\s+([0-9*]+)/",$split[0],$kapasitas);
-				$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$split[0],$satuan);
+				$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{2,4})/",$split[0],$satuan);
 
 			
 				$result = array(

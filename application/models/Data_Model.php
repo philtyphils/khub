@@ -304,6 +304,7 @@ class Data_model extends CI_Model {
 
             try
             {
+                $this->db->cache_delete_all();
                 $exec = $this->db->insert("daftar_perusahaan",$insert);
             }
             catch (\Exception $e) 
@@ -319,6 +320,7 @@ class Data_model extends CI_Model {
     public function edit($data)
     {
         //echo "<pre>";print_r($data);die();
+        
         $d_kota = "";
         if( $data['kota'] != "")
         {
@@ -391,7 +393,7 @@ class Data_model extends CI_Model {
         $jns_legalitas      = $data['jenissk'];
         $tgl_terbit         = date("Y-m-d",strtotime($data['tgl_terbit']));
         $ms_berlaku         = date("Y-m-d",strtotime($data['tgl_akhir']));
-
+        $this->db->cache_delete_all();
         $data = $this->db->where("id",$data['_id'])->update("daftar_perusahaan",array(
             "provinsi_id"           => $provinsi_id,
             "ksop_id"               => $ksop_id,
@@ -486,11 +488,13 @@ class Data_model extends CI_Model {
 
     public function notification()
     {
+        $this->db->cache_off();
         return $this->db->where("flag",1)->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
     }
 
     public function notif_yellow()
     {
+        $this->db->cache_on();
         return $this->db->or_where('ter_tuk','')->or_where('koordinat','')->or_where("lokasi",'')->or_where('sk','')->or_where('tgl_terbit','0000-00-000 00:00:00')->or_where('ms_berlaku','0000-00-000 00:00:00')->count_all_results("daftar_perusahaan");
     }
 
