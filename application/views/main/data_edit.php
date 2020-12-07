@@ -334,7 +334,9 @@
                                         </div>
                                     </div>
                                    
-                                    <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;margin-left: -15px;">SIMPAN DATA</button>
+                                    <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;margin-left: -15px;">
+                                    <i class="fa fa-check" aria-hidden="true" style="margin-right: 4px;"></i>
+                                    SIMPAN DATA</button>
                                     <a href="<?php echo $baseurl;?>Data"  class="btn btn-fill btn-default" >KEMBALI</a> 
                                 </form>
 
@@ -353,6 +355,7 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.multifield.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
 <!--  -->
 <script type="text/javascript">
 
@@ -364,6 +367,28 @@ $(document).ready(function(){
 
 
     $('select').selectpicker();
+
+    <?php if ($this->session->flashdata('info')): ?>
+        swal.fire({
+        title: "Berhasil",
+        text: "Data Berhasil Di Edit",
+        button: false,
+        icon: 'info',
+        showCloseButton: true,
+    });
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error')): ?>
+
+        swal.fire({
+        title: "Berhasil",
+        text: "Data Gagal Di Edit",
+        button: false,
+        icon: 'error',
+        showCloseButton: true,
+        });
+
+    <?php endif; ?>
 
     $('.datepicker').datepicker();
 

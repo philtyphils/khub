@@ -103,38 +103,43 @@ class Kategori extends CI_Controller
 		if($action == "edit")
 		{
 			$data = $this->kategori->edit($this->input->post());
-			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> UPDATE DATA GAGAL!</b></div>');
+			// $alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> UPDATE DATA GAGAL!</b></div>');
 			if($data)
 			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> UPDATE DATA BERHASIL !</b></div>');
+				// $alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> UPDATE DATA BERHASIL !</b></div>');
+				$this->session->set_flashdata('info','Action Completed');
 			}
-			$this->session->set_flashdata($alert);
-			$id = (int) $this->input->post("id");
-			redirect(base_url()."Kategori/edit/".$id);
+			// $this->session->set_flashdata($alert);
+			// $id = (int) $this->input->post("id");
+			// redirect(base_url()."Kategori/edit/".$id);
+			redirect(base_url()."Kategori");
 		}
 
 		if($action == "create")
 		{
 			$data = $this->kategori->create($this->input->post());
-			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
+			// $alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
 			if($data)
 			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
+				// $alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
+				$this->session->set_flashdata('success','Action Completed');
 			}
-			$this->session->set_flashdata($alert);
-			redirect(base_url()."Kategori/create");
+			// $this->session->set_flashdata($alert);
+			redirect(base_url()."Kategori");
 		}
 
 		if($action == "delete")
 		{
 			$data = $this->kategori->delete($this->input->post());
-			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
+			// $alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
 			if($data)
 			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> DELETE DATA BERHASIL !</b></div>');
+				// $alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> DELETE DATA BERHASIL !</b></div>');
+				$return = $this->session->set_flashdata('delete','Action Completed');
 			}
-			$this->session->set_flashdata($alert);
-			echo json_encode(["result" => "always Fine."]);
+			// $this->session->set_flashdata($alert);
+			// echo json_encode(["result" => "always Fine."]);
+			echo json_encode($return);
 		}
 	}
 

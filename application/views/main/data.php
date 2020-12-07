@@ -414,9 +414,22 @@
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-exporting.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-export.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
 
 <script type="text/javascript" src="<?php echo $baseurl;?>assets/js/data.js?v=<?php echo uniqid(); ?>"></script> 
 <script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
+
+<?php if ($this->session->flashdata('delete')): ?>
+<script>
+swal.fire({
+  title: "Berhasil",
+  text: "Data Berhasil Di Delete",
+  button: false,
+  icon: 'success',
+  showCloseButton: true,
+});
+</script>
+<?php endif; ?>
 
 <script>
     $('.showspesifikasi').on('click', function (event) {

@@ -56,9 +56,9 @@
                                                         <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group"> 
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control"  required placeholder="00" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_lat2[]" id="s_lat" class="form-control" required placeholder="00" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>   
                                                             </div>
                                                         </div>
@@ -89,9 +89,9 @@
                                                         <div class="form-group col-md-3" style="padding-left: 2px;padding-right:2px;">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_long[]" id="s_long" class="form-control"  required placeholder="00" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">.</span>
-                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control" value="00" required placeholder="Seconds" min="1" max="60">
+                                                                <input type="number" name="s_long2[]" id="s_long" class="form-control"  required placeholder="00" min="1" max="60">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>

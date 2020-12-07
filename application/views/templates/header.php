@@ -14,8 +14,23 @@
     <link href="<?php echo $baseurl;?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/google-roboto-300-700.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/img/logo-icon.png" rel="icon" >
+    <link rel="stylesheet" href="<?php echo $baseurl;?>assets/css/sweetalert2.css">
 
-   
+    <style type="text/css">
+        #swal2-title {
+            display: block !important;
+        }
+
+        .swal2-success-circular-line-left {
+            background-color: transparent !important;
+        }
+        .swal2-success-fix {
+            background-color: transparent !important;
+        }
+        .swal2-success-circular-line-right {
+            background-color: transparent !important;
+        }
+    </style>
     
 </head>
 <body>

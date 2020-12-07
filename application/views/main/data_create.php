@@ -293,11 +293,10 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.multifield.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
 
 
 <!--  -->
-
-
 
 <script type="text/javascript">
 
@@ -309,6 +308,30 @@ $(document).ready(function(){
     localStorage.setItem('aCounter', 0);
 
     $('select').selectpicker();
+    
+    <?php if ($this->session->flashdata('success')): ?>
+
+    swal.fire({
+    title: "Berhasil",
+    text: "Data Berhasil Dibuat",
+    button: false,
+    icon: 'success',
+    showCloseButton: true,
+    });
+
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error')): ?>
+
+    swal.fire({
+    title: "Berhasil",
+    text: "Data Gagal Dibuat",
+    button: false,
+    icon: 'error',
+    showCloseButton: true,
+    });
+
+    <?php endif; ?>
 
     $('.datepicker').datepicker();
 
