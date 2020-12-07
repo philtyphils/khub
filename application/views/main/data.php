@@ -376,14 +376,14 @@
                 </div>
                
                 <h4 style="font-size: 1.4rem;margin-top: 10px;">Nama Perusahaan 
-                <span class="card-namaperusahaan" style="font-weight: bold;padding-left:10px;font-size:1.4rem;"></span> 
+                <span class="card-namaperusahaan" style="font-weight: bold;padding-left:10px;font-size:1rem;"></span> 
                 </h4>
 
-                <h4 style="font-size: 1.4rem;margin-top: 5px;display:inline-block;padding-right: 40px;">Wilayah Kerja</h4>
+                <h4 style="font-size: 1.4rem;margin-top: 5px;display:inline-block;padding-right: 47px;">Wilayah Kerja</h4>
                 <span class="card-wilayahkerja" style="font-weight: bold;"></span><br>
 
                 <h4 style="font-size: 1.4rem;margin-top: 5px;display:inline-block;padding-right: 24px;">Lokasi Dermaga</h4>
-                <span class="card-lokasi" style="font-size: 1.4rem;font-weight: bold;"></span>
+                <span class="card-lokasi" style="font-size: 1rem;font-weight: bold;"></span>
               
                 <h4 style="font-size: 1.4rem;margin-top: 0;">Spesifikasi</h4>
                 <div class="textarea" style="border:1px solid #43425D; padding:10px;border-radius:5px;">
