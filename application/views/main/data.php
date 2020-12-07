@@ -301,7 +301,7 @@
                   </div>
 
                   <div class="row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="tukstersus">TERSUS / TUSK</label>
                         <!-- <input id="Param10" value="ter_tuk"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" id="Filt10" name="tuk_ter"> -->
@@ -311,7 +311,7 @@
                             <option value="TUKS">TUKS</option>
                         </select>                       
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="status">STATUS OPERASIONAL</label>
                         <!-- <input id="Param11" value="status"  type="hidden">
                         <select class="selectpicker form-control" id="Filt11" name="status"> -->
@@ -320,19 +320,19 @@
                             <option value="N">NON AKTIF</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
+                    <!-- <div class="form-group col-md-3">
                         <label for="akhir">Tgl Terbit</label>
-                        <!-- <input id="Param12" value="tglakhir"  type="hidden"> -->
+                       
                         <div class="input-group date">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
-                            <!-- <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off"> -->
+                           
                             <input placeholder="Tgl Terbit" type="text" class="form-control datepicker" id="Filt12" name="tgl_awal" autocomplete="off">
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="akhir">Masa Berlaku</label>
                         <!-- <input id="Param12" value="tglakhir"  type="hidden"> -->
                         <div class="input-group date">
