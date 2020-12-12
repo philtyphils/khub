@@ -109,13 +109,14 @@
             }
             if($query == "" && $prov_id == "")
             {
+				
                 $data = $this->db->get('rekaptulasi_provinsi');
             }
             else
             {
                 $prov_id = ($prov_id == "") ? "NULL" : $prov_id;
 				$query  = ($query == "") ? "NULL" : "'".$query."'";
-				$this->db->cache_off();
+			
                 $data = $this->db->query("call store_provinsi(".$prov_id.",".$query.")");
                 mysqli_next_result($this->db->conn_id);
             }

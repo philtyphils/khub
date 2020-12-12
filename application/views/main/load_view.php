@@ -268,12 +268,12 @@ $(document).ready(function(){
 
 
     $(".btnAdd").click(function(){
-      
+        
         var val = localStorage.getItem('aCounter');
-        var val = eval(val) + eval(1);
+        var val = eval(val) + 1;
         localStorage.setItem('aCounter',val);
         $.get(baseurl+"Data/load_view/"+val, function(data, status){
-            $("#loadhere<?php echo $id;?>").append(data);
+            $("#lokasi-section").append(data);
         });
 
     });

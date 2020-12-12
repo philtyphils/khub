@@ -35,6 +35,7 @@ class Kategori extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['notification']	= $this->kategori->notification();
+		$data['notif_yellow']	= $this->kategori->notif_yellow();
 	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/kategori',$data);
@@ -55,7 +56,7 @@ class Kategori extends CI_Controller
 			$row[] = '<a href="'.$edit_url.'" class="btn btn-simple btn-warning btn-icon edit">
 							<i class="fa fa-edit"></i>
 					  </a>
-                      <button id="delete" personal-id="'. $value->kategori_id.'" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
+                      <button id="delapan-'.$no.'-philtyphils" personal-id="'. (int) $value->kategori_id.'" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
                           <i class="fa fa-times"></i>
 					  </button>';
 			$result[] = $row;
@@ -77,6 +78,7 @@ class Kategori extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['notification']	= $this->kategori->notification();
+		$data['notif_yellow']	= $this->kategori->notif_yellow();
 
 		$id = (int) $id;
 		$return = $this->kategori->get_kategori($id);
@@ -93,8 +95,8 @@ class Kategori extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['notification']	= $this->kategori->notification();	
+		$data['notif_yellow']	= $this->kategori->notif_yellow();
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/hmenu',$data);
 		$this->load->view('main/kategori_create',$data);
 	}
 
@@ -144,7 +146,7 @@ class Kategori extends CI_Controller
 	}
 
 
-	
+	 
 	
 	
 }

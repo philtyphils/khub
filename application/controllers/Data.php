@@ -12,7 +12,7 @@ class Data extends MY_Controller
 		$this->load->helper('url');
 		$this->load->library('session');
 		
-	}
+	} 
 	/**
 	 * Index Page for this controller.
 	 *
@@ -41,6 +41,18 @@ class Data extends MY_Controller
 		$data['dermaga']		= $this->datax->get_dermaga();
 		$data['notification']	= $this->datax->notification();		
 		$data['notif_yellow']	= $this->datax->notif_yellow();
+
+		/** clear session **/
+		$sessionData = $this->session->all_userdata();
+        foreach($sessionData as $key =>$val){
+          if($key!='session_id' 
+             && $key!='last_activity' 
+             && $key!='ip_address' 
+             && $key!='user_agent' 
+             && $key!='isLoggedIn'){
+               $this->session->unset_userdata($key);
+           }
+        }
 
 		$trigger ='';
 		$trigger 		= $this->input->post('trigger');
@@ -208,7 +220,6 @@ class Data extends MY_Controller
 			$this->db->order_by('a.provinsi_id','asc');
 			$this->db->order_by('c.order','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
-			$this->db->cache_on();
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
@@ -230,7 +241,6 @@ class Data extends MY_Controller
 			$this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
 			
 			$this->db->where('a.flag',1);
-			$this->db->cache_on();
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
@@ -259,7 +269,6 @@ class Data extends MY_Controller
 		$provinsi = $this->input->post('provinsi');
 		$dataprov = $this->datax->get_Kota($provinsi);
 		
-		$html .='<option value="" selected readonly>Pilih Kabupaten / Kota</option>';
 		if(count($dataprov) > 0)
 		{
         	foreach ($dataprov as $list) {
@@ -288,7 +297,6 @@ class Data extends MY_Controller
         $kelas = $this->input->post('kota');
 
         $datakelas = $this->datax->get_Kelas($kelas);
-        $html .='<option value="">Pilih Wilayah Kerja</option>';
         foreach ($datakelas as $list) {
              $html .= '<option value="'.trim($list->ksop_id).'">'.trim($list->nama).'</option>';
         	}
@@ -301,7 +309,6 @@ class Data extends MY_Controller
         $kelas = $this->input->post('kota');
 
         $datakelas = $this->datax->get_Kelas2($kelas);
-        $html .='<option value="">Pilih Wilayah Kerja</option>';
         foreach ($datakelas as $list) {
              $html .= '<option value="'.trim($list->ksop_id).'">'.trim($list->nama).'</option>';
         	}
@@ -314,7 +321,6 @@ class Data extends MY_Controller
         $kecamatan = $this->input->post('kota');
 
         $datakelas = $this->datax->get_Kecamatan($kecamatan);
-        $html .='<option value="" readonly>Pilih Kecamatan</option>';
         foreach ($datakelas as $list) {
              $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
         	}
@@ -327,7 +333,6 @@ class Data extends MY_Controller
         $kecamatan = $this->input->post('provinsi');
 
         $datakecamatan = $this->datax->get_Kecamatan2($kecamatan);
-        $html .='<option value="">Pilih Kecamatan</option>';
         foreach ($datakecamatan as $list) {
              $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
         	}
@@ -385,7 +390,7 @@ class Data extends MY_Controller
 				
 					$a 			= preg_match("/TIPE:([a-zA-Z\s]+)/",$value,$tipe);
 					$b 			= preg_match("/TIPE:[\sa-zA-Z()]*,(.*), KEDALAMAN:/",$value,$spesifikasi);
-					$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$value,$peruntukan);
+					$c 			= preg_match("/PERUNTUKAN:([a-zA-Z0-9\s\/()]+)/",$value,$peruntukan);
 					$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$value,$kedalaman);
 					$e 			= preg_match("/MAKSIMUM\s([0-9]*)\s/",$value,$kapasitas);
 					$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{2,4})/",$value,$satuan);
@@ -407,8 +412,8 @@ class Data extends MY_Controller
 			{
 				$a 			= preg_match("/TIPE:([a-zA-Z\s()*]+),/",$split[0],$tipe);
 				$b 			= preg_match("/TIPE:[\sa-zA-Z()]*,(.*), KEDALAMAN:/",$split[0],$spesifikasi);
-				$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$split[0],$peruntukan);
-				$d 			= preg_match("/KEDALAMAN:(.*)\sM LWS/",$split[0],$kedalaman);
+				$c 			= preg_match("/PERUNTUKAN:([a-zA-Z0-9\s\/()]+)/",$split[0],$peruntukan);
+				$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$split[0],$kedalaman);
 				$e 			= preg_match("/MAKSIMUM\s+([0-9*]+)/",$split[0],$kapasitas);
 				$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{2,4})/",$split[0],$satuan);
 
@@ -604,7 +609,7 @@ class Data extends MY_Controller
 			$data = $this->datax->get_bidangusaha();
 		}
 
-		$html = "<option value='' readonly >Pilih Bidang Usaha</option>";
+		$html = "";
 		foreach($data as $key => $value)
 		{
 			
@@ -628,7 +633,7 @@ class Data extends MY_Controller
 		$selected = $this->datax->_get_kategori($post);
 		$data = $this->datax->get_kategori();
 
-		$html = "<option value='' readonly disabled>Pilih Kategori</option>";
+		$html = "";
 		foreach($data as $key => $value)
 		{
 			if($this->in_array_recursive($value->kategori_id,$selected))

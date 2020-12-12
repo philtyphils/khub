@@ -18,7 +18,6 @@
                                 <div class="form-group col-md-12" style="padding:0">
                                     <label for="kategori usaha"  style="margin-bottom: 1rem;">KATEGORI USAHA</label>
                                     <select class="form-control" id="kategori_usaha" name="kategori_id">
-                                            <option value="" readonly>Pilih Kategori Usaha</option>
                                             <?php foreach($kategori->result() as $key => $value): ?>
                                                 <?php if($value->kategori_id == $bidang_usaha[0]['kategori_id']):?>
                                                     <option value="<?php echo $value->kategori_id;?>" selected><?php echo $value->nama;?></option>
@@ -46,6 +45,7 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 
 <script type="text/javascript">
     $(document).ready(function() {

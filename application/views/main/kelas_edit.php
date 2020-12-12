@@ -20,7 +20,11 @@
                                     <select name="provinsi" class="form-control" id="provinsi" required>
                                         <option value="" disabled>Pilih Provinsi</option>
                                         <?php foreach($provinsi->result() as $key => $value): ?>
+                                            <?php if($value->kode == $kategori[0]['provinsi_id']): ?>
+                                            <option value="<?php echo htmlentities($value->kode);?>" selected><?php echo htmlentities($value->nama);?></option>
+                                            <?php else: ?>
                                             <option value="<?php echo htmlentities($value->kode);?>"><?php echo htmlentities($value->nama);?></option>
+                                            <?php endif; ?>
                                         <?php endforeach;?>
                                     </select>
                                 </div>

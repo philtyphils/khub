@@ -496,16 +496,7 @@ class Export extends MY_Controller
         $sheet->getStyle("G".$rows)->applyFromArray($styleData);
         $sheet->setCellValue("G".$rows,$jumlah );
 
-        $sessionData = $this->session->all_userdata();
-        foreach($sessionData as $key =>$val){
-          if($key!='session_id' 
-             && $key!='last_activity' 
-             && $key!='ip_address' 
-             && $key!='user_agent' 
-             && $key!='isLoggedIn'){
-               $this->session->unset_userdata($key);
-           }
-        }
+        
         
 		$writer = new Xlsx($spreadsheet);
 		$filename = 'Data-TUKS-TERSUS-INDONESIA_'.date("Ymd").".xlsx";

@@ -251,8 +251,19 @@ class Data_model extends CI_Model {
                 $val5 = $data['kapasitas'][$i][$key];
                 $val6 = $data['satuan'][$i][$key];                 
                 $spesifikasi .= "DERMAGA TIPE: ".$val .", " . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
-            
+                
+                //* cek if dermaga exist
+                if($val != "" || isset($val))
+                {
+                    $dMarga = $this->db->where("type",$val)->count_all_results("dermaga_tipe");
+                    if($dMarga <= 0)
+                    {
+                        $iDermaga = array('type' => $val);
+                        $re = $this->db->insert('dermaga_tipe',$iDermaga);
+                    }
+                }
             }
+
             $spesifikasi        = substr($spesifikasi,0,-3);
 
             $bdgusaha_id        = (int) $data['bidangusaha'][$i];
@@ -473,7 +484,7 @@ class Data_model extends CI_Model {
 
     public function delete($data)
     {
-        $this->db->cache_off();
+        $this->db->cache_delete_all();
         $data = $this->db->where("id",$data['id'])->update("daftar_perusahaan",array(
             "flag" => "0"
         ));
@@ -488,13 +499,11 @@ class Data_model extends CI_Model {
 
     public function notification()
     {
-        $this->db->cache_off();
         return $this->db->where("flag",1)->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
     }
 
     public function notif_yellow()
     {
-        $this->db->cache_on();
         return $this->db->or_where('ter_tuk','')->or_where('koordinat','')->or_where("lokasi",'')->or_where('sk','')->or_where('tgl_terbit','0000-00-000 00:00:00')->or_where('ms_berlaku','0000-00-000 00:00:00')->count_all_results("daftar_perusahaan");
     }
 

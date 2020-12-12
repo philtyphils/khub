@@ -56,7 +56,7 @@
                     <li class="<?php echo ($menu == 'Master')?'active':'';?>" id="">
                         <a href="<?php echo $baseurl;?>Master">
                             <i class="fa  fa-line-chart"></i>
-                            <p>Info Grafik</p>
+                            <p>InfoGrafis</p>
                         </a>
                     </li>
                    

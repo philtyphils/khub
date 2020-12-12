@@ -41,6 +41,7 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 
 <script type="text/javascript">
     $(document).ready(function() {

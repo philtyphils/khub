@@ -294,6 +294,7 @@
 <script src="<?php echo $baseurl;?>assets/js/jquery.multifield.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 
 
 <!--  -->
@@ -325,7 +326,7 @@ $(document).ready(function(){
 
     swal.fire({
     title: "Gagal",
-    text: "Data Gagal Dibuat",
+    text: " <?php echo $this->session->flashdata('teks'); ?>",
     button: false,
     icon: 'error',
     showCloseButton: true,

@@ -7,7 +7,7 @@
                                 <h4 class="title" style="color: #ffff;">Edit Data</h4>
                             </div>
                                 <div class="card-form">
-                                <?php echo $this->session->flashdata('teks'); ?>
+                               
                                 <form action="<?php echo $baseurl."Data/submit/edit";?>" method="POST">
                                     <div id="multifield" class="col" style="margin-bottom: 2rem;">
                                         <input type="hidden" value="<?php echo $data['data']->id;?>" name="_id"/>
@@ -32,7 +32,6 @@
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
                                                         <select name="provinsi_f" class="form-control selectpicker" id="provinsi_f" data-live-search="true">
-                                                           <option value="">Pilih Provinsi</option>
                                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                                                 <?php if($dataProvinsi[$i]->kode == $data['data']->provinsi_id):?>
                                                                     <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>" selected><?php echo $dataProvinsi[$i]->nama; ?></option>
@@ -112,7 +111,6 @@
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
                                                             <select name="direction_lat" id="direction_lat" class="form-control" >
-                                                                <option value="" readonly>Pilih</option>
                                                                 <option value="LU" <?php echo (array_key_exists(3,$data['data']->koordinat) && trim($data['data']->koordinat[3]) == "LU") ? "selected" : ""; ?>>LU</option>
                                                                 <option value="LS" <?php echo (array_key_exists(3,$data['data']->koordinat) && trim($data['data']->koordinat[3]) == "LS") ? "selected" : ""; ?>>LS</option>
                                                             </select>
@@ -208,7 +206,6 @@
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
                                                                     <select name="satuan[]" class="form-control" id="satuan" >
-                                                                        <option value="">Pilih Satuan</option>
                                                                         <option value="FEET" <?php echo (trim($value['satuan']) == "FEET") ? "selected" : ""; ?>>FEET</option>
                                                                         <option value ="GT" <?php echo (trim($value['satuan']) == "GT") ? "selected" : ""; ?>>GT</option>
                                                                         <option value="DWT" <?php echo (trim($value['satuan']) == "DWT") ? "selected" : ""; ?>>DWT</option>
@@ -232,10 +229,10 @@
 
                                                         <div class="form-group col-md-6">
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
-                                                            <select name="jenissk" class="form-control" id="jenissk" >
-                                                                <option value="" readonly>Pilih Jenis SK / Legalitas</option>
+                                                            <select name="jenissk" class="form-control" id="jenissk" title="Jenis Legalitas">
+                                                             
                                                                 <?php foreach($jenis_sk as $key => $value):?>
-                                                                    <?php if($value->id == $data['data']->jns_legalitas):?>
+                                                                    <?php if($value->id === $data['data']->jns_legalitas):?>
                                                                     <option value="<?php echo (int) $value->id;?>" selected><?php echo $value->jenis_sk;?></option>
                                                                     <?php else: ?>
                                                                     <option value="<?php echo (int) $value->id;?>"><?php echo $value->jenis_sk;?></option>
@@ -246,7 +243,6 @@
                                                         <div class="form-group col-md-6">
                                                             <label for="bidang usaha">BIDANG USAHA</label>
                                                             <select class="selectpicker form-control" data-live-search="true" title="Bidang Usaha" name="bidangusaha" id="bidangusaha">
-                                                                    <option value="" disabled>Pilih Bidang Usaha</option>
                                                                     <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                                                         <?php if($data['data']->bdgusaha_id == $dataBdgUsaha[$k]->bdg_usaha_id ):?>
                                                                             <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>" selected><?php echo $dataBdgUsaha[$k]->nama; ?></option>
@@ -258,8 +254,7 @@
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
-                                                            <select name="wilayah_kerja" class="form-control" id="kelas" >
-                                                                <option value="">Pilih Wilayah Kerja</option>
+                                                            <select name="wilayah_kerja" class="form-control" id="kelas" title="Wilayah Kerja" >
                                                                 <?php foreach($data['wilayah_kerja'] as $key => $value):?>
                                                                     <?php if($value->ksop_id == $data['data']->ksop_id):?>
                                                                         <option value="<?php echo trim($value->ksop_id); ?>" selected><?php echo $value->nama; ?></option>
@@ -272,17 +267,14 @@
     
                                                         <div class="form-group col-md-3" >
                                                             <label for="tersus_tuks">TERSUS / TUKS</label>
-                                                            <select name="ter_tuk" class="form-control" id="tersus_tuks" >
+                                                            <select name="ter_tuk" class="form-control" id="tersus_tuks" title="TERSUS/TUKS" >
                                                                 <?php if($data['data']->ter_tuk == "TERSUS"): ?>
-                                                                    <option value="" readonly>Pilih</option>
                                                                     <option value="TERSUS" selected>TERSUS</option>
                                                                     <option value="TUKS">TUKS</option>
                                                                 <?php elseif($data['data']->ter_tuk == "TUKS"):?>
-                                                                    <option value="" readonly>Pilih</option>
                                                                     <option value="TERSUS" >TERSUS</option>
                                                                     <option value="TUKS" selected>TUKS</option>
                                                                 <?php else: ?>
-                                                                    <option value="" readonly>Pilih</option>
                                                                     <option value="TERSUS">TERSUS</option>
                                                                     <option value="TUKS">TUKS</option>
                                                                 <?php endif;?>
@@ -291,17 +283,14 @@
         
                                                         <div class="form-group col-md-3" >
                                                             <label for="status">STATUS OPERASIONAL</label>
-                                                            <select name="status" class="form-control" id="status">
+                                                            <select name="status" class="form-control" id="status" title="Status">
                                                                 <?php if($data['data']->status == "Y"):?>
-                                                                    <option value="">Pilih Status</option>
                                                                     <option value="Y" selected>AKTIF</option>
                                                                     <option value="N">NON AKTIF</option>
                                                                 <?php elseif($data['data']->status == "N"):?>
-                                                                    <option value="">Pilih Status</option>
-                                                                    <option value="Y" >AKTIF</option>
+                                                                   <option value="Y" >AKTIF</option>
                                                                     <option value="N" selected>NON AKTIF</option>
                                                                 <?php else: ?>
-                                                                    <option value="" selected readonly>Pilih Status</option>
                                                                     <option value="Y" >AKTIF</option>
                                                                     <option value="N" >NON AKTIF</option>
                                                                 <?php endif; ?>
@@ -356,6 +345,7 @@
 <script src="<?php echo $baseurl;?>assets/js/jquery.multifield.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 <!--  -->
 <script type="text/javascript">
 
@@ -382,7 +372,7 @@ $(document).ready(function(){
 
         swal.fire({
         title: "Gagal",
-        text: "Data Gagal Di Edit",
+        text: " <?php echo $this->session->flashdata('teks'); ?>",
         button: false,
         icon: 'error',
         showCloseButton: true,
@@ -545,7 +535,7 @@ function addFields(){
 
    var idField = Math.random();
 
-   $('#groupdermaga').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" name="dermaga[]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi[]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan[]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter[]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas[]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan[]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option value="FEET">FEET</option><option value="GT">GT</option><option>DWT</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
+   $('#groupdermaga').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" name="dermaga[]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi[]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan[]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter[]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas[]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan[]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option value="FEET">FEET</option><option value="GT">GT</option><option=value="DWT">DWT</option><option value="TON">TON</option></select></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
 
 }
 

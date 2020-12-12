@@ -33,9 +33,10 @@ $(document).ready(function(){
     // $('.datepicker').datepicker();
 
 
-    $('#delete-modal').on('show.bs.modal',function() { 
-        $('.btn-del').click('.remove',function(e) {
-            var id = $(".remove").attr("personal-id");       
+    $('#delete-modal').on('show.bs.modal',function(e) { 
+        var $modal = $(this),
+            id = e.relatedTarget.attributes['personal-id'].value;
+        $('.btn-del').click('.remove',function(e) {     
             var param = {"id" : parseInt(id) }
 
             $.ajax({
@@ -91,7 +92,7 @@ $(document).ready(function(){
 
     var timer;
     $('#Filt02').on('hide.bs.select',function(option, checked) {
-        var param = {'provinsi':$(this).val()};  
+        var param = {'provinsi': $(this).val()};  
             
         $.ajax({
             url : siteurl+'/Data/get_Kota/',
@@ -105,10 +106,6 @@ $(document).ready(function(){
 
                 setkelas($("#Filt02").val());
 
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                alert('Error get data'); 
             }
         });
 

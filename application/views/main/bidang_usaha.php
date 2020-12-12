@@ -152,6 +152,7 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/sweetalert2.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/extender.js?v=<?php echo uniqid(); ?>"></script> 
 
 <?php if ($this->session->flashdata('success')): ?>
 <script>
@@ -228,9 +229,10 @@ swal.fire({
         $('.card .material-datatables label').addClass('form-group');
 
          // MODAL DELETE
-         $('#delete-modal').on('show.bs.modal',function() { 
+         $('#delete-modal').on('show.bs.modal',function(e) { 
+            var $modal = $(this),
+            id = e.relatedTarget.attributes['personal-id'].value;
             $('.btn-del').click('.remove',function(e) {
-                var id = $(".remove").attr("personal-id");
                 var param = {"id" : id}
                 $.ajax({
                     type: "POST",

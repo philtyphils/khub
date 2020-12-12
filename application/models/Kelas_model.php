@@ -43,9 +43,10 @@
 
 		public function edit($data)
 		{
+
 			$id = (int) $data['id'];
 			$nama = $data['name'];
-			
+			$this->db->cache_delete_all();
 			$this->db->where("kategori_id",$id);
 			$data = $this->db->update("kategori",array(
 				"nama" => $nama
@@ -56,6 +57,7 @@
 
 		public function create($data)
 		{
+
 			$temp = array(
 				"1" => "OP",
 				"2" => "KSOP KELAS I",
@@ -71,7 +73,7 @@
 
 			$nama 		= $temp[$data['kelas']] ." ". $data["name"];
 			$provinsi 	= (int) $data['provinsi'];			
-			
+			$this->db->cache_delete_all();
 			$data = $this->db->insert("ksop",array(
 				"provinsi_id" => $provinsi,
 				"nama"		  => $nama,
@@ -84,6 +86,7 @@
 
 		public function delete($data)
 		{ 
+			$this->db->cache_delete_all();
 			$this->db->where("ksop_id",$data['id']);
 			$data = $this->db->update("ksop",array(
 				"flag" => "0"

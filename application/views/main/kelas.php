@@ -173,9 +173,10 @@ swal.fire({
         $('.card .material-datatables label').addClass('form-group');
 
         // MODAL DELETE
-        $('#delete-modal').on('show.bs.modal',function() { 
+        $('#delete-modal').on('show.bs.modal',function(e) { 
+            var $modal = $(this),
+            id = e.relatedTarget.attributes['personal-id'].value;
             $('.btn-del').click('.remove',function(e) {
-                var id = $(".remove").attr("personal-id");
                 var param = {"id" : id}
 
                $.ajax({
